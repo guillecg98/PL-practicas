@@ -47,12 +47,12 @@ http://www2.cs.arizona.edu/classes/cs453/fall14/DOCS/index.html
 				BEGIN(Q1); /* change to 1 */
 			}
 
-<Q2>"/" 	{
+<Q2>"\\" 	{
 				yymore();
 	 		   /* stay in Q2 */
 			}
 
 
-(.|n)		ECHO;
+.|\n		ECHO;
 %% 
 

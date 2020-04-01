@@ -11,7 +11,7 @@
 letra          [a-zA-Z]
 digito         [0-9]
 identificador  {letra}({letra}|{digito})*
-cadena	       "'"([^']|"\\\'")*"'"
+cadena	       "'"([^'\\]|"\\\'")*"'"
 
 
 %% 

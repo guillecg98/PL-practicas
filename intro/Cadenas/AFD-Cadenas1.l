@@ -31,9 +31,9 @@ http://www2.cs.arizona.edu/classes/cs453/fall14/DOCS/index.html
 			}
 
 <Q2>[^\\] 	BEGIN(Q1); /* change to 1 */
-<Q2>"/" 	; 		   /* stay in Q2 */
+<Q2>"\\" 	; 		   /* stay in Q2 */
 
 
-(.|n)		ECHO;
+.|\n		ECHO;
 %% 
 

@@ -13,8 +13,7 @@ NAME = ejemplo44
 # -ansi: standard language
 # -02: optimization level
 # -Wno-unused-function  -Wno-sign-compare -Wno-implicit-function-declaration: disabled error messages
-CFLAGS = -c -g -Wall -ansi -O2 -Wno-unused-function  -Wno-sign-compare -Wno-implicit-function-declaration
-
+CFLAGS = -c -g -Wall -ansi -O2 -Wno-unused-function  -Wno-sign-compare -Wno-implicit-function-declaration -Wno-unused-command-line-argument
 # Directive for flex's library
 LFLAGS = -ll 
 
