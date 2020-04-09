@@ -5,7 +5,8 @@ extern FILE *yyin, *yyout;
 %}
 
 %%
-
+[0-9]+"."+[0-9] ECHO;
+[0-9]+  {fprintf(yyout, "%.2f", atof(yytext));}
 %%
 
 extern FILE *yyin, *yyout;
