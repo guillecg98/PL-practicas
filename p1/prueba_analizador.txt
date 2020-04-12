@@ -1,3 +1,6 @@
-3445.3
--3452.45
-433e42
+'El primer ejemplo de cadena'
+
+'el segundo \'ejemplo\' de cadena'
+
+"Esto es un ejemplo incorrecto de cadena"
+

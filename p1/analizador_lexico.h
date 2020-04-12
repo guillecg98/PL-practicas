@@ -18,3 +18,4 @@
 #define FIN_PARA 274
 #define ID 275
 #define NUMERO 276
+#define CADENA 277

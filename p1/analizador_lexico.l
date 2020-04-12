@@ -11,6 +11,7 @@ letra   [a-zA-Z]
 digito  [0-9]
 identificador   {letra}(\_?({letra}|{digito}))*
 numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
+cadena  \'(\\.|[^'\\])*\'
 
 /*Zona de las reglas*/
 %%
@@ -35,7 +36,7 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 (?i:fin_para)   {printf("\n Palabra reservada: %s --> token %d\n",yytext,FIN_PARA);}
 {identificador} {printf("\n Identificador %s --> token %d\n",yytext,ID);}
 {numero}    {printf("\n Numero %s --> token %d\n",yytext,NUMERO);}
-
+{cadena}    {printf("\n Cadena %s --> token %d\n",yytext,CADENA);}
 %%
 
 extern FILE *yyin;
