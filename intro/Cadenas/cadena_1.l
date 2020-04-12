@@ -14,17 +14,17 @@ identificador  {letra}({letra}|{digito})*
 cadena	       "'"([^'\\]|"\\\'")*"'"
 
 
-%% 
+%%
 
 {identificador} {printf("identificador = %s\n", yytext);}
 
 
-{cadena}		{ 
+{cadena}		{
                		/* Se ha reconocido una cadena */
                     printf("\t Cadena reconocida = %s\n",yytext);
-				}      
+				}
 
 .				{ECHO;}
 
-%%  
+%%
 
