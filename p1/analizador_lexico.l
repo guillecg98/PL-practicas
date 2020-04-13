@@ -13,7 +13,7 @@ identificador   {letra}(\_?({letra}|{digito}))*
 numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 %x ESTADO_CADENA
 %x ESTADO_COMENTARIO_LINEA
-%x ESTADO_COMENTARIO
+%x Q1 Q2 Q3 Q4
 /*Zona de las reglas*/
 %%
 {espacios}   { /* no se hace nada */ ; }
@@ -59,6 +59,45 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
                                 BEGIN 0;
                                 printf("\n Comentario de una linea: %s --> token %d\n", yytext,LINE_COMMENT);
                             }
+
+"(" {
+    yymore();
+    BEGIN(Q1);
+    }
+<Q1>"*" {
+            yymore();
+            BEGIN(Q2);
+        }
+<Q2>[^*)]   {
+                yymore();
+            }
+<Q2>"*" {
+            yymore();
+            BEGIN(Q3);
+        }
+<Q2>")" {
+            yymore();
+            BEGIN(Q4);
+        }
+<Q3>"*" {
+            yymore();
+        }
+<Q3>[^*)]   {
+                yymore();
+                BEGIN(Q2);
+            }
+<Q3>")" {
+            printf("\n Comentario: %s --> token %d\n",yytext,COMMENT);
+            BEGIN(INITIAL);
+        }
+<Q4>[^*]    {
+				yymore();
+				BEGIN(Q2); /* change to Q2 */
+			}
+<Q4>"*" {
+		    printf("\nError: comentario anidado:%s\n", yytext);
+			BEGIN(INITIAL);
+		}
 
 ":="  {printf("\n Operador Asignación: %s --> token %d\n",yytext,ASIGNACION);}
 "+"   {printf("\n Operador Aritmético: %s --> token %d\n",yytext,ARITMETICO);}

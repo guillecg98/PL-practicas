@@ -2,4 +2,7 @@
 'otro ejemplo de cadena'
 my_var := 'string'
 #Este comentario tiene una linea
-(*comentario*)
+
+(*comentario
+de varias
+lineas*)
