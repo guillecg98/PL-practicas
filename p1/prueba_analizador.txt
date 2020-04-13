@@ -1,8 +1,1 @@
-'ejemplo \'de\' cadena'
-'otro ejemplo de cadena'
-my_var := 'string'
-#Este comentario tiene una linea
-
-(*comentario
-de varias
-lineas*)
+escribir( 'prueba' )

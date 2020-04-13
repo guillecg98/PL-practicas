@@ -117,9 +117,9 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 ".y."   {printf("\n Operador Relacional: %s --> token %d\n",yytext,RELACIONAL);}
 ".no."  {printf("\n Operador Relacional: %s --> token %d\n",yytext,RELACIONAL);}
 
-";" {printf("\n Final de sentencia: %s --> token %d\n",yytext,OTROS);}
-"(" {printf("\n Parentesis de apertura: %s --> token %d\n",yytext,OTROS);}
-")" {printf("\n Parentesis de cierre: %s --> token %d\n",yytext,OTROS);}
+;$ {printf("\n Final de sentencia: %s --> token %d\n",yytext,OTROS);}
+\(*[^*] {printf("\n Parentesis de apertura: %s --> token %d\n",yytext,OTROS);}
+\)  {printf("\n Parentesis de cierre: %s --> token %d\n",yytext,OTROS);}
 
 .|\n   ECHO;
 %%

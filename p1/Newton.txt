@@ -1,7 +1,7 @@
 
 
 # Programa que calcula la raíz de un número usando método de Newton
- 
+
 (*
   Descripcion:
          Raiz cuadrada de Newton
@@ -39,13 +39,13 @@ inicio
 
         	 i := 1;
 
-	         repetir 
+	         repetir
 
 	            x0 := 0.5 * (x0 + numero / x0);
 		    i := i + 1;
 
 		hasta_que ( i > iteraciones );
-	
+
 	        escribir( 'La aproximacion a la raiz cuadrada de ' );
         	escribir( numero || ' es ' || x0 || '\n' );
 

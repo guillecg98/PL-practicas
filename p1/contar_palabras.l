@@ -12,8 +12,13 @@ char concrete_word[64];
 /*{concrete_word} {word++; REJECT;}*/
 
 %%
-[a-zA-ZáÁéÉíÍóÓúÚñN]+ {total_words++; if(strcmp(yytext,concrete_word) == 0){word++;}}
-.|\n ECHO;
+[a-zA-ZáÁéÉíÍóÓúÚñN]+   {
+                            total_words++;
+                            if(strcmp(yytext,concrete_word) == 0){
+                                word++;
+                            }
+                        }
+.|\n    {ECHO;}
 %%
 
 extern FILE *yyin, *yyout;
@@ -35,6 +40,6 @@ int  main(int argc, char *argv[])
 
         break;
   }
-  
+
   return 0;
 }
