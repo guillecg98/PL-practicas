@@ -1,6 +1,5 @@
-'El primer ejemplo de cadena'
-
-'el segundo \'ejemplo\' de cadena'
-
-"Esto es un ejemplo incorrecto de cadena"
-
+'ejemplo \'de\' cadena'
+'otro ejemplo de cadena'
+my_var := 'string'
+#Este comentario tiene una linea
+(*comentario*)

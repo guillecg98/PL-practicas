@@ -19,3 +19,11 @@
 #define ID 275
 #define NUMERO 276
 #define CADENA 277
+#define ASIGNACION 278
+#define ARITMETICO 279
+#define ALFANUM 280
+#define RELACIONAL 281
+#define LOGICOS 282
+#define OTROS 283
+#define LINE_COMMENT 284
+#define COMMENT 285
