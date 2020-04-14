@@ -18,6 +18,7 @@ char concrete_word[64];
                                 word++;
                             }
                         }
+[:num:] {ECHO;}
 .|\n    {ECHO;}
 %%
 
@@ -30,14 +31,13 @@ int  main(int argc, char *argv[])
         case 2:
             yyin=fopen(argv[1],"r");
             yylex();
-            printf("El total de palabras es: %d",total_words);
+            printf("El total de palabras es: %d\n",total_words);
         break;
         case 3:
             yyin=fopen(argv[1],"r");
             strcpy(concrete_word,argv[2]);
             yylex();
-            printf("El total de palabras es: %d. Y la palabra <%s> aparece %d veces",total_words,concrete_word,word);
-
+            printf("El total de palabras es: %d. Y la palabra <%s> aparece %d veces\n",total_words,concrete_word,word);
         break;
   }
 
