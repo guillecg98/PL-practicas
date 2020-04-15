@@ -3,7 +3,8 @@ extern FILE *yyin;
 %{
 int numero_cuentas = 0;
 int numero_cuentas_mismo_pais = 0;
-int numero_cuentas_misma_entitdad = 0;
+int numero_cuentas_misma_entidad = 0;
+int numero_cuentas_misma_oficina = 0;
 char country_id[64];
 char entity_id[64];
 char office_id[64];
@@ -27,7 +28,13 @@ numeros_entidad [0-9]{4}
                 }
 <ESTADO_IBAN>{numeros_entidad} {
                                     if(strcmp(yytext,entity_id) == 0){
-                                        numero_cuentas_misma_entitdad++;
+                                        numero_cuentas_misma_entidad++;
+                                    }
+                                    yymore();
+                                }
+<ESTADO_IBAN>{numeros_entidad}  {
+                                    if(strcmp(yytext,office_id) == 0){
+                                        numero_cuentas_misma_oficina++;
                                     }
                                     yymore();
                                 }
@@ -56,7 +63,16 @@ int  main(int argc, char *argv[])
             strcpy(country_id,argv[2]);
             strcpy(entity_id,argv[3]);
             yylex();
-            printf("\nEl numero de cuentas pertenecientes al pais '%s' y la entidad '%s', es: %d\n",country_id,entity_id,numero_cuentas_misma_entitdad);
+            printf("\nEl numero de cuentas pertenecientes al pais '%s' y la entidad '%s', es: %d\n",country_id,entity_id,numero_cuentas_misma_entidad);
+        break;
+        case 5:
+            yyin=fopen(argv[1],"r");
+            strcpy(country_id,argv[2]);
+            strcpy(entity_id,argv[3]);
+            strcpy(office_id,argv[4]);
+            yylex();
+            printf("\nEl numero de cuentas pertenecientes al pais '%s',la entidad '%s' y la oficina '%s', es: %d\n",country_id,entity_id,office_id,numero_cuentas_misma_oficina);
+        break;
     }
     return 0;
 }
