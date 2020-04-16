@@ -8,11 +8,13 @@ int numero_cuentas_misma_oficina = 0;
 char country_id[64];
 char entity_id[64];
 char office_id[64];
+char *newYytext;
+char *secondYytext;
 %}
 
 letras_id  [A-Z]{2}
-espacio [\s]
-numeros_entidad [0-9]{4}
+espacio [[:space:]]
+numeros_entidad [0-9]{4}{espacio}[0-9]{4}
 %x ESTADO_IBAN
 
 %%
@@ -27,18 +29,19 @@ numeros_entidad [0-9]{4}
                     BEGIN 0;
                 }
 <ESTADO_IBAN>{numeros_entidad} {
-                                    if(strcmp(yytext,entity_id) == 0){
-                                        numero_cuentas_misma_entidad++;
-                                    }
-                                    yymore();
-                                }
-<ESTADO_IBAN>{numeros_entidad}  {
-                                    if(strcmp(yytext,office_id) == 0){
+
+                                    newYytext = strtok(yytext," ");
+                                    secondYytext = strtok(NULL," ");
+                                    if( (strcmp(newYytext,entity_id) == 0) && (strcmp(secondYytext,office_id) == 0) ){
                                         numero_cuentas_misma_oficina++;
+                                    }else{
+                                        if(strcmp(yytext,entity_id) == 0){
+                                            numero_cuentas_misma_entidad++;
+                                        }
                                     }
                                     yymore();
                                 }
-.|\n    {ECHO;}
+.|\n    {;}
 %%
 
 extern FILE *yyin;
