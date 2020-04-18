@@ -54,17 +54,29 @@ int  main(int argc, char *argv[])
     switch(argc){
         case 2:
             yyin=fopen(argv[1],"r");
+            if(yyin == NULL){
+                printf("Error al abrir el archivo <%s>\n",argv[1]);
+                exit(-1);
+            }
             yylex();
             printf("\n El numero total de cuentas bancarias en el fichero es: %d\n", numero_cuentas);
         break;
         case 3:
             yyin=fopen(argv[1],"r");
+            if(yyin == NULL){
+                printf("Error al abrir el archivo <%s>\n",argv[1]);
+                exit(-1);
+            }
             strcpy(country_id,argv[2]);
             yylex();
             printf("\n El numero de cuentas pertenecientes al pais '%s', es: %d\n",country_id,numero_cuentas_mismo_pais);
         break;
         case 4:
             yyin=fopen(argv[1],"r");
+            if(yyin == NULL){
+                printf("Error al abrir el archivo <%s>\n",argv[1]);
+                exit(-1);
+            }
             strcpy(country_id,argv[2]);
             strcpy(entity_id,argv[3]);
             yylex();
@@ -72,6 +84,10 @@ int  main(int argc, char *argv[])
         break;
         case 5:
             yyin=fopen(argv[1],"r");
+            if(yyin == NULL){
+                printf("Error al abrir el archivo <%s>\n",argv[1]);
+                exit(-1);
+            }
             strcpy(country_id,argv[2]);
             strcpy(entity_id,argv[3]);
             strcpy(office_id,argv[4]);
