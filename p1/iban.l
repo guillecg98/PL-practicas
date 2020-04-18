@@ -13,6 +13,8 @@ char *secondYytext;
 %}
 
 letras_id  [A-Z]{2}
+cualquier .|\n
+resto   [0-9]{10}
 espacio [[:space:]]
 numeros_entidad [0-9]{4}{espacio}[0-9]{4}
 %x ESTADO_IBAN
@@ -41,7 +43,7 @@ numeros_entidad [0-9]{4}{espacio}[0-9]{4}
                                     }
                                     yymore();
                                 }
-.|\n    {;}
+<ESTADO_IBAN>{cualquier}    {;}
 %%
 
 extern FILE *yyin;
