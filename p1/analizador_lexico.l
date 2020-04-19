@@ -12,6 +12,7 @@ digito  [0-9]
 identificador   {letra}(\_?({letra}|{digito}))*
 numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 %x ESTADO_CADENA
+%x ESTADO_PARENTESIS
 %x ESTADO_COMENTARIO_LINEA
 %x Q1 Q2 Q3 Q4
 /*Zona de las reglas*/
@@ -60,14 +61,10 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
                                 printf("\n Comentario de una linea: %s --> token %d\n", yytext,LINE_COMMENT);
                             }
 
-"(" {
+"(*" {
     yymore();
-    BEGIN(Q1);
+    BEGIN(Q2);
     }
-<Q1>"*" {
-            yymore();
-            BEGIN(Q2);
-        }
 <Q2>[^*)]   {
                 yymore();
             }
@@ -117,10 +114,10 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 ".y."   {printf("\n Operador Relacional: %s --> token %d\n",yytext,RELACIONAL);}
 ".no."  {printf("\n Operador Relacional: %s --> token %d\n",yytext,RELACIONAL);}
 
-;$ {printf("\n Final de sentencia: %s --> token %d\n",yytext,OTROS);}
-\(*[^*] {printf("\n Parentesis de apertura: %s --> token %d\n",yytext,OTROS);}
-")"  {printf("\n Parentesis de cierre: %s --> token %d\n",yytext,OTROS);}
+"("    {printf("\n Parentesis de apertura: %s --> token %d\n",yytext,OTROS);}
+")"    {printf("\n Parentesis de cierre: %s --> token %d\n",yytext,OTROS);}
 
+;$ {printf("\n Final de sentencia: %s --> token %d\n",yytext,OTROS);}
 .|\n   ECHO;
 %%
 
