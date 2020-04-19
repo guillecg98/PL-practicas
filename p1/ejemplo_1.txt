@@ -1,0 +1,8 @@
+escribir ('prueba');
+id_1 := 12 __mod 2;
+mientras (id_1 == 0) hacer
+    escribir ('esto es una prueba' id_1);
+FIN_mientras
+id_34 := 'prueba string';
+mal_id := 349;
+

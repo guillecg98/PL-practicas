@@ -10,6 +10,7 @@ espacios    {espacio}+
 letra   [a-zA-Z]
 digito  [0-9]
 identificador   {letra}(\_?({letra}|{digito}))*
+id_error  ({letra}|{digito})+(\_\_)+({letra}+|{digito}+)?
 numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 %x ESTADO_CADENA
 %x ESTADO_PARENTESIS
@@ -39,6 +40,7 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 (?i:fin_para)   {printf("\n Palabra reservada: %s --> token %d\n",yytext,FIN_PARA);}
 
 {identificador} {printf("\n Identificador: %s --> token %d\n",yytext,ID);}
+{id_error}  {printf("\n Identificador incorrecto: %s --> token %d\n",yytext,ERROR);}
 {numero}    {printf("\n Numero: %s --> token %d\n",yytext,NUMERO);}
 
 "'" {
@@ -116,8 +118,16 @@ numero  {digito}+(\.{digito}+)?(E[+\-]?{digito}+)?
 
 "("    {printf("\n Parentesis de apertura: %s --> token %d\n",yytext,OTROS);}
 ")"    {printf("\n Parentesis de cierre: %s --> token %d\n",yytext,OTROS);}
-
 ;$ {printf("\n Final de sentencia: %s --> token %d\n",yytext,OTROS);}
+
+"?" {printf("\n ERROR: %s simbolo no permitido --> token %d\n",yytext,ERROR);}
+"¿" {printf("\n ERROR: %s simbolo no permitido --> token %d\n",yytext,ERROR);}
+"!=" {printf("\n ERROR: %s simbolo no permitido --> token %d \n Quizás quisite poner <>\n",yytext,ERROR);}
+"!" {printf("\n ERROR: %s simbolo no permitido --> token %d \n Quizás quisite poner .no.\n",yytext,ERROR);}
+"&&" {printf("\n ERROR: %s simbolo no permitido --> token %d \n Quizás quisite poner .y.\n",yytext,ERROR);}
+"=" {printf("\n ERROR: %s simbolo no permitido --> token %d \n Quizás quisite poner :=\n",yytext,ERROR);}
+":" {printf("\n ERROR: %s simbolo no permitido --> token %d \n Quizás quisite poner ;\n",yytext,ERROR);}
+
 .|\n   ECHO;
 %%
 

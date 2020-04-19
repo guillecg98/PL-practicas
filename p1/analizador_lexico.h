@@ -27,3 +27,4 @@
 #define OTROS 283
 #define LINE_COMMENT 284
 #define COMMENT 285
+#define ERROR 404

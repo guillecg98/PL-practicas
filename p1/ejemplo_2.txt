@@ -1,0 +1,5 @@
+escribir ('prueba') ? 12;
+43 && 8 != ide;
+id__34 = 'prueba string';
+mal_id := 349:
+

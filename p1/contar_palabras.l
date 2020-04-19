@@ -19,7 +19,7 @@ char concrete_word[64];
                             }
                         }
 [:num:] {ECHO;}
-.|\n    {ECHO;}
+.|\n    {;}
 %%
 
 extern FILE *yyin, *yyout;
@@ -45,7 +45,7 @@ int  main(int argc, char *argv[])
             }
             strcpy(concrete_word,argv[2]);
             yylex();
-            printf("El total de palabras es: %d. Y la palabra <%s> aparece %d veces\n",total_words,concrete_word,word);
+            printf("La palabra <%s> aparece %d veces\n",concrete_word,word);
         break;
   }
 
