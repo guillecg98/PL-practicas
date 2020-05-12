@@ -1,5 +1,0 @@
-if (dato > 0)
-   valor = dato;
-else 
-   valor = - dato;
-

@@ -1,3 +1,0 @@
-/********* Programa mínimo de lex *********/ 
-
-%%
