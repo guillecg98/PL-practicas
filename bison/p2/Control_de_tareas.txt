@@ -14,55 +14,55 @@ NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
-PALABRAS RESERVADAS:		[ ]							CHECK
+PALABRAS RESERVADAS:		[x?]							CHECK
 -----------------------------------------------------------------
-	modulo												[ ]
-	quotient											[ ]
+	modulo												[x]
+	quotient											[x]
 
-	or 													[ ]
-	and													[ ]
-	not													[ ]
+	or 													[x]
+	and													[x]
+	not													[x]
 
-	read												[ ]
-	readstring											[ ]
+	read												[x]
+	readstring											[x]
 
-	write												[ ]
-	writestring											[ ]
+	write												[x]
+	writestring											[x]
 
-	SENTENCIA CONDICIONAL:								[ ]
-		if												[ ]
-		then											[ ]
-		else											[ ]
-		endif											[ ]
+	SENTENCIA CONDICIONAL:								[x]
+		if												[x]
+		then											[x]
+		else											[x]
+		endif											[x]
 
-	SENTENCIA DE BUCLE MIENTRAS:						[ ]
-		while											[ ]
-		do												[ ]
-		endwhile										[ ]
+	SENTENCIA DE BUCLE MIENTRAS:						[x]
+		while											[x]
+		do												[x]
+		endwhile										[x]
 
-	SENTENCIA DE BUCLE REPETIR:							[ ]
-		repeat											[ ]
-		until											[ ]
+	SENTENCIA DE BUCLE REPETIR:							[x]
+		repeat											[x]
+		until											[x]
 
-	SENTENCIA DE BUCLE PARA:							[ ]
-		for												[ ]
-		from											[ ]
-		to												[ ]
-		step											[ ]
-		do												[ ]
-		endfor											[ ]
+	SENTENCIA DE BUCLE PARA:							[x]
+		for												[x]
+		from											[x]
+		to												[x]
+		step											[x]
+		do												[x]
+		endfor											[x]
 
-	MACROS:												[ ]
-		clear											[ ]
-		place											[ ]
+	MACROS:												[x]
+		clear											[x]
+		place											[x]
 
-	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[ ]
-	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[ ]
+	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[x]
+	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[x]
 
 
 -----------------------------------------------------------------
 IDENTIFICADORES:		[ ]								CHECK
------------------------------------------------------------------
+-----------------------------------------------------------------y
 	COMPUESTOS POR LETRAS, DIGITOS Y SUBRAYADOS 		[ ]
 	COMIENZA POR UNA LETRA								[ ]
 	NO TERMINAN  EN SUBRAYADA							[ ]
