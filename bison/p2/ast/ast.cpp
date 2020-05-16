@@ -550,6 +550,35 @@ double lp::PowerNode::evaluateNumber()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::QuotientNode::print() 
+{
+	std::cout << "PowerNode: "  << std::endl;
+	this->_left->print();												//TODO
+	std::cout << " ? ";													//¿Qué simbolo usarías?
+	this->_right->print();
+}
+
+double lp::QuotientNode::evaluateNumber() 
+{
+	int integerResult = 0;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == NUMBER)
+	{
+		integerResult = this->_left->evaluateNumber() / this->_right->evaluateNumber();
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not numeric for", "quotient");
+	}
+
+	double result = integerResult;
+ 	return result;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 int lp::BuiltinFunctionNode_0::getType()
 {
 	return	NUMBER;

@@ -103,17 +103,17 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 						 /* NEW in example 7 */
 						 std::string identifier(yytext);
 
+						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
+						for (int i = 0; yytext[i] != '\0'; i++)
+						{
+							yytext[i] = toupper(yytext[i]);
+						}
 						/*
                           strdup() function returns a pointer to a new string
                           which  is a duplicate of the string yytext
                         */
 						  yylval.identifier =  strdup(yytext);
 
-						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
-						for (int i = 0; yytext[i] != '\0'; i++)
-						{
-							identifier[i] = toupper(identifier[i]);
-						}
 
 						/* If the identifier is not in the table of symbols then it is inserted */
 						 if (table.lookupSymbol(identifier) == false)
@@ -160,7 +160,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "/"     { return DIVISION; } 		/* NEW in example 3 */
 "%"		{ return MODULO;}
 "&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
-"**"	{ return POWER_OF; }	
+"**"	{ return POWER; }	
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 "=="	{ return EQUAL; }			/* NEW in example 15 */

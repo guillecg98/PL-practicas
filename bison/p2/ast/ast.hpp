@@ -796,6 +796,46 @@ class PowerNode : public NumericOperatorNode
   double evaluateNumber();
 };
 
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/*!	
+  \class   QuotiendNode
+  \brief   Definition of atributes and methods of Quotient class
+  \note    Quotient Class publicly inherits from NumericOperatorNode class
+*/
+class QuotientNode : public NumericOperatorNode  
+{
+
+ public:
+
+/*!		
+	\brief Constructor of QuotientNode uses NumericOperatorNode's constructor as members initializer
+	\param L: pointer to ExpNode
+	\param R: pointer to ExpNode
+	\post  A new QuotientNode is created with the parameter
+*/
+  QuotientNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+	{
+		// empty
+	} 
+
+/*!
+	\brief   Print the QuotientNode
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the QuotientNode
+	\return  bool
+	\sa		 print()
+*/
+  bool evaluateBool();
+};
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
