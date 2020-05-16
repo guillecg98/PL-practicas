@@ -52,9 +52,9 @@ DIGIT  [0-9]
 
 LETTER [a-zA-Z]
 
-NUMBER1 {DIGIT}+\.?
-
-NUMBER2 {DIGIT}*\.{DIGIT}+
+integerNUMBER 					[0-9]+
+realNUMBER						[0-9]+\.[0-9]+
+scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
@@ -87,11 +87,14 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 			return COMMA;
 		}
 
-{NUMBER1}|{NUMBER2}  {
+//Hay números de enteros, reales y de notacion científica
+{integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 
+					{
 					  /* MODIFIED in example 4 */
 					  /* Conversion of type and sending of the numerical value to the parser */
 					   yylval.number = atof(yytext);
 
+					   //Todos son tratados como número porque devuelven token number al sintáctico
                        return NUMBER;
                       }
 
