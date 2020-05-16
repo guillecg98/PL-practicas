@@ -133,7 +133,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn WRITE read if while block repeat for
+%type <st> stmt asgn write read if while block repeat for
 
 %type <prog> program
 
@@ -147,7 +147,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 // NEW in example 17: IF, ELSE, WHILE
-%token PRINT READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
+%token READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
 
 // NEW in example 17
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -296,9 +296,8 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
-	 
-    | repeat
     
+    | repeat
     | for
 ;
 
@@ -596,12 +595,7 @@ exp:	NUMBER
  			$$ = new lp::NotNode($2);
 		}
 
-	//Añadido
-    | exp QUOTIENT exp
-	 	{
-		  // Create a new "quotient" node
- 			$$ = new lp::QuotientNode($1,$3);
-		}
+
 ;
 
 
