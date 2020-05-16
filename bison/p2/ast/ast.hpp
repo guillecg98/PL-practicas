@@ -830,10 +830,10 @@ class QuotientNode : public NumericOperatorNode
 
 /*!	
 	\brief   Evaluate the QuotientNode
-	\return  bool
+	\return  double
 	\sa		 print()
 */
-  bool evaluateBool();
+  double evaluateNumber();
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

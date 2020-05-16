@@ -133,7 +133,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block
+%type <st> stmt asgn WRITE read if while block
 
 %type <prog> program
 
