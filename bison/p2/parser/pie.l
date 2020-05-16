@@ -100,14 +100,17 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 
 {IDENTIFIER}   		 {
-						 /* NEW in example 7 */
-						 std::string identifier(yytext);
 
 						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
 						for (int i = 0; yytext[i] != '\0'; i++)
 						{
 							yytext[i] = toupper(yytext[i]);
 						}
+
+						/* NEW in example 7 */
+						std::string identifier(yytext);
+
+
 						/*
                           strdup() function returns a pointer to a new string
                           which  is a duplicate of the string yytext
