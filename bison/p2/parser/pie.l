@@ -149,8 +149,9 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT})*
 "-"		{ return MINUS;  } 			/* NEW in example 3 */
 "*"	    { return MULTIPLICATION; } 	/* NEW in example 3 */
 "/"     { return DIVISION; } 		/* NEW in example 3 */
-"**"	    { return POWER_OF; }			/* NEW in example 5 */
-
+"%"		{ return MODULO;}
+"&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
+"**"	{ return POWER_OF; }	
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 "=="	{ return EQUAL; }			/* NEW in example 15 */

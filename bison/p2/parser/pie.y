@@ -572,6 +572,25 @@ exp:	NUMBER
 		  // Create a new "logic negation" node
  			$$ = new lp::NotNode($2);
 		}
+	
+	//Añadido
+    | exp QUOTIENT exp
+	 	{
+		  // Create a new "quotient" node
+ 			$$ = new lp::NotNode($2);
+		}
+	//Añadido
+    | exp MODULO exp
+	 	{
+		  // Create a new "modulo" node
+ 			$$ = new lp::NotNode($2);
+		}
+	//Añadido
+    | exp POWER_OF exp
+	 	{
+		  // Create a new "power_of" node
+ 			$$ = new lp::NotNode($2);
+		}
 ;
 
 
