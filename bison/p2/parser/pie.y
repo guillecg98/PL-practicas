@@ -147,7 +147,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 // NEW in example 17: IF, ELSE, WHILE
-%token PRINT READ IF ELSE WHILE
+%token PRINT READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
 
 // NEW in example 17
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET

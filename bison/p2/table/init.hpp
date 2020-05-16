@@ -34,6 +34,50 @@
 ///////////////////////////////////////
 
 
+// NEW in example 12
+/*!
+  \ brief Predefined keywords
+*/
+static struct {
+          std::string name ;
+	      int token;
+	      } keyword[] = {
+						"modulo", MODULO,
+						"quotient",QUOTIENT,
+						"read",READ,
+						"write",WRITE,
+						"readstring",READ_STRING,
+						"writestring",WRITE_STRING,
+						"if",IF,
+						"then",THEN,
+						"else",ELSE,
+						"endif",END_IF,
+						"while", WHILE,
+						"do",DO,
+						"endwhile",END_WHILE,
+						"repeat",REPEAT,
+						"until",UNTIL,
+						"for",FOR,
+						"from",FROM,
+						"to",TO,
+						"step",STEP,
+						"endfor",END_FOR,
+						"clear",CLEAR,
+						"place",PLACE,
+						"or", OR,
+						"and", AND,
+						"not", NOT,
+						"",      0
+	                   };
+
+
+/*(?i:or)	{ return OR; }
+(?i:and)	{ return AND; }		esto tenemos que pensar si dejarlo aqui
+(?i:not)		{ return NOT; } o en el pie.l 
+
+Por ahora se cargan en la tabla como keywords 
+*/
+
 /*!
   \ brief Predefined numeric constants
 */
@@ -65,44 +109,6 @@ static struct {
 	                   };
 
 
-// NEW in example 12
-/*!
-  \ brief Predefined keywords
-*/
-static struct {
-          std::string name ;
-	      int token;
-	      } keyword[] = {
-						"modulo", MODULO,
-						"quotient",QUOTIENT,
-						"read",READ,
-						"write",WRITE,
-						"readstring",READ_STRING,
-						"writestring",WRITE_STRING,
-						"if",IF,
-						"then",THEN,
-						"else",ELSE,
-						"endif",END_IF,
-						"while"WHILE,
-						"do",DO,
-						"endwhile",END_WHILE,
-						"repeat",REPEAT,
-						"until",UNTIL,
-						"for",FOR,
-						"from",FROM,
-						"to",TO,
-						"step",STEP,
-						"do",DO,
-						"endfor",END_FOR,
-						"clear",CLEAR,
-						"place",PLACE,
-						"",      0
-	                   };
-
-
-/*(?i:or)	{ return OR; }
-(?i:and)	{ return AND; }		esto tenemos que pensar si dejarlo aqui
-(?i:not)		{ return NOT; } o en el pie.l */
 
 
 

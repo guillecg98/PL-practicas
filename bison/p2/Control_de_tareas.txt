@@ -92,8 +92,8 @@ CADENA:					[ ]								CHECK
 OPERADORES:				[ ]								CHECK
 -----------------------------------------------------------------
 	NUMERICOS											[ ]
-		ASIGNACION :=									[ ]
-		SUMA +											[ ]
+		ASIGNACION :=									[X]
+		SUMA +											[X]
 			UNARIO +2									[ ]
 			BINARIO 2+3									[ ]
 		RESTA -											[ ]
