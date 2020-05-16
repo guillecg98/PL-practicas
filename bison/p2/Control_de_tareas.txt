@@ -91,7 +91,7 @@ CADENA:					[ ]								CHECK
 -----------------------------------------------------------------
 OPERADORES:				[ ]								CHECK
 -----------------------------------------------------------------
-	NUMERICOS											[ ]
+	NUMERICOS											[X]
 		ASIGNACION :=									[X]
 		SUMA +											[X]
 			UNARIO +2									[X]
@@ -101,9 +101,9 @@ OPERADORES:				[ ]								CHECK
 			BINARIO 2-3									[X]
 		PRODUCTO *										[X]
 		DIVISION /										[X]
-		DIVISION_ENTERA quotient						[ ]
-		MODULO modulo									[ ]
-		POTENCIA **										[ ]
+		DIVISION_ENTERA quotient						[X]
+		MODULO modulo									[X]
+		POTENCIA **										[X]
 
 	ALFANUMERICOS										[ ]
 		CONCATENACION ||								[ ]
@@ -133,15 +133,15 @@ OTROS:					[ ]								CHECK
 SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
 	ASIGNACION											[ ]
-		IDENTIFICADOR := EXPR NUMÉRICA					[ ]
+		IDENTIFICADOR := EXPR NUMÉRICA					[X]
 		IDENTIFICADOR := EXPR ALFANUMÉRICA				[ ]
 
 	LECTURA												[ ]
-		read(identificador)								[ ]
+		read(identificador)								[X]
 		readstring(identificador)						[ ]
 
 	ESCRITURA											[ ]
-		write											[ ]
+		write											[X]
 		writestring										[ ]
 
 	SENTENCIAS DE CONTROL								[ ]

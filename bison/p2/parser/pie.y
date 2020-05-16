@@ -266,7 +266,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
-	| print SEMICOLON
+	| write SEMICOLON
 	  {
 		// Default action
 		// $$ = $1;
@@ -276,6 +276,8 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
+
+
 	/*  NEW in example 17 */
 	| if
 	 {
@@ -377,7 +379,7 @@ asgn:   VARIABLE ASSIGNMENT exp
 ;
 
 
-print:  PRINT exp
+write:  WRITE exp
 		{
 			// Create a new print node
 			 $$ = new lp::PrintStmt($2);
