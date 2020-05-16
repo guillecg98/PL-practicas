@@ -577,19 +577,14 @@ exp:	NUMBER
     | exp QUOTIENT exp
 	 	{
 		  // Create a new "quotient" node
- 			$$ = new lp::NotNode($2);
+ 			$$ = new lp::QuotientNode($1,$3);
 		}
-	//Añadido
-    | exp MODULO exp
-	 	{
-		  // Create a new "modulo" node
- 			$$ = new lp::NotNode($2);
-		}
+		
 	//Añadido
     | exp POWER_OF exp
 	 	{
 		  // Create a new "power_of" node
- 			$$ = new lp::NotNode($2);
+ 			$$ = new lp::PowerOfNode($1,$3);
 		}
 ;
 
