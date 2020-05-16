@@ -145,28 +145,28 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		writestring										[ ]
 
 	SENTENCIAS DE CONTROL								[ ]
-		CONDICIONAL SIMPLE								[ ]
+		CONDICIONAL SIMPLE								[X]
 			if condicional
 				then lista de sentencias
 			endif
 
-		CONDICIONAL COMPUESTA							[ ]
+		CONDICIONAL COMPUESTA							[X]
 			if cond
 				then lista de sentencias
 				else lista de sentencias
 			endif
 
-		BUCLE "while"								[ ]
+		BUCLE "while"								    [X]
 			while condicional do
 					lista de sentencias
 			endwhile
 
-		BUCLE "repeat"									[ ]
+		BUCLE "repeat"									[X]
 			repeat
 				lista de sentencias
 			until condicional
 
-		BUCLE "for"									[ ]
+		BUCLE "for"									    [ ]
 			for identificador
 				from expr numerica 1
 				to expr numerica 2
