@@ -56,7 +56,7 @@ NUMBER1 {DIGIT}+\.?
 
 NUMBER2 {DIGIT}*\.{DIGIT}+
 
-IDENTIFIER  {LETTER}({LETTER}|{DIGIT})*
+IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 /* NEW in example 3 */
 /* STATE  */
@@ -105,6 +105,12 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT})*
                           which  is a duplicate of the string yytext
                         */
 						  yylval.identifier =  strdup(yytext);
+
+						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
+						for (int i = 0; yytext[i] != '\0'; i++)
+						{
+							identifier[i] = toupper(identifier[i]);
+						}
 
 						/* If the identifier is not in the table of symbols then it is inserted */
 						 if (table.lookupSymbol(identifier) == false)

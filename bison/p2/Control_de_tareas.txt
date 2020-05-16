@@ -63,12 +63,12 @@ PALABRAS RESERVADAS:		[x]							CHECK
 -----------------------------------------------------------------
 IDENTIFICADORES:		[ ]								CHECK
 -----------------------------------------------------------------y
-	COMPUESTOS POR LETRAS, DIGITOS Y SUBRAYADOS 		[ ]
-	COMIENZA POR UNA LETRA								[ ]
-	NO TERMINAN  EN SUBRAYADA							[ ]
-	NO CONTIENEN DOS SUBRAYADOS SEGUIDOS				[ ]
+	COMPUESTOS POR LETRAS, DIGITOS Y SUBRAYADOS 		[X]
+	COMIENZA POR UNA LETRA								[X]
+	NO TERMINAN  EN SUBRAYADA							[X]
+	NO CONTIENEN DOS SUBRAYADOS SEGUIDOS				[X]
 
-	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[ ]
+	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[X]
 
 
 -----------------------------------------------------------------
