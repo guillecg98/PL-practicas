@@ -88,7 +88,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 		}
 
 //Hay números de enteros, reales y de notacion científica
-{integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 
+{integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER}
 					{
 					  /* MODIFIED in example 4 */
 					  /* Conversion of type and sending of the numerical value to the parser */
@@ -163,7 +163,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "/"     { return DIVISION; } 		/* NEW in example 3 */
 "%"		{ return MODULO;}
 "&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
-"**"	{ return POWER; }	
+"**"	{ return POWER; }
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 "=="	{ return EQUAL; }			/* NEW in example 15 */
