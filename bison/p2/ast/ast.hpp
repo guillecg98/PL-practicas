@@ -1,7 +1,7 @@
-/*!	
+/*!
 	\file    ast.hpp
 	\brief   Declaration of AST class
-	\author  
+	\author
 	\date    2018-12-13
 	\version 1.0
 */
@@ -27,15 +27,15 @@ namespace lp
 {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-/*!	
+/*!
   \class   ExpNode
   \brief   Definition of atributes and methods of ExpNode class
   \warning Abstract class
 */
- class ExpNode 
+ class ExpNode
 {
   public:
-	/*!	
+	/*!
 		\brief   Type of  the expression
 		\warning Pure virtual function: must be redefined in the heir classes
 		\return  int
@@ -44,7 +44,7 @@ namespace lp
     virtual int getType() = 0;
 
 
-	/*!	
+	/*!
 		\brief   Print the expression
 		\warning Pure virtual function: must be redefined in the heir classes
 		\return  void
@@ -52,7 +52,7 @@ namespace lp
 	*/
     virtual void print() = 0;
 
-	/*!	
+	/*!
 		\brief   Evaluate the expression as NUMBER
 		\warning Virtual function: could be redefined in the heir classes
 		\return  double
@@ -61,10 +61,10 @@ namespace lp
     virtual double evaluateNumber()
 	{
 		return 0.0;
-	}		
+	}
 
 
-	/*!	
+	/*!
 		\brief   Evaluate the expression as BOOL
 		\warning Virtual function: could be redefined in the heir classes
 		\return  bool
@@ -81,19 +81,19 @@ namespace lp
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class VariableNode
   \brief Definition of atributes and methods of VariableNode class
   \note  VariableNode Class publicly inherits from ExpNode class
 */
-class VariableNode : public ExpNode 
+class VariableNode : public ExpNode
 {
 	private:
 	  std::string _id; //!< Name of the VariableNode
 
 	public:
 
-	/*!		
+	/*!
 		\brief Constructor of VariableNode
 		\param value: double
 		\post  A new NumericVariableNode is created with the name of the parameter
@@ -101,10 +101,10 @@ class VariableNode : public ExpNode
 	*/
 	  VariableNode(std::string const & value)
 		{
-			this->_id = value; 
+			this->_id = value;
 		}
 
-	/*!	
+	/*!
 		\brief   Type of the Variable
 		\return  int
 		\sa		 print
@@ -118,14 +118,14 @@ class VariableNode : public ExpNode
 	*/
 	  void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the Variable as NUMBER
 		\return  double
 		\sa		 print
 	*/
 	  double evaluateNumber();
 
-	/*!	
+	/*!
 		\brief   Evaluate the Variable as BOOL
 		\return  bool
 		\sa		 print
@@ -137,29 +137,29 @@ class VariableNode : public ExpNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class ConstantNode
   \brief Definition of atributes and methods of ConstantNode class
   \note  ConstantNode Class publicly inherits from ExpNode class
 */
-class ConstantNode : public ExpNode 
+class ConstantNode : public ExpNode
 {
 	private:
 	  std::string _id; //!< Name of the ConstantNode
 
 	public:
 
-	/*!		
+	/*!
 		\brief Constructor of ConstantNode
 		\param value: double
 		\post  A new ConstantNode is created with the name of the parameter
 	*/
 	  ConstantNode(std::string value)
 		{
-			this->_id = value; 
+			this->_id = value;
 		}
 
-	/*!	
+	/*!
 		\brief   Type of the Constant
 		\return  int
 		\sa		 print
@@ -173,14 +173,14 @@ class ConstantNode : public ExpNode
 	*/
 	  void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the Constant as NUMBER
 		\return  double
 		\sa		 print
 	*/
 	  double evaluateNumber();
 
-	/*!	
+	/*!
 		\brief   Evaluate the Constant as BOOL
 		\return  bool
 		\sa		 print
@@ -195,19 +195,19 @@ class ConstantNode : public ExpNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class NumberNode
   \brief Definition of atributes and methods of NumberNode class
   \note  NumberNode Class publicly inherits from ExpNode class
 */
-class NumberNode : public ExpNode 
+class NumberNode : public ExpNode
 {
- private: 	
+ private:
    double _number; //!< \brief number of the NumberNode
- 
+
  public:
 
-/*!		
+/*!
 	\brief Constructor of NumberNode
 	\param value: double
 	\post  A new NumberNode is created with the value of the parameter
@@ -218,7 +218,7 @@ class NumberNode : public ExpNode
 	    this->_number = value;
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the expression: NUMBER
 	\return  int
 	\sa		 print
@@ -232,7 +232,7 @@ class NumberNode : public ExpNode
 	*/
 	void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the expression
 		\return  double
 		\sa		 print
@@ -241,24 +241,67 @@ class NumberNode : public ExpNode
 };
 
 
+/*!
+  \class CadenasNode
+  \brief Definition of atributes and methods of CadenasNode class
+  \note  StringsNode Class publicly inherits from ExpNode class
+*/
+
+class CadenasNode : public ExpNode
+{
+	private:
+		std::string _cadena;
+
+	public:
+		/*!
+		\brief Constructor of CadenasNode
+		\param value: string
+		\post  A new CadenasNode is created with the value of the parameter
+		\note  Inline function
+		*/
+		CadenasNode(std::string cadena){
+			this->_cadena = cadena;
+		}
+
+		/*!
+		\brief   Get the type of the expression: CADENAS
+		\return  int
+		\sa		 print
+		*/
+		int getType();
+
+		/*!
+		\brief   Print the expression
+		\return  void
+		\sa		 evaluate()
+		*/
+		void print();
+
+		/*!
+		\brief   Evaluate the expression
+		\return  string
+		\sa		 print
+		*/
+		std::string evaluateCadena();
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   UnaryOperatorNode
   \brief   Definition of atributes and methods of UnaryOperatorNode class
   \note    UnaryOperatorNode Class publicly inherits from ExpNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class UnaryOperatorNode : public ExpNode 
+class UnaryOperatorNode : public ExpNode
 {
  protected:
   ExpNode *_exp;  //!< Child expression
 
  public:
 
-/*!		
+/*!
 	\brief Constructor of UnaryOperatorNode links the node to it child,
            and stores the character representation of the operator.
 	\param expression: pointer to ExpNode
@@ -270,7 +313,7 @@ class UnaryOperatorNode : public ExpNode
 		this->_exp = expression;
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the child expression
 	\return  int
 	\sa		 print
@@ -285,17 +328,17 @@ class UnaryOperatorNode : public ExpNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   NumericUnaryOperatorNode
   \brief   Definition of atributes and methods of UnaryOperatorNode class
   \note    UnaryOperatorNode Class publicly inherits from UnaryOperatorNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class NumericUnaryOperatorNode : public UnaryOperatorNode 
+class NumericUnaryOperatorNode : public UnaryOperatorNode
 {
  public:
 
-/*!		
+/*!
 	\brief Constructor of NumericUnaryOperatorNode uses UnaryOperatorNode's constructor as member initializer
 	\param expression: pointer to ExpNode
 	\post  A new NumericUnaryOperatorNode is created with the parameters
@@ -306,7 +349,7 @@ class NumericUnaryOperatorNode : public UnaryOperatorNode
 		// Empty
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the child expression
 	\return  int
 	\sa		 print
@@ -319,17 +362,17 @@ class NumericUnaryOperatorNode : public UnaryOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   LogicalUnaryOperatorNode
   \brief   Definition of atributes and methods of UnaryOperatorNode class
   \note    UnaryOperatorNode Class publicly inherits from UnaryOperatorNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class LogicalUnaryOperatorNode : public UnaryOperatorNode 
+class LogicalUnaryOperatorNode : public UnaryOperatorNode
 {
  public:
 
-/*!		
+/*!
 	\brief Constructor of LogicalUnaryOperatorNode uses UnaryOperatorNode's constructor as member initializer
 	\param expression: pointer to ExpNode
 	\post  A new NumericUnaryOperatorNode is created with the parameters
@@ -340,7 +383,7 @@ class LogicalUnaryOperatorNode : public UnaryOperatorNode
 		// Empty
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the child expression
 	\return  int
 	\sa		 print
@@ -354,26 +397,26 @@ class LogicalUnaryOperatorNode : public UnaryOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   UnaryMinusNode
   \brief   Definition of atributes and methods of UnaryMinusNode class
   \note    UnaryMinusNode Class publicly inherits from NumericUnaryOperatorNode class
 */
-class UnaryMinusNode : public NumericUnaryOperatorNode 
+class UnaryMinusNode : public NumericUnaryOperatorNode
 {
 
  public:
 
-/*!		
+/*!
 	\brief Constructor of UnaryMinusNode uses NumericUnaryOperatorNode's constructor as member initializer.
 	\param expression: pointer to ExpNode
 	\post  A new UnaryMinusNode is created with the parameter
 	\note  Inline function: the NumericUnaryOperatorNode's constructor is used ad member initializer
 */
-  UnaryMinusNode(ExpNode *expression): NumericUnaryOperatorNode(expression) 
+  UnaryMinusNode(ExpNode *expression): NumericUnaryOperatorNode(expression)
 	{
 		// empty
-	} 
+	}
 
 /*!
 	\brief   Print the expression
@@ -382,7 +425,7 @@ class UnaryMinusNode : public NumericUnaryOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the expression
 	\return  double
 	\sa		 print
@@ -393,25 +436,25 @@ class UnaryMinusNode : public NumericUnaryOperatorNode
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   UnaryPlusNode
   \brief   Definition of atributes and methods of UnaryPlusNode class
   \note    UnaryPlusNode Class publicly inherits from NumericUnaryOperatorNode class
 */
-class UnaryPlusNode : public NumericUnaryOperatorNode 
+class UnaryPlusNode : public NumericUnaryOperatorNode
 {
 
  public:
 
-/*!		
+/*!
 	\brief Constructor of UnaryPlusNode uses NumericUnaryOperatorNode's constructor as member initializer
 	\param expression: pointer to ExpNode
 	\post  A new UnaryPlusNode is created with the parameter
 */
-  UnaryPlusNode(ExpNode *expression): NumericUnaryOperatorNode(expression) 
+  UnaryPlusNode(ExpNode *expression): NumericUnaryOperatorNode(expression)
 	{
 		// empty
-	} 
+	}
 
 /*!
 	\brief   Print the expression
@@ -420,7 +463,7 @@ class UnaryPlusNode : public NumericUnaryOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the expression
 	\return  double
 	\sa		 print
@@ -434,20 +477,20 @@ class UnaryPlusNode : public NumericUnaryOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   OperatorNode
   \brief   Definition of atributes and methods of OperatorNode class
   \note    OperatorNode Class publicly inherits from ExpNode class
   \warning Abstract class, because it does not redefine the print and getType methods of ExpNode
 */
-class OperatorNode : public ExpNode 
+class OperatorNode : public ExpNode
 {
 	protected:
 		ExpNode *_left;    //!< Left expression
 		ExpNode *_right;   //!< Right expression
 
 	public:
-	/*!		
+	/*!
 		\brief Constructor of OperatorNode links the node to its children,
 		\param L: pointer to ExpNode
 		\param R: pointer to ExpNode
@@ -466,28 +509,28 @@ class OperatorNode : public ExpNode
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   NumericOperatorNode
   \brief   Definition of atributes and methods of NumericOperatorNode class
   \note    NumericOperatorNode Class publicly inherits from OperatorNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class NumericOperatorNode : public OperatorNode 
+class NumericOperatorNode : public OperatorNode
 {
 	public:
 
-	/*!		
+	/*!
 		\brief Constructor of NumericOperatorNode uses OperatorNode's constructor as members initializer
 		\param L: pointer to ExpNode
 		\param R: pointer to ExpNode
 		\post  A new NumericOperatorNode is created with the parameters
 	*/
-    NumericOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R) 
+    NumericOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R)
 	{
 		//	Empty
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the children expressions
 	\return  int
 	\sa		 print()
@@ -500,27 +543,27 @@ class NumericOperatorNode : public OperatorNode
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   RelationalOperatorNode
   \brief   Definition of atributes and methods of RelationalOperatorNode class
   \note    RelationalOperatorNode Class publicly inherits from OperatorNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class RelationalOperatorNode : public OperatorNode 
+class RelationalOperatorNode : public OperatorNode
 {
 public:
-/*!		
+/*!
 	\brief Constructor of RelationalOperatorNode uses OperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new RelationalOperatorNode is created with the parameters
 */
-    RelationalOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R) 
+    RelationalOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R)
 	{
 		//	Empty
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the children expressions
 	\return  int
 	\sa		 print()
@@ -533,28 +576,28 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   LogicalOperatorNode
   \brief   Definition of atributes and methods of LogicalOperatorNode class
   \note    NumericOperatorNode Class publicly inherits from OperatorNode class
   \warning Abstract class, because it does not redefine the print method of ExpNode
 */
-class LogicalOperatorNode : public OperatorNode 
+class LogicalOperatorNode : public OperatorNode
 {
 	public:
 
-	/*!		
+	/*!
 		\brief Constructor of LogicalOperatorNode uses OperatorNode's constructor as members initializer
 		\param L: pointer to ExpNode
 		\param R: pointer to ExpNode
 		\post  A new NumericOperatorNode is created with the parameters
 	*/
-    LogicalOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R) 
+    LogicalOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R)
 	{
 		//	Empty
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the children expressions
 	\return  int
 	\sa		 print()
@@ -567,22 +610,22 @@ class LogicalOperatorNode : public OperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   PlusNode
   \brief   Definition of atributes and methods of PlusNode class
-  \note    PlusNode Class publicly inherits from NumericOperatorNode class 
+  \note    PlusNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class PlusNode : public NumericOperatorNode 
+class PlusNode : public NumericOperatorNode
 {
   public:
-/*!		
+/*!
 	\brief Constructor of PlusNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new PlusNode is created with the parameter
 */
-  PlusNode(ExpNode *L, ExpNode *R) : NumericOperatorNode(L,R) 
+  PlusNode(ExpNode *L, ExpNode *R) : NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -594,7 +637,7 @@ class PlusNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the PlusNode
 	\return  double
 	\sa		 print
@@ -606,23 +649,23 @@ class PlusNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   MinusNode
   \brief   Definition of atributes and methods of MinusNode class
-  \note    MinusNode Class publicly inherits from NumericOperatorNode class 
+  \note    MinusNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class MinusNode : public NumericOperatorNode 
+class MinusNode : public NumericOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of MinusNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new MinusNode is created with the parameter
 */
-  MinusNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  MinusNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -633,7 +676,7 @@ class MinusNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the MinusNode
 	\return  double
 	\sa		 print
@@ -647,23 +690,23 @@ class MinusNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   MultiplicationNode
   \brief   Definition of atributes and methods of MultiplicationNode class
-  \note    MultiplicationNode Class publicly inherits from NumericOperatorNode class 
+  \note    MultiplicationNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class MultiplicationNode : public NumericOperatorNode 
+class MultiplicationNode : public NumericOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of MultiplicationNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new MultiplicationNode is created with the parameter
 */
-  MultiplicationNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  MultiplicationNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -674,7 +717,7 @@ class MultiplicationNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the MultiplicationNode
 	\return  double
 	\sa		 print
@@ -685,22 +728,22 @@ class MultiplicationNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   DivisionNode
   \brief   Definition of atributes and methods of DivisionNode class
-  \note    DivisionNode Class publicly inherits from NumericOperatorNode class 
+  \note    DivisionNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class DivisionNode : public NumericOperatorNode 
+class DivisionNode : public NumericOperatorNode
 {
   public:
-/*!		
+/*!
 	\brief Constructor of DivisionNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new DivisionNode is created with the parameter
 */
-  DivisionNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  DivisionNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -711,7 +754,7 @@ class DivisionNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the DivisionNode
 	\return  double
 	\sa		 print
@@ -723,22 +766,22 @@ class DivisionNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   ModuloNode
   \brief   Definition of atributes and methods of ModuloNode class
-  \note    ModuloNode Class publicly inherits from NumericOperatorNode class 
+  \note    ModuloNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class ModuloNode : public NumericOperatorNode 
+class ModuloNode : public NumericOperatorNode
 {
   public:
-/*!		
+/*!
 	\brief Constructor of ModuloNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new ModuloNode is created with the parameter
 */
-  ModuloNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  ModuloNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -749,7 +792,7 @@ class ModuloNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the ModuloNode
 	\return  double
 	\sa		 print
@@ -761,22 +804,22 @@ class ModuloNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   PowerNode
   \brief   Definition of atributes and methods of PowerNode class
-  \note    PowerNode Class publicly inherits from NumericOperatorNode class 
+  \note    PowerNode Class publicly inherits from NumericOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class PowerNode : public NumericOperatorNode 
+class PowerNode : public NumericOperatorNode
 {
   public:
-/*!		
+/*!
 	\brief Constructor of PowerNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new PowerNode is created with the parameter
 */
-  PowerNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  PowerNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
   {
 		// Empty
   }
@@ -788,7 +831,7 @@ class PowerNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the PowerNode
 	\return  double
 	\sa		 print
@@ -800,26 +843,26 @@ class PowerNode : public NumericOperatorNode
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   QuotiendNode
   \brief   Definition of atributes and methods of Quotient class
   \note    Quotient Class publicly inherits from NumericOperatorNode class
 */
-class QuotientNode : public NumericOperatorNode  
+class QuotientNode : public NumericOperatorNode
 {
 
  public:
 
-/*!		
+/*!
 	\brief Constructor of QuotientNode uses NumericOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new QuotientNode is created with the parameter
 */
-  QuotientNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R) 
+  QuotientNode(ExpNode *L, ExpNode *R): NumericOperatorNode(L,R)
 	{
 		// empty
-	} 
+	}
 
 /*!
 	\brief   Print the QuotientNode
@@ -828,7 +871,7 @@ class QuotientNode : public NumericOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the QuotientNode
 	\return  double
 	\sa		 print()
@@ -840,18 +883,18 @@ class QuotientNode : public NumericOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   BuiltinFunctionNode
   \brief   Definition of atributes and methods of BuiltinFunctionNode class
-  \note    BuiltinFunctionNode Class publicly inherits from ExpNode class 
+  \note    BuiltinFunctionNode Class publicly inherits from ExpNode class
 */
-class BuiltinFunctionNode : public ExpNode 
+class BuiltinFunctionNode : public ExpNode
 {
-  protected: 
+  protected:
 	std::string _id; //!< Name of the BuiltinFunctionNode
-	
+
   public:
-/*!		
+/*!
 	\brief Constructor of BuiltinFunctionNode
 	\param id: string, name of the BuiltinFunction
 	\post  A new BuiltinFunctionNode is created with the parameter
@@ -870,26 +913,26 @@ class BuiltinFunctionNode : public ExpNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   BuiltinFunctionNode_0
   \brief   Definition of atributes and methods of BuiltinFunctionNode_0 class
-  \note    BuiltinFunctionNode_0 Class publicly inherits from BuiltinFunctionNode class 
+  \note    BuiltinFunctionNode_0 Class publicly inherits from BuiltinFunctionNode class
 		   and adds its own print and evaluate functions
 */
-class BuiltinFunctionNode_0 : public BuiltinFunctionNode 
+class BuiltinFunctionNode_0 : public BuiltinFunctionNode
 {
   public:
-/*!		
+/*!
 	\brief Constructor of BuiltinFunctionNode_0 uses BuiltinFunctionNode's constructor as member initializer
 	\param id: string, name of the BuiltinFunction
 	\post  A new BuiltinFunctionNode_2 is created with the parameter
 */
   BuiltinFunctionNode_0(std::string id): BuiltinFunctionNode(id)
 	{
-		// 
+		//
 	}
 
-	/*!	
+	/*!
 		\brief   Get the type of the child expression:
 		\return  int
 		\sa		 print
@@ -905,7 +948,7 @@ class BuiltinFunctionNode_0 : public BuiltinFunctionNode
 	*/
 	  void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the BuiltinFunctionNode_0
 		\return  double
 		\sa		 print
@@ -919,19 +962,19 @@ class BuiltinFunctionNode_0 : public BuiltinFunctionNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   BuiltinFunctionNode_1
   \brief   Definition of atributes and methods of BuiltinFunctionNode_1 class
-  \note    BuiltinFunctionNode_1 Class publicly inherits from BuiltinFunctionNode class 
+  \note    BuiltinFunctionNode_1 Class publicly inherits from BuiltinFunctionNode class
 		   and adds its own print and evaluate functions
 */
-class BuiltinFunctionNode_1: public BuiltinFunctionNode 
+class BuiltinFunctionNode_1: public BuiltinFunctionNode
 {
   private:
 	ExpNode *_exp;  //!< Argument of the BuiltinFunctionNode_1
 
   public:
-/*!		
+/*!
 	\brief Constructor of BuiltinFunctionNode_1 uses BuiltinFunctionNode's constructor as member initializer
 	\param id: string, name of the BuiltinFunction
 	\param expression: pointer to ExpNode, argument of the BuiltinFunctionNode_1
@@ -942,7 +985,7 @@ class BuiltinFunctionNode_1: public BuiltinFunctionNode
 		this->_exp = expression;
 	}
 
-	/*!	
+	/*!
 		\brief   Get the type of the child expression:
 		\return  int
 		\sa		 print
@@ -956,7 +999,7 @@ class BuiltinFunctionNode_1: public BuiltinFunctionNode
 	*/
 	  void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the BuiltinFunctionNode_1
 		\return  double
 		\sa		 print
@@ -970,20 +1013,20 @@ class BuiltinFunctionNode_1: public BuiltinFunctionNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   BuiltinFunctionNode_2
-  \brief   Definition of atributes and methods of BuiltinFunctionNode_2 class 
-  \note    BuiltinFunctionNode_2 Class publicly inherits from BuiltinFunctionNode class 
+  \brief   Definition of atributes and methods of BuiltinFunctionNode_2 class
+  \note    BuiltinFunctionNode_2 Class publicly inherits from BuiltinFunctionNode class
 		   and adds its own print and evaluate functions
 */
-class BuiltinFunctionNode_2 : public BuiltinFunctionNode 
+class BuiltinFunctionNode_2 : public BuiltinFunctionNode
 {
 	private:
 		ExpNode *_exp1; //!< First argument of the BuiltinFunction_2
 		ExpNode *_exp2; //!< Second argument of the BuiltinFunction_2
 
 	public:
-	/*!		
+	/*!
 		\brief Constructor of BuiltinFunctionNode_2 uses BuiltinFunctionNode's constructor as member initializer
 		\param id: string, name of the BuiltinFunction_2
 		\param expression1: pointer to ExpNode, first argument of the BuiltinFunctionNode
@@ -996,7 +1039,7 @@ class BuiltinFunctionNode_2 : public BuiltinFunctionNode
 		this->_exp2 = expression2;
 	}
 
-	/*!	
+	/*!
 	\brief   Get the type of the children expressions
 	\return  int
 	\sa		 print
@@ -1012,7 +1055,7 @@ class BuiltinFunctionNode_2 : public BuiltinFunctionNode
 	*/
 	  void print();
 
-	/*!	
+	/*!
 		\brief   Evaluate the BuiltinFunctionNode_2
 		\return  double
 		\sa		 print
@@ -1025,23 +1068,23 @@ class BuiltinFunctionNode_2 : public BuiltinFunctionNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   GreaterThanNode
   \brief   Definition of atributes and methods of GreaterThanNode class
-  \note    GreaterThanNode Class publicly inherits from RelationalOperatorNode class 
+  \note    GreaterThanNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class GreaterThanNode : public RelationalOperatorNode 
+class GreaterThanNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of GreaterThanNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new GreaterThanNode is created with the parameter
 */
-  GreaterThanNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  GreaterThanNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1054,7 +1097,7 @@ class GreaterThanNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the GreaterThanNode
 	\return  bool
 	\sa		 print
@@ -1068,23 +1111,23 @@ class GreaterThanNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   GreaterOrEqualNode
   \brief   Definition of atributes and methods of GreaterOrEqualNode class
-  \note    GreaterOrEqualNode Class publicly inherits from RelationalOperatorNode class 
+  \note    GreaterOrEqualNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class GreaterOrEqualNode : public RelationalOperatorNode 
+class GreaterOrEqualNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of GreaterOrEqualNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new GreaterOrEqualNode is created with the parameter
 */
-  GreaterOrEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  GreaterOrEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1095,7 +1138,7 @@ class GreaterOrEqualNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the GreaterOrEqualNode
 	\return  bool
 	\sa		 print()
@@ -1109,23 +1152,23 @@ class GreaterOrEqualNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   LessThanNode
   \brief   Definition of atributes and methods of LessThanNode class
-  \note    LessThanNode Class publicly inherits from RelationalOperatorNode class 
+  \note    LessThanNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class LessThanNode : public RelationalOperatorNode 
+class LessThanNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of LessThanNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new LessThanNode is created with the parameter
 */
-  LessThanNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  LessThanNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1136,7 +1179,7 @@ class LessThanNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the LessThanNode
 	\return  bool
 	\sa		 print()
@@ -1150,23 +1193,23 @@ class LessThanNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   LessOrEqualNode
   \brief   Definition of atributes and methods of LessOrEqualNode class
-  \note    LessThanNode Class publicly inherits from RelationalOperatorNode class 
+  \note    LessThanNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class LessOrEqualNode : public RelationalOperatorNode 
+class LessOrEqualNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of LessOrEqualNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new LessOrEqualNode is created with the parameter
 */
-  LessOrEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  LessOrEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1177,7 +1220,7 @@ class LessOrEqualNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the LessOrEqualNode
 	\return  bool
 	\sa		 print()
@@ -1190,23 +1233,23 @@ class LessOrEqualNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   EqualNode
   \brief   Definition of atributes and methods of EqualNode class
-  \note    EqualNode Class publicly inherits from RelationalOperatorNode class 
+  \note    EqualNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class EqualNode : public RelationalOperatorNode 
+class EqualNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of EqualNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new EqualNode is created with the parameter
 */
-  EqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  EqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1217,7 +1260,7 @@ class EqualNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the EqualNode
 	\return  bool
 	\sa		 print()
@@ -1230,23 +1273,23 @@ class EqualNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   NotEqualNode
   \brief   Definition of atributes and methods of NotEqualNode class
-  \note    NotEqualNode Class publicly inherits from RelationalOperatorNode class 
+  \note    NotEqualNode Class publicly inherits from RelationalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class NotEqualNode : public RelationalOperatorNode 
+class NotEqualNode : public RelationalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of NotEqualNode uses RelationalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new NotEqualNode is created with the parameter
 */
-  NotEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R) 
+  NotEqualNode(ExpNode *L, ExpNode *R): RelationalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1258,7 +1301,7 @@ class NotEqualNode : public RelationalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the NotEqualNode
 	\return  bool
 	\sa		 print()
@@ -1272,23 +1315,23 @@ class NotEqualNode : public RelationalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   AndNode
   \brief   Definition of atributes and methods of AndNode class
-  \note    AndNode Class publicly inherits from LogicalOperatorNode class 
+  \note    AndNode Class publicly inherits from LogicalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class AndNode : public LogicalOperatorNode 
+class AndNode : public LogicalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of AndNode uses LogicalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new AndNode is created with the parameter
 */
-  AndNode(ExpNode *L, ExpNode *R): LogicalOperatorNode(L,R) 
+  AndNode(ExpNode *L, ExpNode *R): LogicalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1300,7 +1343,7 @@ class AndNode : public LogicalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the AndNode
 	\return  bool
 	\sa		 print()
@@ -1315,23 +1358,23 @@ class AndNode : public LogicalOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   OrNode
   \brief   Definition of atributes and methods of OrNode class
-  \note    OrNode Class publicly inherits from LogicalOperatorNode class 
+  \note    OrNode Class publicly inherits from LogicalOperatorNode class
 		   and adds its own print and evaluate functions
 */
-class OrNode : public LogicalOperatorNode 
+class OrNode : public LogicalOperatorNode
 {
   public:
 
-/*!		
+/*!
 	\brief Constructor of AndNode uses LogicalOperatorNode's constructor as members initializer
 	\param L: pointer to ExpNode
 	\param R: pointer to ExpNode
 	\post  A new AndNode is created with the parameter
 */
-  OrNode(ExpNode *L, ExpNode *R): LogicalOperatorNode(L,R) 
+  OrNode(ExpNode *L, ExpNode *R): LogicalOperatorNode(L,R)
   {
 		// Empty
   }
@@ -1343,7 +1386,7 @@ class OrNode : public LogicalOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the OrNode
 	\return  bool
 	\sa		 print()
@@ -1356,25 +1399,25 @@ class OrNode : public LogicalOperatorNode
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   NotNode
   \brief   Definition of atributes and methods of UnaryPlusNode class
   \note    NotNode Class publicly inherits from LogicalUnaryOperatorNode class
 */
-class NotNode : public LogicalUnaryOperatorNode 
+class NotNode : public LogicalUnaryOperatorNode
 {
 
  public:
 
-/*!		
+/*!
 	\brief Constructor of NotNode uses LogicalUnaryOperatorNode's constructor as member initializer
 	\param expression: pointer to ExpNode
 	\post  A new NotNode is created with the parameter
 */
-  NotNode(ExpNode *expression): LogicalUnaryOperatorNode(expression) 
+  NotNode(ExpNode *expression): LogicalUnaryOperatorNode(expression)
 	{
 		// empty
-	} 
+	}
 
 /*!
 	\brief   Print the NotNode
@@ -1383,7 +1426,7 @@ class NotNode : public LogicalUnaryOperatorNode
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the NotNode
 	\return  bool
 	\sa		 print()
@@ -1395,7 +1438,7 @@ class NotNode : public LogicalUnaryOperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   Statement
   \brief   Definition of atributes and methods of Statement class
   \warning Abstract class
@@ -1404,7 +1447,7 @@ class NotNode : public LogicalUnaryOperatorNode
 class Statement {
  public:
 
-/*!	
+/*!
 	\brief   Print the Statement
 	\note    Virtual function: can be redefined in the heir classes
 	\return  double
@@ -1413,7 +1456,7 @@ class Statement {
 
   virtual void print() {}
 
-/*!	
+/*!
 	\brief   Evaluate the Statement
 	\warning Pure virtual function: must be redefined in the heir classes
 	\return  double
@@ -1427,39 +1470,39 @@ class Statement {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   AssignmentStmt
   \brief   Definition of atributes and methods of AssignmentStmt class
-  \note    AssignmentStmt Class publicly inherits from Statement class 
+  \note    AssignmentStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class AssignmentStmt : public Statement 
+class AssignmentStmt : public Statement
 {
  private:
   std::string _id;    //!< Name of the variable of the assignment statement
   ExpNode *_exp; 	 //!< Expresssion the assignment statement
 
-  AssignmentStmt *_asgn;  //!< Allow multiple assigment -> a = b = 2 
+  AssignmentStmt *_asgn;  //!< Allow multiple assigment -> a = b = 2
 
  public:
 
-/*!		
-	\brief Constructor of AssignmentStmt 
+/*!
+	\brief Constructor of AssignmentStmt
 	\param id: string, variable of the AssignmentStmt
 	\param expression: pointer to ExpNode
 	\post  A new AssignmentStmt is created with the parameters
 */
   AssignmentStmt(std::string id, ExpNode *expression): _id(id), _exp(expression)
 	{
-		this->_asgn = NULL; 
+		this->_asgn = NULL;
 	}
 
-/*!		
-	\brief Constructor of AssignmentStmt 
+/*!
+	\brief Constructor of AssignmentStmt
 	\param id: string, variable of the AssignmentStmt
 	\param asgn: pointer to AssignmentStmt
 	\post  A new AssignmentStmt is created with the parameters
-	\note  Allow multiple assigment -> a = b = 2 
+	\note  Allow multiple assigment -> a = b = 2
 */
 
   AssignmentStmt(std::string id, AssignmentStmt *asgn): _id(id), _asgn(asgn)
@@ -1475,7 +1518,7 @@ class AssignmentStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the AssignmentStmt
 	\return  void
 	\sa		 print
@@ -1487,21 +1530,21 @@ class AssignmentStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-/*!	
+/*!
   \class   PrintStmt
   \brief   Definition of atributes and methods of PrintStmt class
-  \note    PrintStmt Class publicly inherits from Statement class 
+  \note    PrintStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
   \warning  In this class, print and evaluate functions have the same meaning.
 */
-class PrintStmt: public Statement 
+class PrintStmt: public Statement
 {
  private:
   ExpNode *_exp; //!< Expresssion the print statement
 
  public:
-/*!		
-	\brief Constructor of PrintStmt 
+/*!
+	\brief Constructor of PrintStmt
 	\param expression: pointer to ExpNode
 	\post  A new PrintStmt is created with the parameter
 */
@@ -1517,7 +1560,7 @@ class PrintStmt: public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the PrintStmt
 	\return  double
 	\sa		 print
@@ -1530,20 +1573,20 @@ class PrintStmt: public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   ReadStmt
   \brief   Definition of atributes and methods of ReadStmt class
-  \note    ReadStmt Class publicly inherits from Statement class 
+  \note    ReadStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class ReadStmt : public Statement 
+class ReadStmt : public Statement
 {
   private:
 	std::string _id; //!< Name of the ReadStmt
-	
+
 
   public:
-/*!		
+/*!
 	\brief Constructor of ReadStmt
 	\param id: string, name of the variable of the ReadStmt
 	\post  A new ReadStmt is created with the parameter
@@ -1560,7 +1603,7 @@ class ReadStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the ReadStmt
 	\return  void
 	\sa		 print
@@ -1573,20 +1616,20 @@ class ReadStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   EmptyStmt
   \brief   Definition of atributes and methods of EmptyStmt class
-  \note    EmptyStmt Class publicly inherits from Statement class 
+  \note    EmptyStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class EmptyStmt : public Statement 
+class EmptyStmt : public Statement
 {
   // No attributes
 
   public:
-/*!		
+/*!
 	\brief Constructor of  WhileStmt
-	\post  A new EmptyStmt is created 
+	\post  A new EmptyStmt is created
 */
   EmptyStmt()
 	{
@@ -1601,7 +1644,7 @@ class EmptyStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the EmptyStmt
 	\return  void
 	\sa		 print
@@ -1613,13 +1656,13 @@ class EmptyStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
-/*!	
+/*!
   \class   IfStmt
   \brief   Definition of atributes and methods of IfStmt class
-  \note    IfStmt Class publicly inherits from Statement class 
+  \note    IfStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class IfStmt : public Statement 
+class IfStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the if statement
@@ -1627,7 +1670,7 @@ class IfStmt : public Statement
   Statement *_stmt2; //!< Statement of the alternative
 
   public:
-/*!		
+/*!
 	\brief Constructor of Single IfStmt (without alternative)
 	\param condition: ExpNode of the condition
 	\param statement1: Statement of the consequent
@@ -1641,7 +1684,7 @@ class IfStmt : public Statement
 	}
 
 
-/*!		
+/*!
 	\brief Constructor of Compound IfStmt (with alternative)
 	\param condition: ExpNode of the condition
 	\param statement1: Statement of the consequent
@@ -1663,7 +1706,7 @@ class IfStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the IfStmt
 	\return  void
 	\sa		 print
@@ -1679,23 +1722,23 @@ class IfStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
-/*!	
+/*!
   \class   WhileStmt
   \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class 
+  \note    WhileStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class WhileStmt : public Statement 
+class WhileStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the while statement
   Statement *_stmt; //!< Statement of the body of the while loop
 
   public:
-/*!		
+/*!
 	\brief Constructor of  WhileStmt
 	\param condition: ExpNode of the condition
-	\param statement: Statement of the body of the loop 
+	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
   WhileStmt(ExpNode *condition, Statement *statement)
@@ -1712,7 +1755,7 @@ class WhileStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the WhileStmt
 	\return  void
 	\sa		 print
@@ -1724,23 +1767,23 @@ class WhileStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
-/*!	
+/*!
   \class   UntilStmt
   \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class 
+  \note    WhileStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class UntilStmt : public Statement 
+class UntilStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the until statement
   Statement *_stmt; //!< Statement of the body of the until loop
 
   public:
-/*!		
+/*!
 	\brief Constructor of  WhileStmt
 	\param condition: ExpNode of the condition
-	\param statement: Statement of the body of the loop 
+	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
   UntilStmt(ExpNode *condition, Statement *statement)
@@ -1757,7 +1800,7 @@ class UntilStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the UntilStmt
 	\return  void
 	\sa		 print
@@ -1769,13 +1812,13 @@ class UntilStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
-/*!	
+/*!
   \class   UntilStmt
   \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class 
+  \note    WhileStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class ForStmt : public Statement 
+class ForStmt : public Statement
 {
  private:
   ExpNode * _variable; //!< Condicion of the for statement
@@ -1785,10 +1828,10 @@ class ForStmt : public Statement
   Statement *_stmt; //!< Statement of the body of the for loop
 
   public:
-/*!		
+/*!
 	\brief Constructor of  WhileStmt
 	\param condition: ExpNode of the condition
-	\param statement: Statement of the body of the loop 
+	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
   ForStmt(ExpNode * var, ExpNode * from,ExpNode * to,ExpNode * step, Statement *statement)
@@ -1808,7 +1851,7 @@ class ForStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the ForStmt
 	\return  void
 	\sa		 print
@@ -1821,19 +1864,19 @@ class ForStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
-/*!	
+/*!
   \class   BlockStmt
   \brief   Definition of atributes and methods of BlockStmt class
-  \note    BlockStmt Class publicly inherits from Statement class 
+  \note    BlockStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
-class BlockStmt : public Statement 
+class BlockStmt : public Statement
 {
  private:
    std::list<Statement *> *_stmts;  //!< List of statements
 
   public:
-/*!		
+/*!
 	\brief Constructor of  WhileStmt
 	\param stmtList: list of Statement
 	\post  A new BlockStmt is created with the parameters
@@ -1851,7 +1894,7 @@ class BlockStmt : public Statement
 */
   void print();
 
-/*!	
+/*!
 	\brief   Evaluate the BlockStmt
 	\return  void
 	\sa		 print
@@ -1864,7 +1907,7 @@ class BlockStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*!	
+/*!
   \class   AST
   \brief   Definition of atributes and methods of AST class
 */
@@ -1874,8 +1917,8 @@ class AST {
 
  public:
 
-/*!		
-	\brief Constructor of PrintStmt 
+/*!
+	\brief Constructor of PrintStmt
 	\param stmtList: pointer to a list of pointers to Statement
 	\post  A new PrintStmt is created with the parameter
 */
@@ -1891,7 +1934,7 @@ class AST {
 */
   void print();
 
-/*!	
+/*!
 	\brief   evaluate the AST
 	\return  double
 	\sa		 print

@@ -58,6 +58,8 @@ scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
+%x CADENA
+
 /* NEW in example 3 */
 /* STATE  */
 %x ERROR
@@ -149,6 +151,19 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 							}
                      }
 
+"'" {
+        BEGIN CADENA;
+    }
+<CADENA>"'"  {
+                        BEGIN 0;
+                        yytext[yyleng-1]='\0';
+						yylval.cadena = strdup(yytext);
+						return CADENA;
+                    }
+<CADENA>"\\\'"   {yymore();}
+<CADENA>.    {yymore();}
+<CADENA>\t	{yymore();}
+<CADENA>\n    {yymore();}
 
 
 
