@@ -133,7 +133,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block
+%type <st> stmt asgn write read if while block repeat for
 
 %type <prog> program
 
@@ -147,7 +147,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 // NEW in example 17: IF, ELSE, WHILE
-%token PRINT READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
+%token READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
 
 // NEW in example 17
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -266,7 +266,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
-	| print SEMICOLON
+	| write SEMICOLON
 	  {
 		// Default action
 		// $$ = $1;
@@ -276,6 +276,8 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
+
+
 	/*  NEW in example 17 */
 	| if
 	 {
@@ -294,6 +296,9 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
+    
+    | repeat
+    | for
 ;
 
 
@@ -313,20 +318,20 @@ controlSymbol:  /* Epsilon rule*/
 
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
-	IF controlSymbol cond stmt
+	IF controlSymbol cond THEN stmt END_IF
     {
 		// Create a new if statement node
-		$$ = new lp::IfStmt($3, $4);
+		$$ = new lp::IfStmt($3, $5);
 
 		// To control the interactive mode
 		control--;
 	}
 
 	/* Compound conditional statement */
-	| IF controlSymbol cond stmt  ELSE stmt
+	| IF controlSymbol cond THEN stmt ELSE stmt END_IF
 	 {
 		// Create a new if statement node
-		$$ = new lp::IfStmt($3, $4, $6);
+		$$ = new lp::IfStmt($3, $5, $7);
 
 		// To control the interactive mode
 		control--;
@@ -334,14 +339,31 @@ if:	/* Simple conditional statement */
 ;
 
 	/*  NEW in example 17 */
-while:  WHILE controlSymbol cond stmt
+while:  WHILE controlSymbol cond DO stmt END_WHILE
 		{
 			// Create a new while statement node
-			$$ = new lp::WhileStmt($3, $4);
+			$$ = new lp::WhileStmt($3, $5);
 
 			// To control the interactive mode
 			control--;
     }
+;
+
+repeat: REPEAT stmt UNTIL controlSymbol cond
+        {
+            //Create a new until statement node
+            $$ = new lp::UntilStmt($5, $2);
+            		
+            // To control the interactive mode
+			control--;
+}
+;
+
+for: FOR exp FROM exp TO exp STEP exp DO stmt END_FOR
+        {
+            //Create a new until statement node
+            $$ = new lp::ForStmt($2, $4, $6, $8, $10);
+}
 ;
 
 	/*  NEW in example 17 */
@@ -377,7 +399,7 @@ asgn:   VARIABLE ASSIGNMENT exp
 ;
 
 
-print:  PRINT exp
+write:  WRITE exp
 		{
 			// Create a new print node
 			 $$ = new lp::PrintStmt($2);
@@ -573,12 +595,7 @@ exp:	NUMBER
  			$$ = new lp::NotNode($2);
 		}
 
-	//Añadido
-    | exp QUOTIENT exp
-	 	{
-		  // Create a new "quotient" node
- 			$$ = new lp::QuotientNode($1,$3);
-		}
+
 ;
 
 

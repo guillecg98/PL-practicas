@@ -1363,7 +1363,70 @@ void lp::WhileStmt::evaluate()
 
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
 
+void lp::UntilStmt::print() 
+{
+  std::cout << "UntilStmt: "  << std::endl;
+  // Condition
+  this->_cond->print();
+
+  // Body of the while loop
+  this->_stmt->print();
+
+  std::cout << std::endl;
+}
+
+
+void lp::UntilStmt::evaluate() 
+{
+  // While the condition is true. the body is run 
+  while (this->_cond->evaluateBool() == true)
+  {	
+	  this->_stmt->evaluate();
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
+
+void lp::ForStmt::print() 
+{
+  std::cout << "ForStmt: "  << std::endl;
+  // Condition
+  std::cout << "For variable: ";
+  this->_variable->print();
+  std::cout << std::endl;
+  std::cout << "From: ";
+  this->_from->print();
+  std::cout << std::endl;
+  std::cout << "To: ";
+  this->_to->print();
+  std::cout << std::endl;
+  std::cout << "Step: ";
+  this->_from->print();
+  std::cout << std::endl;
+  std::cout << "Do: ";
+  this->_stmt->print();
+  std::cout << std::endl;
+}
+
+
+void lp::ForStmt::evaluate() 
+{
+
+  //double variable = this->_from->evaluateNumber();
+  //double stopCondition = this->_to->evaluateNumber();
+  //double step = this->_step->evaluateNumber(); 
+  // While the condition is true. the body is run 
+  while (this->_variable->evaluateBool() == true)
+  {	
+	  this->_stmt->evaluate();
+  }
+}
 
 
 

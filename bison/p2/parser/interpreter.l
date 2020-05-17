@@ -81,20 +81,16 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 			return SEMICOLON;
 		}
 
-
 ","		{
 			/* NEW in example 14 */
 			return COMMA;
 		}
 
-//Hay números de enteros, reales y de notacion científica
-{integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER}
-					{
+{integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 	{
 					  /* MODIFIED in example 4 */
 					  /* Conversion of type and sending of the numerical value to the parser */
 					   yylval.number = atof(yytext);
 
-					   //Todos son tratados como número porque devuelven token number al sintáctico
                        return NUMBER;
                       }
 

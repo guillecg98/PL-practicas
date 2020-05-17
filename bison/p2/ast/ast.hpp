@@ -830,10 +830,10 @@ class QuotientNode : public NumericOperatorNode
 
 /*!	
 	\brief   Evaluate the QuotientNode
-	\return  bool
+	\return  double
 	\sa		 print()
 */
-  bool evaluateBool();
+  double evaluateNumber();
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1720,6 +1720,101 @@ class WhileStmt : public Statement
   void evaluate();
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
+
+/*!	
+  \class   UntilStmt
+  \brief   Definition of atributes and methods of WhileStmt class
+  \note    WhileStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+class UntilStmt : public Statement 
+{
+ private:
+  ExpNode *_cond; //!< Condicion of the until statement
+  Statement *_stmt; //!< Statement of the body of the until loop
+
+  public:
+/*!		
+	\brief Constructor of  WhileStmt
+	\param condition: ExpNode of the condition
+	\param statement: Statement of the body of the loop 
+	\post  A new WhileStmt is created with the parameters
+*/
+  UntilStmt(ExpNode *condition, Statement *statement)
+	{
+		this->_cond = condition;
+		this->_stmt = statement;
+	}
+
+
+/*!
+	\brief   Print the UntilStmt
+	\return  void
+	\sa		 evaluate
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the UntilStmt
+	\return  void
+	\sa		 print
+*/
+  void evaluate();
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
+
+/*!	
+  \class   UntilStmt
+  \brief   Definition of atributes and methods of WhileStmt class
+  \note    WhileStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+class ForStmt : public Statement 
+{
+ private:
+  ExpNode * _variable; //!< Condicion of the for statement
+  ExpNode *_from; //!< Condicion of the for statement
+  ExpNode *_to; //!< Condicion of the for statement
+  ExpNode * _step; //!< Condicion of the for statement
+  Statement *_stmt; //!< Statement of the body of the for loop
+
+  public:
+/*!		
+	\brief Constructor of  WhileStmt
+	\param condition: ExpNode of the condition
+	\param statement: Statement of the body of the loop 
+	\post  A new WhileStmt is created with the parameters
+*/
+  ForStmt(ExpNode * var, ExpNode * from,ExpNode * to,ExpNode * step, Statement *statement)
+	{
+		this->_variable = var;
+		this->_from = from;
+		this->_to = to;
+		this->_step = step;
+		this->_stmt = statement;
+	}
+
+
+/*!
+	\brief   Print the ForStmt
+	\return  void
+	\sa		 evaluate
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the ForStmt
+	\return  void
+	\sa		 print
+*/
+  void evaluate();
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
