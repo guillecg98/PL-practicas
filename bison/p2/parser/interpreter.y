@@ -121,6 +121,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
   std::list<lp::Statement *> *stmts; /* NEW in example 16 */
   lp::Statement *st;				 /* NEW in example 16 */
   lp::AST *prog;					 /* NEW in example 16 */
+  char * cadena;
 }
 
 /* Type of the non-terminal symbols */
@@ -170,6 +171,8 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 /* MODIFIED in examples 11, 13 */
 %token <identifier> VARIABLE UNDEFINED CONSTANT BUILTIN
+
+%token <cadena> CADENA
 
 /* Left associativity */
 
@@ -296,7 +299,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
-    
+
     | repeat
     | for
 ;
@@ -353,7 +356,7 @@ repeat: REPEAT stmt UNTIL controlSymbol cond
         {
             //Create a new until statement node
             $$ = new lp::UntilStmt($5, $2);
-            		
+
             // To control the interactive mode
 			control--;
 }
@@ -485,6 +488,11 @@ exp:	NUMBER
 		{
 		  // Create a new variable node
 		  $$ = new lp::VariableNode($1);
+		}
+
+	 | CADENA
+	 	{
+			 $$ = new lp::CadenasNode($1);
 		}
 
 	 | CONSTANT
