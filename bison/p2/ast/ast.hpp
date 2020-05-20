@@ -453,7 +453,6 @@ class UnaryPlusNode : public NumericUnaryOperatorNode
 {
 
  public:
-ou can still crea
 /*!
 	\brief Constructor of UnaryPlusNode uses NumericUnaryOperatorNode's constructor as member initializer
 	\param expression: pointer to ExpNode

@@ -1184,7 +1184,7 @@ void lp::AssignmentStmt::evaluate()
 					// with the type BOOL and the value
 					lp::alfanumericVariable *v = new lp::alfanumericVariable(this->_id,
 											VARIABLE,CADENA,value);
-					table.installSymbol(v);					
+					table.installSymbol(v);
 				}
 			}break;
 

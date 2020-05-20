@@ -1,48 +1,48 @@
-/*!	
+/*!
 	\file    alfanumericVariable.hpp
 	\brief   Declaration of alfanumericVariable class
-	\author  
+	\author
 	\date    2017-12-1
 	\version 1.0
 */
 
-#ifndef _alfanumericVariable_HPP_
-#define _alfanumericVariable_HPP_
+#ifndef _ALFANUMERICVARIABLE_HPP_
+#define _ALFANUMERICVARIABLE_HPP_
 
-#include <string>
+#include <cstring>
 #include <iostream>
 
 #include "variable.hpp"
 
-/*!	
+/*!
 	\namespace lp
 	\brief Name space for the subject Language Processors
 */
 namespace lp{
 
-/*!	
+/*!
   \class alfanumericVariable
   \brief Definition of atributes and methods of alfanumericVariable class
   \note  alfanumericVariable Class publicly inherits from Variable class
 */
 class alfanumericVariable:public lp::Variable
 {
-/*!		
+/*!
 \name Private atributes of alfanumericVariable class
 */
 	private:
 		std::string      _value;   //!< \brief Numeric value of the alfanumericVariable
 
-/*!		
+/*!
 \name Public methods of alfanumericVariable class
 */
 	public:
 
-/*!	
+/*!
 	\name Constructors
 */
-		
-/*!		
+
+/*!
 	\brief Constructor with arguments with default values
 	\note  Inline function that uses Variable's constructor as members initializer
 	\param name: name of the alfanumericVariable
@@ -53,13 +53,12 @@ class alfanumericVariable:public lp::Variable
 	\post  A new alfanumericVariable is created with the values of the parameters
 	\sa   setName, setValue
 */
-	inline alfanumericVariable(std::string name="", int token = 0, int type = 0, std::string value=""): 
- 	Variable(name,token,type)
+	inline alfanumericVariable(std::string name="", int token = 0, int type = 0, std::string value=""):Variable(name,token,type)
 	{
 		this->setValue(value);
 	}
-		
-/*!		
+
+/*!
 	\brief Copy constructor
 	\note  Inline function
 	\param n: object of alfanumericVariable class
@@ -75,17 +74,17 @@ class alfanumericVariable:public lp::Variable
 		this->setToken(n.getToken());
 
 		this->setType(n.getType());
-		
+
 		// Own method
 		this->setValue(n.getValue());
 	}
 
 
-/*!	
+/*!
 	\name Observer
 */
-	
-/*!	
+
+/*!
 	\brief  Public method that returns the value of the alfanumericVariable
 	\note   Función inline
 	\pre    None
@@ -100,16 +99,16 @@ class alfanumericVariable:public lp::Variable
 
 
 
-/*!	
+/*!
 	\name Modifier
 */
-		
-/*!	
+
+/*!
 	\brief   This functions modifies the value of the alfanumericVariable
 	\note    Inline function
 	\param   value: new value of the alfanumericVariable
 	\pre     None
-	\post    The value of the alfanumericVariable is equal to the parameter 
+	\post    The value of the alfanumericVariable is equal to the parameter
 	\return  void
 	\sa 	 setValue
 */
@@ -120,12 +119,12 @@ class alfanumericVariable:public lp::Variable
 
 
 
-		
-/*!	
+
+/*!
 	\name I/O Functions
 */
-		
-/*!		
+
+/*!
 	\brief Read a alfanumericVariable
 	\pre   None
 	\post  The atributes of the alfanumericVariable are modified with the read values
@@ -133,8 +132,8 @@ class alfanumericVariable:public lp::Variable
 */
 	void read();
 
-	
-/*!		
+
+/*!
 	\brief Write a alfanumericVariable
 	\pre   None
 	\post  None
@@ -143,21 +142,21 @@ class alfanumericVariable:public lp::Variable
 	void write() const;
 
 
-/*!	
+/*!
 	\name Operators
 */
-	
-/*!		
+
+/*!
 	\brief  Assignment Operator
 	\param  n: objectoof alfanumericVariable class
 	\post   The atributes of this object are equal to the atributes of the parameter
 	\return Reference to this object
 */
 	alfanumericVariable &operator=(const alfanumericVariable &n);
-	
+
 
  //! \name Friend functions
-/*!		
+/*!
 	\brief  Insertion operator
 	\param  i: input stream
 	\param  n: object of alfanumericVariable class
@@ -167,7 +166,7 @@ class alfanumericVariable:public lp::Variable
 */
 	friend std::istream &operator>>(std::istream &i, alfanumericVariable &n);
 
-/*!		
+/*!
 	\brief  Extraction operator
 	\param  o: output stream
 	\param  n: object of alfanumericVariable class
@@ -176,7 +175,7 @@ class alfanumericVariable:public lp::Variable
 	\return The output stream
 */
 	friend std::ostream &operator<<(std::ostream &o, alfanumericVariable const &n);
-	
+
 // End of alfanumericVariable class
 };
 
