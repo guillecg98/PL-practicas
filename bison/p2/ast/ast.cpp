@@ -117,6 +117,23 @@ bool lp::VariableNode::evaluateBool()
 	return result;
 }
 
+std::string lp::VariableNode::evaluateCadena()
+{
+	std::string result = "";
+
+	if(this->getType() == CADENA){
+
+		lp::alfanumericVariable *var = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+
+		result = var->getValue();
+	}else{
+		warning("Runtime error in evaluateCadena(): the variable is not string type",
+				   this->_id);
+	}
+
+	return result;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -310,6 +327,19 @@ int lp::LogicalOperatorNode:: getType()
 		warning("Runtime error: incompatible types for", "Logical Operator");
 
 	return	result;
+}
+
+int lp::AlphaNumericOperatorNode::getType()
+{
+	int result = 0;
+
+	if( (this->_left->getType() == CADENA) and (this->_right->getType() == CADENA)){
+		result = CADENA;
+	}else{
+		warning("Runtime error: incompatible types for", "AlphaNumeric Operator");
+	}
+
+	return result;
 }
 
 
@@ -1410,8 +1440,6 @@ void lp::IfStmt::evaluate()
 	else if (this->_stmt2 != NULL)
 		  this->_stmt2->evaluate();
 }
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
