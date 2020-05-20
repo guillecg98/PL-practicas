@@ -63,7 +63,6 @@ namespace lp
 		return 0.0;
 	}
 
-
 	/*!
 		\brief   Evaluate the expression as BOOL
 		\warning Virtual function: could be redefined in the heir classes
@@ -73,6 +72,11 @@ namespace lp
     virtual bool evaluateBool()
 	{
 		return false;
+	}
+
+	virtual std::string evaluateCadena()
+	{
+		return "";
 	}
 
 };
@@ -132,6 +136,13 @@ class VariableNode : public ExpNode
 	*/
 	  bool evaluateBool();
 
+	/*!
+		\brief   Evaluate the Variable as BOOL
+		\return  bool
+		\sa		 print
+	*/
+	  std::string evaluateCadena();
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,9 +198,6 @@ class ConstantNode : public ExpNode
 	*/
 	  bool evaluateBool();
 };
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,7 +291,7 @@ class CadenasNode : public ExpNode
 		\sa		 print
 		*/
 		std::string evaluateCadena();
-}
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -572,7 +580,6 @@ public:
 
 };
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -606,6 +613,28 @@ class LogicalOperatorNode : public OperatorNode
 };
 
 
+class AlphaNumericOperatorNode : public OperatorNode
+{
+	public:
+
+		/*!
+		\brief Constructor of AlphaNumericOperatorNode uses OperatorNode's constructor as members initializer
+		\param L: pointer to ExpNode
+		\param R: pointer to ExpNode
+		\post  A new NumericOperatorNode is created with the parameters
+	*/
+		AlphaNumericOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R)
+		{
+
+		}
+
+		/*!
+		\brief   Get the type of the children expressions
+		\return  int
+		\sa		 print()
+		*/
+		int getType();
+};
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -685,10 +714,8 @@ class MinusNode : public NumericOperatorNode
 };
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 /*!
   \class   MultiplicationNode
