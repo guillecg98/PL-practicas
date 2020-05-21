@@ -124,10 +124,10 @@ OPERADORES:				[ ]								CHECK
 OTROS:					[ ]								CHECK
 -----------------------------------------------------------------
 	COMENTARIOS											[ ]
-		VARIAS LINEAS: DELIMITADORES #	.... #			[ ]
-		UNA LÍNEA: DELIMITADOR @						[ ]
+		VARIAS LINEAS: DELIMITADORES #	.... #			[X]
+		UNA LÍNEA: DELIMITADOR @						[X]
 
-	FIN DE LINEA ;										[ ]
+	FIN DE LINEA ;										[X]
 
 -----------------------------------------------------------------
 SENTENCIAS DE CONTROL:	[ ]								CHECK
