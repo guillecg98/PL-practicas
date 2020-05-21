@@ -364,7 +364,7 @@ repeat: REPEAT stmt UNTIL controlSymbol cond
 
 for: FOR exp FROM exp TO exp STEP exp DO stmt END_FOR
         {
-            //Create a new until statement node
+            //Create a new fo statement node
             $$ = new lp::ForStmt($2, $4, $6, $8, $10);
 }
 ;
