@@ -25,16 +25,16 @@ namespace lp{
   \brief Definition of atributes and methods of alfanumericVariable class
   \note  alfanumericVariable Class publicly inherits from Variable class
 */
-class alfanumericVariable:public lp::Variable
+class AlfaNumericVariable:public lp::Variable
 {
 /*!
-\name Private atributes of alfanumericVariable class
+\name Private atributes of AlfaNumericVariable class
 */
 	private:
-		std::string      _value;   //!< \brief Numeric value of the alfanumericVariable
+		std::string      _value;   //!< \brief Numeric value of the AlfaNumericVariable
 
 /*!
-\name Public methods of alfanumericVariable class
+\name Public methods of AlfaNumericVariable class
 */
 	public:
 
@@ -45,15 +45,15 @@ class alfanumericVariable:public lp::Variable
 /*!
 	\brief Constructor with arguments with default values
 	\note  Inline function that uses Variable's constructor as members initializer
-	\param name: name of the alfanumericVariable
-	\param token: token of the alfanumericVariable
-	\param type: type of the alfanumericVariable
-	\param value: numeric value of the alfanumericVariable
+	\param name: name of the AlfaNumericVariable
+	\param token: token of the AlfaNumericVariable
+	\param type: type of the AlfaNumericVariable
+	\param value: numeric value of the AlfaNumericVariable
 	\pre   None
-	\post  A new alfanumericVariable is created with the values of the parameters
+	\post  A new AlfaNumericVariable is created with the values of the parameters
 	\sa   setName, setValue
 */
-	inline alfanumericVariable(std::string name="", int token = 0, int type = 0, std::string value=""):Variable(name,token,type)
+	inline AlfaNumericVariable(std::string name="", int token = 0, int type = 0, std::string value=""):Variable(name,token,type)
 	{
 		this->setValue(value);
 	}
@@ -61,12 +61,12 @@ class alfanumericVariable:public lp::Variable
 /*!
 	\brief Copy constructor
 	\note  Inline function
-	\param n: object of alfanumericVariable class
+	\param n: object of AlfaNumericVariable class
 	\pre   None
-	\post  A new alfanumericVariable is created with the values of an existent alfanumericVariable
+	\post  A new AlfaNumericVariable is created with the values of an existent AlfaNumericVariable
 	\sa    setName, setValue
 */
-	alfanumericVariable(const alfanumericVariable & n)
+	AlfaNumericVariable(const AlfaNumericVariable & n)
 	{
 		// Inherited methods
 		this->setName(n.getName());
@@ -85,11 +85,11 @@ class alfanumericVariable:public lp::Variable
 */
 
 /*!
-	\brief  Public method that returns the value of the alfanumericVariable
+	\brief  Public method that returns the value of the AlfaNumericVariable
 	\note   Función inline
 	\pre    None
 	\post   None
-    \return Value of the alfanumericVariable
+    \return Value of the AlfaNumericVariable
 	\sa		getValue
 */
 	inline std::string getValue() const
@@ -104,11 +104,11 @@ class alfanumericVariable:public lp::Variable
 */
 
 /*!
-	\brief   This functions modifies the value of the alfanumericVariable
+	\brief   This functions modifies the value of the AlfaNumericVariable
 	\note    Inline function
-	\param   value: new value of the alfanumericVariable
+	\param   value: new value of the AlfaNumericVariable
 	\pre     None
-	\post    The value of the alfanumericVariable is equal to the parameter
+	\post    The value of the AlfaNumericVariable is equal to the parameter
 	\return  void
 	\sa 	 setValue
 */
@@ -125,16 +125,16 @@ class alfanumericVariable:public lp::Variable
 */
 
 /*!
-	\brief Read a alfanumericVariable
+	\brief Read a AlfaNumericVariable
 	\pre   None
-	\post  The atributes of the alfanumericVariable are modified with the read values
+	\post  The atributes of the AlfaNumericVariable are modified with the read values
     \sa    write
 */
 	void read();
 
 
 /*!
-	\brief Write a alfanumericVariable
+	\brief Write a AlfaNumericVariable
 	\pre   None
 	\post  None
     \sa    read
@@ -148,39 +148,39 @@ class alfanumericVariable:public lp::Variable
 
 /*!
 	\brief  Assignment Operator
-	\param  n: objectoof alfanumericVariable class
+	\param  n: objectoof AlfaNumericVariable class
 	\post   The atributes of this object are equal to the atributes of the parameter
 	\return Reference to this object
 */
-	alfanumericVariable &operator=(const alfanumericVariable &n);
+	AlfaNumericVariable &operator=(const AlfaNumericVariable &n);
 
 
  //! \name Friend functions
 /*!
 	\brief  Insertion operator
 	\param  i: input stream
-	\param  n: object of alfanumericVariable class
+	\param  n: object of AlfaNumericVariable class
 	\pre    nome
-	\post   The atributes of the alfanumericVariable are modified with the inserted values from the input stream
+	\post   The atributes of the AlfaNumericVariable are modified with the inserted values from the input stream
 	\return The input stream
 */
-	friend std::istream &operator>>(std::istream &i, alfanumericVariable &n);
+	friend std::istream &operator>>(std::istream &i, AlfaNumericVariable &n);
 
 /*!
 	\brief  Extraction operator
 	\param  o: output stream
-	\param  n: object of alfanumericVariable class
+	\param  n: object of AlfaNumericVariable class
 	\pre    nome
-	\post   The atributes of the alfanumericVariable are written in the output stream
+	\post   The atributes of the AlfaNumericVariable are written in the output stream
 	\return The output stream
 */
-	friend std::ostream &operator<<(std::ostream &o, alfanumericVariable const &n);
+	friend std::ostream &operator<<(std::ostream &o, AlfaNumericVariable const &n);
 
-// End of alfanumericVariable class
+// End of AlfaNumericVariable class
 };
 
 // End of name space lp
 }
 
-// End of _alfanumericVariable_HPP_
+// End of _AlfaNumericVariable_HPP_
 #endif
