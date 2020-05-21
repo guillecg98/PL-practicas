@@ -59,6 +59,8 @@ scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 %x CADENA
+%x COMMENT
+%x LINE_COMMENT
 
 /* NEW in example 3 */
 /* STATE  */
@@ -78,15 +80,26 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
         	/* return NEWLINE; */
         }
 
-";"		{
-			/* NEW in example 5 */
-			return SEMICOLON;
-		}
-
-","		{
-			/* NEW in example 14 */
-			return COMMA;
-		}
+";"		{ return SEMICOLON; }
+","		{ return COMMA;}
+":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
+"+"		{ return PLUS;   } 			/* NEW in example 3 */
+"-"		{ return MINUS;  } 			/* NEW in example 3 */
+"*"	    { return MULTIPLICATION; } 	/* NEW in example 3 */
+"/"     { return DIVISION; } 		/* NEW in example 3 */
+"%"		{ return MODULO;}
+"&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
+"**"	{ return POWER; }
+"("     { return LPAREN; } 			/* NEW in example 3 */
+")"	    { return RPAREN; } 			/* NEW in example 3 */
+"=="	{ return EQUAL; }			/* NEW in example 15 */
+"!="	{ return NOT_EQUAL; }		/* NEW in example 15 */
+">="	{ return GREATER_OR_EQUAL; }/* NEW in example 15 */
+"<="	{ return LESS_OR_EQUAL; }	/* NEW in example 15 */
+">"		{ return GREATER_THAN; }	/* NEW in example 15 */
+"<"		{ return LESS_THAN; }		/* NEW in example 15 */
+"{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
+"}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
 
 {integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 	{
 					  /* MODIFIED in example 4 */
@@ -165,26 +178,27 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 <CADENA>\t	{yymore();}
 <CADENA>\n    {yymore();}
 
+"@" {
+        BEGIN LINE_COMMENT;
+    }
+<LINE_COMMENT>.* {
+                    BEGIN 0;
+                 }
 
-
-":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
-"+"		{ return PLUS;   } 			/* NEW in example 3 */
-"-"		{ return MINUS;  } 			/* NEW in example 3 */
-"*"	    { return MULTIPLICATION; } 	/* NEW in example 3 */
-"/"     { return DIVISION; } 		/* NEW in example 3 */
-"%"		{ return MODULO;}
-"&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
-"**"	{ return POWER; }
-"("     { return LPAREN; } 			/* NEW in example 3 */
-")"	    { return RPAREN; } 			/* NEW in example 3 */
-"=="	{ return EQUAL; }			/* NEW in example 15 */
-"!="	{ return NOT_EQUAL; }		/* NEW in example 15 */
-">="	{ return GREATER_OR_EQUAL; }/* NEW in example 15 */
-"<="	{ return LESS_OR_EQUAL; }	/* NEW in example 15 */
-">"		{ return GREATER_THAN; }	/* NEW in example 15 */
-"<"		{ return LESS_THAN; }		/* NEW in example 15 */
-"{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
-"}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
+"#"	{
+		BEGIN(COMMENT);}
+<COMMENT>[^"#"|^\n]	{
+						yymore();
+					}
+<COMMENT>\^	{
+				yymore();
+			}
+<COMMENT>\n	{
+				yymore();
+			}
+<COMMENT>"#"	{
+					BEGIN(INITIAL);
+				}
 
 
 ^# { /* The interpreter finishes when the symbol # is written at the beginning of the line */
