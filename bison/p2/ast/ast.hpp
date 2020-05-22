@@ -267,7 +267,7 @@ class CadenasNode : public ExpNode
 		\post  A new CadenasNode is created with the value of the parameter
 		\note  Inline function
 		*/
-		CadenasNode(std::string cadena){
+		CadenasNode(std::string const & cadena){
 			this->_cadena = cadena;
 		}
 

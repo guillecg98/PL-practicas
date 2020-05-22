@@ -1,7 +1,7 @@
-z/*!	
-	\file    alfanumericVariable.cpp
-	\brief   Code of some functions of alfanumericVariable class
-	\author 
+/*!
+	\file    AlfaNumericVariable.cpp
+	\brief   Code of some functions of AlfaNumericVariable class
+	\author
 	\date    2017-10-19
 	\version 1.0
 */
@@ -11,40 +11,39 @@ z/*!
 
 // Delete the comment if you want to use atof in the operator overload >>
 // #include <stdlib.h>
-
-#include "alfanumericVariable.hpp"
+#include "alfaNumericVariable.hpp"
 
 
 /*
- Definitions of the read and write functions of the alfanumericVariable class 
+ Definitions of the read and write functions of the AlfaNumericVariable class
 */
 
-void lp::alfanumericVariable::read()
+void lp::AlfaNumericVariable::read()
 {
   // Inherited attributes
-   std::cout << "Name of the alfanumericVariable: ";
+   std::cout << "Name of the AlfaNumericVariable: ";
    std::cin >> this->_name;
 
-   std::cout << "Token of the alfanumericVariable: ";
+   std::cout << "Token of the AlfaNumericVariable: ";
    std::cin >> this->_token;
-   // The \n character is read 
-   std::cin.ignore(); 
+   // The \n character is read
+   std::cin.ignore();
 
-   std::cout << "Type of the alfanumericVariable: ";
+   std::cout << "Type of the AlfaNumericVariable: ";
    std::cin >> this->_type;
-   // The \n character is read 
-   std::cin.ignore(); 
+   // The \n character is read
+   std::cin.ignore();
 
 
    // Own attribute
-   std::cout << "Value of the alfanumericVariable: ";
+   std::cout << "Value of the AlfaNumericVariable: ";
    std::cin >> this->_value;
-   // The \n character is read 
-   std::cin.ignore(); 
+   // The \n character is read
+   std::cin.ignore();
 }
 
 
-void lp::alfanumericVariable::write() const
+void lp::AlfaNumericVariable::write() const
 {
   // Inherited methods
   std::cout << "Name:" << this->getName() << std::endl;
@@ -55,10 +54,10 @@ void lp::alfanumericVariable::write() const
   std::cout << "Value:" << this->getValue() << std::endl;
 }
 
-lp::alfanumericVariable &lp::alfanumericVariable::operator=(const lp::alfanumericVariable &n)
+lp::AlfaNumericVariable &lp::AlfaNumericVariable::operator=(const lp::AlfaNumericVariable &n)
   {
  	// Check that is not the current object
-		if (this != &n) 
+		if (this != &n)
 		{
 			// Inherited methods
 			this->setName(n.getName());
@@ -76,29 +75,29 @@ lp::alfanumericVariable &lp::alfanumericVariable::operator=(const lp::alfanumeri
   }
 
 
-/*!	
+/*!
 	\namespace lp
 	\brief Name space for the subject Language Processors
 */
 namespace lp{
 
-std::istream &operator>>(std::istream &i, lp::alfanumericVariable &n)
+std::istream &operator>>(std::istream &i, lp::AlfaNumericVariable &n)
 {
   // Inherited attributes
   i >> n._name;
 
   i >> n._token;
-  // The \n character is read 
+  // The \n character is read
   i.ignore();
 
 
   i >> n._type;
-  // The \n character is read 
+  // The \n character is read
   i.ignore();
 
 
   i >> n._token;
-  // The \n character is read 
+  // The \n character is read
   i.ignore();
 
   ////////////////////////////////////
@@ -106,12 +105,12 @@ std::istream &operator>>(std::istream &i, lp::alfanumericVariable &n)
   // Own attribute
 
   i >> n._value;
-  // The \n character is read 
+  // The \n character is read
   i.ignore();
 
   ////////////////////////////////////
 
-/* Alternative way using an auxiliar string 
+/* Alternative way using an auxiliar string
 
   std::string auxiliar;
 
@@ -131,7 +130,7 @@ std::istream &operator>>(std::istream &i, lp::alfanumericVariable &n)
 }
 
 
-std::ostream &operator<<(std::ostream &o, lp::alfanumericVariable const &n)
+std::ostream &operator<<(std::ostream &o, lp::AlfaNumericVariable const &n)
 {
   // Inherited attributes
   o << n._name << std::endl;
@@ -148,7 +147,7 @@ std::ostream &operator<<(std::ostream &o, lp::alfanumericVariable const &n)
 }
 
 // End of name space lp
-} 
+}
 
 
 

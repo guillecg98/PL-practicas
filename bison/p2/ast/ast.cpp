@@ -27,7 +27,7 @@
 //
 #include "../table/numericVariable.hpp"
 #include "../table/logicalVariable.hpp"
-#include "../table/alfanumericVariable.hpp"
+#include "../table/AlfaNumericVariable.hpp"
 
 #include "../table/numericConstant.hpp"
 #include "../table/logicalConstant.hpp"
@@ -123,7 +123,7 @@ std::string lp::VariableNode::evaluateCadena()
 
 	if(this->getType() == CADENA){
 
-		lp::alfanumericVariable *var = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+		lp::AlfaNumericVariable *var = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
 
 		result = var->getValue();
 	}else{
@@ -1170,6 +1170,7 @@ void lp::AssignmentStmt::evaluate()
 				if(firstVar->getType() == CADENA)
 				{
 				  	// Get the identifier in the table of symbols as LogicalVariable
+
 					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 
 					// Assignment the value to the identifier in the table of symbols
@@ -1182,8 +1183,10 @@ void lp::AssignmentStmt::evaluate()
 
 					// Insert the variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value
+          
 					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
 					table.installSymbol(v);					
+
 				}
 			}break;
 
@@ -1274,12 +1277,12 @@ void lp::AssignmentStmt::evaluate()
 			case CADENA:
 			{
 				/* Get the identifier of the previous asgn in the table of symbols as LogicalVariable */
-				lp::alfanumericVariable * secondVar = (lp::alfanumericVariable *) table.getSymbol(this->_asgn->_id);
+				lp::AlfaNumericVariable * secondVar = (lp::AlfaNumericVariable *) table.getSymbol(this->_asgn->_id);
 				// Check the type of the first variable
 				if (firstVar->getType() == CADENA)
 				{
 				/* Get the identifier of the first variable in the table of symbols as LogicalVariable */
-				lp::alfanumericVariable * firstVar = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+				lp::AlfaNumericVariable * firstVar = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
 				  	// Get the identifier o f the in the table of symbols as NumericVariable
 //					lp::NumericVariable *n = (lp::NumericVariable *) table.getSymbol(this->_id);
 
@@ -1295,7 +1298,9 @@ void lp::AssignmentStmt::evaluate()
 
 					// Insert the first variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value of the previous variable
+
 					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+
 					table.installSymbol(firstVar);
 				}
 			}
