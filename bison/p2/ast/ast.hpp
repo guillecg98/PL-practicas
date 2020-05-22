@@ -1557,37 +1557,78 @@ class AssignmentStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 /*!
-  \class   PrintStmt
-  \brief   Definition of atributes and methods of PrintStmt class
-  \note    PrintStmt Class publicly inherits from Statement class
+  \class   WriteStmt
+  \brief   Definition of atributes and methods of WriteStmt class
+  \note    WriteStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
   \warning  In this class, print and evaluate functions have the same meaning.
 */
-class PrintStmt: public Statement
+class WriteStmt: public Statement
 {
  private:
   ExpNode *_exp; //!< Expresssion the print statement
 
  public:
 /*!
-	\brief Constructor of PrintStmt
+	\brief Constructor of WriteStmt
 	\param expression: pointer to ExpNode
-	\post  A new PrintStmt is created with the parameter
+	\post  A new WriteStmt is created with the parameter
 */
-  PrintStmt(ExpNode *expression)
+  WriteStmt(ExpNode *expression)
 	{
 		this->_exp = expression;
 	}
 
 /*!
-	\brief   Print the PrintStmt
+	\brief   Print the WriteStmt
 	\return  void
 	\sa		 evaluate()
 */
   void print();
 
 /*!
-	\brief   Evaluate the PrintStmt
+	\brief   Evaluate the WriteStmt
+	\return  double
+	\sa		 print
+*/
+  void evaluate();
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+/*!
+  \class   WriteStringStmt
+  \brief   Definition of atributes and methods of WriteStringStmt class
+  \note    WriteStringStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+  \warning  In this class, print and evaluate functions have the same meaning.
+*/
+class WriteStringStmt: public Statement
+{
+ private:
+  ExpNode *_exp; //!< Expresssion the print statement
+
+ public:
+/*!
+	\brief Constructor of WriteStringStmt
+	\param expression: pointer to ExpNode
+	\post  A new WriteStringStmt is created with the parameter
+*/
+  WriteStringStmt(ExpNode *expression)
+	{
+		this->_exp = expression;
+	}
+
+/*!
+	\brief   Print the WriteStringStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!
+	\brief   Evaluate the WriteStringStmt
 	\return  double
 	\sa		 print
 */
@@ -1631,6 +1672,48 @@ class ReadStmt : public Statement
 
 /*!
 	\brief   Evaluate the ReadStmt
+	\return  void
+	\sa		 print
+*/
+  void evaluate();
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*!
+  \class   ReadStringStmt
+  \brief   Definition of atributes and methods of ReadStringStmt class
+  \note    ReadStringStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+*/
+class ReadStringStmt : public Statement
+{
+  private:
+	std::string _id; //!< Name of the ReadStringStmt
+
+
+  public:
+/*!
+	\brief Constructor of ReadStringStmt
+	\param id: string, name of the variable of the ReadStringStmt
+	\post  A new ReadStringStmt is created with the parameter
+*/
+  ReadStringStmt(std::string id)
+	{
+		this->_id = id;
+	}
+
+/*!
+	\brief   Print the ReadStringStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!
+	\brief   Evaluate the ReadStringStmt
 	\return  void
 	\sa		 print
 */

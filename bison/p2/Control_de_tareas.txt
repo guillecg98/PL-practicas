@@ -212,8 +212,8 @@ CONTROL DE ERRORES:		[ ]								CHECK
 -----------------------------------------------------------------
 MODOS DE EJECUCIÓN:		[ ]								CHECK
 -----------------------------------------------------------------
-	INTERACTIVO											[ ]
-	DESDE FICHERO										[ ]
+	INTERACTIVO											[X]
+	DESDE FICHERO										[X]
 
 -----------------------------------------------------------------
 OPCIONALES:				[ ]								CHECK

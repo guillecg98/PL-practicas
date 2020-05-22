@@ -134,7 +134,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block repeat for
+%type <st> stmt asgn write read if while block repeat for writestring readstring
 
 %type <prog> program
 
@@ -279,8 +279,16 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
-
-
+	| writestring SEMICOLON
+	  {
+		// Default action
+		// $$ = $1;
+	  }
+	| readstring SEMICOLON
+	  {
+		// Default action
+		// $$ = $1;
+	  }
 	/*  NEW in example 17 */
 	| if
 	 {
@@ -405,7 +413,14 @@ asgn:   VARIABLE ASSIGNMENT exp
 write:  WRITE exp
 		{
 			// Create a new print node
-			 $$ = new lp::PrintStmt($2);
+			 $$ = new lp::WriteStmt($2);
+		}
+;
+
+writestring:  WRITE_STRING exp
+		{
+			// Create a new print node
+			 $$ = new lp::WriteStringStmt($2);
 		}
 ;
 
@@ -419,6 +434,13 @@ read:  READ LPAREN VARIABLE RPAREN
 	| READ LPAREN CONSTANT RPAREN
 		{
  			execerror("Semantic error in \"read statement\": it is not allowed to modify a constant ",$3);
+		}
+;
+
+readstring:  READ_STRING LPAREN VARIABLE RPAREN
+		{
+			// Create a new print node
+			 $$ = new lp::ReadStringStmt($3);
 		}
 ;
 
