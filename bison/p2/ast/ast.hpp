@@ -634,6 +634,47 @@ class AlphaNumericOperatorNode : public OperatorNode
 		*/
 		int getType();
 };
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/*!
+  \class   ConcatenationNode
+  \brief   Definition of atributes and methods of UnaryPlusNode class
+  \note    ConcatenationNode Class publicly inherits from AlphaNumericOperatorNode class
+*/
+class ConcatenationNode : public AlphaNumericOperatorNode
+{
+
+ public:
+
+/*!
+	\brief Constructor of ConcatenationNode uses AlphaNumericOperatorNode's constructor as member initializer
+	\param expression: pointer to ExpNode
+	\post  A new ConcatenationNode is created with the parameter
+*/
+  ConcatenationNode(ExpNode *expressionL, ExpNode *expressionR): AlphaNumericOperatorNode(expressionL , expressionR)
+	{
+		// empty
+	}
+
+/*!
+	\brief   Print the ConcatenationNode
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!
+	\brief   Evaluate the ConcatenationNode
+	\return  bool
+	\sa		 print()
+*/
+  std::string evaluateCadena();
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

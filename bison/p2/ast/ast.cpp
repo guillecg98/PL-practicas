@@ -1683,3 +1683,35 @@ void lp::AST::evaluate()
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ConcatenationNode::print()
+{
+  std::cout << "Concatenation: " << std::endl;
+  this->_left->print();
+  std::cout << " / ";
+  this->_right->print();
+}
+
+std::string lp::ConcatenationNode::evaluateCadena()
+{
+	std::string result;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == CADENA)
+	{
+		std::string left, right;
+
+		left = this->_left->evaluateNumber();
+		right = this->_right->evaluateNumber();
+
+		result = left + right;
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not numeric for", "Concatenation");
+	}
+
+  return result;
+}

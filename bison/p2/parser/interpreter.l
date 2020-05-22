@@ -90,6 +90,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "%"		{ return MODULO;}
 "&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
 "**"	{ return POWER; }
+"|"     { return CONCAT; }
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 "=="	{ return EQUAL; }			/* NEW in example 15 */

@@ -191,7 +191,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %left PLUS MINUS
 
 /* MODIFIED in example 5 */
-%left MULTIPLICATION DIVISION MODULO
+%left MULTIPLICATION DIVISION MODULO QUOTIENT CONCAT
 
 %left LPAREN RPAREN
 
@@ -474,6 +474,12 @@ exp:	NUMBER
 		  // Create a new division node
 		  $$ = new lp::DivisionNode($1, $3);
 	   }
+	   
+	| 	exp QUOTIENT exp
+		{
+		  // Create a new division node
+		  $$ = new lp::QuotientNode($1, $3);
+	   }
 
 	| 	LPAREN exp RPAREN
        	{
@@ -498,6 +504,13 @@ exp:	NUMBER
 		  // Create a new modulo node
 
 		  $$ = new lp::ModuloNode($1, $3);
+       }
+
+    |	exp CONCAT exp
+		{
+		  // Create a new modulo node
+
+		  $$ = new lp::ConcatenationNode($1, $3);
        }
 
 	|	exp POWER exp
