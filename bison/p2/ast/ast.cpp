@@ -27,7 +27,7 @@
 //
 #include "../table/numericVariable.hpp"
 #include "../table/logicalVariable.hpp"
-#include "../table/AlfaNumericVariable.hpp"
+#include "../table/alfaNumericVariable.hpp"
 
 #include "../table/numericConstant.hpp"
 #include "../table/logicalConstant.hpp"
@@ -1171,7 +1171,7 @@ void lp::AssignmentStmt::evaluate()
 				{
 				  	// Get the identifier in the table of symbols as LogicalVariable
 
-					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+					lp::AlfaNumericVariable * v = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
 
 					// Assignment the value to the identifier in the table of symbols
 					v->setValue(value);
@@ -1184,7 +1184,7 @@ void lp::AssignmentStmt::evaluate()
 					// Insert the variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value
           
-					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
+					lp::AlfaNumericVariable * v = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
 					table.installSymbol(v);					
 
 				}
@@ -1299,7 +1299,7 @@ void lp::AssignmentStmt::evaluate()
 					// Insert the first variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value of the previous variable
 
-					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+					lp::AlfaNumericVariable *firstVar = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
 
 					table.installSymbol(firstVar);
 				}
@@ -1506,8 +1506,7 @@ void lp::ForStmt::print()
 {
   std::cout << "ForStmt: "  << std::endl;
   // Condition
-  std::cout << "For variable: ";
-  this->_variable->print();
+  std::cout << "For variable: "<<this->_id;
   std::cout << std::endl;
   std::cout << "From: ";
   this->_from->print();
@@ -1540,18 +1539,18 @@ void lp::ForStmt::evaluate()
 	/* Assignment the read value to the identifier */
 	initialValue = n->getValue();
 
-	from = this->_from.evaluateNumber();
+	from = this->_from->evaluateNumber();
 
-	to = this->_to.evaluateNumber();
+	to = this->_to->evaluateNumber();
 
-	step = this->_to.evaluateNumber();
+	step = this->_to->evaluateNumber();
 
 
 
 	int i = from;
 	while(i<to)
 	{
-		_stmt.evaluate();
+		_stmt->evaluate();
 		i = i + step;
 		n->setValue(i); 
 	}
