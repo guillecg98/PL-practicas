@@ -1847,7 +1847,7 @@ class UntilStmt : public Statement
 class ForStmt : public Statement
 {
  private:
-  ExpNode * _variable; //!< Condicion of the for statement
+  std::string _id;    //!< Name of the variable of the assignment statement
   ExpNode *_from; //!< Condicion of the for statement
   ExpNode *_to; //!< Condicion of the for statement
   ExpNode * _step; //!< Condicion of the for statement
@@ -1860,9 +1860,9 @@ class ForStmt : public Statement
 	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
-  ForStmt(ExpNode * var, ExpNode * from,ExpNode * to,ExpNode * step, Statement *statement)
+  ForStmt(std::string id, ExpNode * from,ExpNode * to,ExpNode * step, Statement *statement)
 	{
-		this->_variable = var;
+		this->_id = id;
 		this->_from = from;
 		this->_to = to;
 		this->_step = step;

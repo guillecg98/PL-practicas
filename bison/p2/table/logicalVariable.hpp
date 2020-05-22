@@ -53,7 +53,7 @@ class LogicalVariable:public lp::Variable
 	\post  A new LogicalVariable is created with the values of the parameters
 	\sa   setName(), setValue()
 */
-	inline LogicalVariable(std::string name="", int token = 0, int type = 0, bool value=false): 
+	inline LogicalVariable(std::string name, int token = 0, int type = 0, bool value=false): 
  	Variable(name,token,type)
 	{
 		this->setValue(value);

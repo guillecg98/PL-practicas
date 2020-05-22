@@ -1170,7 +1170,8 @@ void lp::AssignmentStmt::evaluate()
 				if(firstVar->getType() == CADENA)
 				{
 				  	// Get the identifier in the table of symbols as LogicalVariable
-					lp::AlfaNumericVariable *v = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+
+					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 
 					// Assignment the value to the identifier in the table of symbols
 					v->setValue(value);
@@ -1182,9 +1183,10 @@ void lp::AssignmentStmt::evaluate()
 
 					// Insert the variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value
-					lp::AlfaNumericVariable *v = new lp::AlfaNumericVariable(this->_id,
-											VARIABLE,CADENA,value);
-					table.installSymbol(v);
+          
+					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
+					table.installSymbol(v);					
+
 				}
 			}break;
 
@@ -1296,8 +1298,9 @@ void lp::AssignmentStmt::evaluate()
 
 					// Insert the first variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value of the previous variable
-					lp::AlfaNumericVariable *firstVar = new lp::AlfaNumericVariable(this->_id,
-											VARIABLE,CADENA,secondVar->getValue());
+
+					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+
 					table.installSymbol(firstVar);
 				}
 			}
@@ -1373,7 +1376,7 @@ void lp::ReadStmt::evaluate()
 	if (var->getType() == NUMBER)
 	{
 		/* Get the identifier in the table of symbols as NumericVariable */
-		lp::NumericVariable *n = (lp::NumericVariable *) table.getSymbol(this->_id);
+		lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
 
 		/* Assignment the read value to the identifier */
 		n->setValue(value);
@@ -1528,10 +1531,30 @@ void lp::ForStmt::evaluate()
   //double stopCondition = this->_to->evaluateNumber();
   //double step = this->_step->evaluateNumber();
   // While the condition is true. the body is run
-  while (this->_variable->evaluateBool() == true)
-  {
-	  this->_stmt->evaluate();
-  }
+
+	double initialValue, from, to, step;
+
+	/* Get the identifier in the table of symbols as NumericVariable */
+	lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
+
+	/* Assignment the read value to the identifier */
+	initialValue = n->getValue();
+
+	from = this->_from.evaluateNumber();
+
+	to = this->_to.evaluateNumber();
+
+	step = this->_to.evaluateNumber();
+
+
+
+	int i = from;
+	while(i<to)
+	{
+		_stmt.evaluate();
+		i = i + step;
+		n->setValue(i); 
+	}
 }
 
 

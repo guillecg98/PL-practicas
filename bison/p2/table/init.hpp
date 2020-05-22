@@ -42,31 +42,31 @@ static struct {
           std::string name ;
 	      int token;
 	      } keyword[] = {
-						"MODULO", MODULO,
-						"QUOTIENT",QUOTIENT,
-						"READ",READ,
-						"WRITE",WRITE,
-						"READSTRING",READ_STRING,
-						"WRITESTRING",WRITE_STRING,
-						"IF",IF,
-						"THEN",THEN,
-						"ELSE",ELSE,
-						"ENDIF",END_IF,
-						"WHILE", WHILE,
-						"DO",DO,
-						"ENDWHILE",END_WHILE,
-						"REPEAT",REPEAT,
-						"UNTIL",UNTIL,
-						"FOR",FOR,
-						"FROM",FROM,
-						"TO",TO,
-						"STEP",STEP,
-						"ENDFOR",END_FOR,
-						"CLEAR",CLEAR,
-						"PLACE",PLACE,
-						"OR", OR,
-						"AND", AND,
-						"NOT", NOT,
+						"modulo", MODULO,
+						"quotient",QUOTIENT,
+						"read",READ,
+						"write",WRITE,
+						"readstring",READ_STRING,
+						"writestring",WRITE_STRING,
+						"if",IF,
+						"then",THEN,
+						"else",ELSE,
+						"endif",END_IF,
+						"while", WHILE,
+						"do",DO,
+						"endwhile",END_WHILE,
+						"repeat",REPEAT,
+						"until",UNTIL,
+						"for",FOR,
+						"from",FROM,
+						"to",TO,
+						"step",STEP,
+						"endfor",END_FOR,
+						"clear",CLEAR,
+						"place",PLACE,
+						"or", OR,
+						"and", AND,
+						"not", NOT,
 						"",      0
 	                   };
 
@@ -85,11 +85,11 @@ static struct {
           std::string name ;
 	      double value;
 	      } numericConstant[] = {
-	                    "PI",    3.14159265358979323846,
-	                    "E",     2.71828182845904523536,
-	                    "GAMMA", 0.57721566490153286060,
-	                    "DEG",  57.29577951308232087680,
-	                    "PHI",   1.61803398874989484820,
+	                    "pi",    3.14159265358979323846,
+	                    "e",     2.71828182845904523536,
+	                    "gamma", 0.57721566490153286060,
+	                    "deg",  57.29577951308232087680,
+	                    "phi",   1.61803398874989484820,
 	                    "",      0
 	                   };
 

@@ -115,7 +115,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
 						for (int i = 0; yytext[i] != '\0'; i++)
 						{
-							yytext[i] = toupper(yytext[i]);
+							yytext[i] = tolower(yytext[i]);
 						}
 
 						/* NEW in example 7 */
