@@ -67,15 +67,17 @@ static struct {
 						"or", OR,
 						"and", AND,
 						"not", NOT,
+						"place", PLACE,
+						"clear", CLEAR
 						"",      0
 	                   };
 
 
 /*(?i:or)	{ return OR; }
 (?i:and)	{ return AND; }		esto tenemos que pensar si dejarlo aqui
-(?i:not)		{ return NOT; } o en el pie.l 
+(?i:not)		{ return NOT; } o en el pie.l
 
-Por ahora se cargan en la tabla como keywords 
+Por ahora se cargan en la tabla como keywords
 */
 
 /*!

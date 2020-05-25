@@ -1410,6 +1410,28 @@ void lp::EmptyStmt::evaluate()
   // Empty
 }
 
+void lp::ClearStmt::print()
+{
+	std::cout << "ClearStmt" << std::endl;
+}
+
+void lp::ClearStmt::evaluate()
+{
+	std::cout << CLEAR_SCREEN;
+}
+
+void lp::PlaceStmt::print()
+{
+	std::cout << "PlaceStmt" << std::endl;
+	std::cout << "x -> " << this->_posX << std::endl;
+  	std::cout << "y -> " << this->_posY << std::endl;
+}
+
+void lp::PlaceStmt::evaluate()
+{
+	PLACE((int)this->_posX, (int)this->_posY);
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
