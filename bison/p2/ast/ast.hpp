@@ -1678,6 +1678,79 @@ class EmptyStmt : public Statement
   void evaluate();
 };
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+/*!
+  \class   ClearStmt
+  \brief   Definition of atributes and methods of ClearStmt class
+  \note    ClearStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+*/
+class ClearStmt : public Statement
+{
+	public:
+
+	/*!
+		\brief Constructor of  ClearStmt
+		\post  A new ClearStmt is created
+	*/
+	ClearStmt(){}
+
+
+	/*!
+		\brief   Print the ClearStmt
+		\return  void
+		\sa		 evaluate()
+	*/
+	void print();
+
+	/*!
+		\brief   Evaluate the ClearStmt
+		\return  void
+		\sa		 print
+	*/
+	void evaluate();
+}
+
+/*!
+  \class   PlaceStmt
+  \brief   Definition of atributes and methods of PlaceStmt class
+  \note    PlaceStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+*/
+class PlaceStmt : public Statement
+{
+	private:
+
+	double _posX,_posY;//!< Name of the ReadStmt
+
+	public:
+	/*!
+		\brief Constructor of PlaceStmt
+		\param _posX: double, name of the variable x of the PlaceStmt
+		\param _posY: double, name of the variable y of the PlaceStmt
+		\post  A new PlaceStmt is created with the parameter
+	*/
+	PlaceStmt(double posX, double posY){
+		this->_posX = posX;
+		this->_posY = posY;
+	}
+
+	/*!
+		\brief   Print the PlaceStmt
+		\return  void
+		\sa		 evaluate()
+	*/
+	void print();
+
+	/*!
+		\brief   Evaluate the PlaceStmt
+		\return  void
+		\sa		 print
+	*/
+	void evaluate();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
