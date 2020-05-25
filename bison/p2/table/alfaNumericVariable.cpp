@@ -1,6 +1,6 @@
 /*!
-	\file    AlfaNumericVariable.cpp
-	\brief   Code of some functions of AlfaNumericVariable class
+	\file    alfanumericVariable.cpp
+	\brief   Code of some functions of alfanumericVariable class
 	\author
 	\date    2017-10-19
 	\version 1.0
@@ -15,35 +15,35 @@
 
 
 /*
- Definitions of the read and write functions of the AlfaNumericVariable class
+ Definitions of the read and write functions of the alfanumericVariable class
 */
 
-void lp::AlfaNumericVariable::read()
+void lp::alfanumericVariable::read()
 {
   // Inherited attributes
-   std::cout << "Name of the AlfaNumericVariable: ";
+   std::cout << "Name of the alfanumericVariable: ";
    std::cin >> this->_name;
 
-   std::cout << "Token of the AlfaNumericVariable: ";
+   std::cout << "Token of the alfanumericVariable: ";
    std::cin >> this->_token;
    // The \n character is read
    std::cin.ignore();
 
-   std::cout << "Type of the AlfaNumericVariable: ";
+   std::cout << "Type of the alfanumericVariable: ";
    std::cin >> this->_type;
    // The \n character is read
    std::cin.ignore();
 
 
    // Own attribute
-   std::cout << "Value of the AlfaNumericVariable: ";
+   std::cout << "Value of the alfanumericVariable: ";
    std::cin >> this->_value;
    // The \n character is read
    std::cin.ignore();
 }
 
 
-void lp::AlfaNumericVariable::write() const
+void lp::alfanumericVariable::write() const
 {
   // Inherited methods
   std::cout << "Name:" << this->getName() << std::endl;
@@ -54,7 +54,7 @@ void lp::AlfaNumericVariable::write() const
   std::cout << "Value:" << this->getValue() << std::endl;
 }
 
-lp::AlfaNumericVariable &lp::AlfaNumericVariable::operator=(const lp::AlfaNumericVariable &n)
+lp::alfanumericVariable &lp::alfanumericVariable::operator=(const lp::alfanumericVariable &n)
   {
  	// Check that is not the current object
 		if (this != &n)
@@ -81,7 +81,7 @@ lp::AlfaNumericVariable &lp::AlfaNumericVariable::operator=(const lp::AlfaNumeri
 */
 namespace lp{
 
-std::istream &operator>>(std::istream &i, lp::AlfaNumericVariable &n)
+std::istream &operator>>(std::istream &i, lp::alfanumericVariable &n)
 {
   // Inherited attributes
   i >> n._name;
@@ -130,7 +130,7 @@ std::istream &operator>>(std::istream &i, lp::AlfaNumericVariable &n)
 }
 
 
-std::ostream &operator<<(std::ostream &o, lp::AlfaNumericVariable const &n)
+std::ostream &operator<<(std::ostream &o, lp::alfanumericVariable const &n)
 {
   // Inherited attributes
   o << n._name << std::endl;
