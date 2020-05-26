@@ -280,6 +280,15 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// $$ = $1;
 	  }
 
+	| place SEMICOLON
+		{
+
+		}
+
+	| clear SEMICOLON
+		{
+
+		}
 
 	/*  NEW in example 17 */
 	| if
@@ -301,7 +310,13 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 	 }
 
     | repeat
+	{
+
+	}
     | for
+	{
+		
+	}
 ;
 
 
@@ -362,7 +377,7 @@ repeat: REPEAT stmt UNTIL controlSymbol cond
 }
 ;
 
-for: FOR exp FROM exp TO exp STEP exp DO stmt END_FOR
+for: FOR VARIABLE FROM exp TO exp STEP exp DO stmt END_FOR
         {
             //Create a new fo statement node
             $$ = new lp::ForStmt($2, $4, $6, $8, $10);
@@ -407,9 +422,9 @@ clear:	CLEAR
 	}
 ;
 
-place: PLACE
+place: PLACE exp exp
 	{
-		$$ = new lp::PlaceStmt($1,$2);
+		$$ = new lp::PlaceStmt($2,$3);
 	}
 ;
 

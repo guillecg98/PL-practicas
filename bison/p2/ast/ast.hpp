@@ -1710,7 +1710,7 @@ class ClearStmt : public Statement
 		\sa		 print
 	*/
 	void evaluate();
-}
+};
 
 /*!
   \class   PlaceStmt
@@ -1731,9 +1731,9 @@ class PlaceStmt : public Statement
 		\param _posY: double, name of the variable y of the PlaceStmt
 		\post  A new PlaceStmt is created with the parameter
 	*/
-	PlaceStmt(double posX, double posY){
-		this->_posX = posX;
-		this->_posY = posY;
+	PlaceStmt(ExpNode *posX, ExpNode *posY){
+		this->_posX = posX->evaluateNumber();
+		this->_posY = posY->evaluateNumber();
 	}
 
 	/*!
@@ -1749,7 +1749,7 @@ class PlaceStmt : public Statement
 		\sa		 print
 	*/
 	void evaluate();
-}
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////

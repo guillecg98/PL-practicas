@@ -67,8 +67,6 @@ static struct {
 						"or", OR,
 						"and", AND,
 						"not", NOT,
-						"place", PLACE,
-						"clear", CLEAR
 						"",      0
 	                   };
 

@@ -59,8 +59,8 @@ scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 %x CADENA
-%x COMMENT
 %x LINE_COMMENT
+%x COMMENT
 
 /* NEW in example 3 */
 /* STATE  */
@@ -175,7 +175,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
                     }
 <CADENA>"\\\'"   {yymore();}
 <CADENA>.    {yymore();}
-<CADENA>\t	{yymore();}
 <CADENA>\n    {yymore();}
 
 "@" {
@@ -185,23 +184,20 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
                     BEGIN 0;
                  }
 
-"#"	{
-		BEGIN(COMMENT);}
-<COMMENT>[^"#"|^\n]	{
-						yymore();
-					}
-<COMMENT>\^	{
-				yymore();
-			}
-<COMMENT>\n	{
-				yymore();
-			}
-<COMMENT>"#"	{
-					BEGIN(INITIAL);
-				}
+"#" {
+    yymore();
+    BEGIN COMMENT;
+    }
+<COMMENT>"#" {
+            yymore();
+            BEGIN(INITIAL);
+        }
+<COMMENT>.	{yymore();}
+<COMMENT>\n	{yymore();}
 
 
-^# { /* The interpreter finishes when the symbol # is written at the beginning of the line */
+
+^! { /* The interpreter finishes when the symbol # is written at the beginning of the line */
 	// std::cout << CLEAR_SCREEN;
 	//  PLACE(24,10);
   	  std::cout <<  BIYELLOW;
