@@ -123,7 +123,7 @@ std::string lp::VariableNode::evaluateCadena()
 
 	if(this->getType() == CADENA){
 
-		lp::AlfaNumericVariable *var = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+		lp::alfanumericVariable *var = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 
 		result = var->getValue();
 	}else{
@@ -1183,9 +1183,9 @@ void lp::AssignmentStmt::evaluate()
 
 					// Insert the variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value
-          
-					lp::AlfaNumericVariable * v = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
-					table.installSymbol(v);					
+
+					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
+					table.installSymbol(v);
 
 				}
 			}break;
@@ -1277,12 +1277,12 @@ void lp::AssignmentStmt::evaluate()
 			case CADENA:
 			{
 				/* Get the identifier of the previous asgn in the table of symbols as LogicalVariable */
-				lp::AlfaNumericVariable * secondVar = (lp::AlfaNumericVariable *) table.getSymbol(this->_asgn->_id);
+				lp::alfanumericVariable * secondVar = (lp::alfanumericVariable *) table.getSymbol(this->_asgn->_id);
 				// Check the type of the first variable
 				if (firstVar->getType() == CADENA)
 				{
 				/* Get the identifier of the first variable in the table of symbols as LogicalVariable */
-				lp::AlfaNumericVariable * firstVar = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+				lp::alfanumericVariable * firstVar = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 				  	// Get the identifier o f the in the table of symbols as NumericVariable
 //					lp::NumericVariable *n = (lp::NumericVariable *) table.getSymbol(this->_id);
 
@@ -1479,6 +1479,28 @@ void lp::EmptyStmt::evaluate()
   // Empty
 }
 
+void lp::ClearStmt::print()
+{
+	std::cout << "ClearStmt" << std::endl;
+}
+
+void lp::ClearStmt::evaluate()
+{
+	std::cout << CLEAR_SCREEN;
+}
+
+void lp::PlaceStmt::print()
+{
+	std::cout << "PlaceStmt" << std::endl;
+	std::cout << "x -> " << this->_posX << std::endl;
+  	std::cout << "y -> " << this->_posY << std::endl;
+}
+
+void lp::PlaceStmt::evaluate()
+{
+	PLACE((int)this->_posX, (int)this->_posY);
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1619,7 +1641,7 @@ void lp::ForStmt::evaluate()
 	{
 		_stmt->evaluate();
 		i = i + step;
-		n->setValue(i); 
+		n->setValue(i);
 	}
 }
 

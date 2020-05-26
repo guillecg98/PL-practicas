@@ -134,7 +134,8 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block repeat for writestring readstring
+
+%type <st> stmt asgn write read if while block repeat for writestring readstring clear place
 
 %type <prog> program
 
@@ -409,6 +410,17 @@ asgn:   VARIABLE ASSIGNMENT exp
 		}
 ;
 
+clear:	CLEAR
+	{
+		$$ = new lp::ClearStmt();
+	}
+;
+
+place: PLACE
+	{
+		$$ = new lp::PlaceStmt($1,$2);
+	}
+;
 
 write:  WRITE exp
 		{

@@ -176,10 +176,10 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 			endfor
 
 -----------------------------------------------------------------
-COMANDOS ESPECIALES:	[ ]								CHECK
+COMANDOS ESPECIALES:	[x]								CHECK
 -----------------------------------------------------------------
-	clear												[ ]
-	place(expr numérica 1, expr numérica 2)				[ ]
+	clear												[x]
+	place(expr numérica 1, expr numérica 2)				[x]
 
 -----------------------------------------------------------------
 OBSERVACIONES:			[ ]								CHECK
