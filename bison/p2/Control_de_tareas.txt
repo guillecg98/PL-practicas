@@ -108,12 +108,12 @@ OPERADORES:				[ ]								CHECK
 	ALFANUMERICOS										[ ]
 		CONCATENACION ||								[ ]
 
-	RELACIONALES NÚMEROS Y CADENAS						[X]
-		MENOR QUE <										[X]
-		MENOR O IGUAL QUE <=							[X]
-		MAYOR QUE >										[X]
-		MAYOR O IGUAL QUE >=							[X]
-		DISTINTO DE <>									[X]
+	RELACIONALES NÚMEROS Y CADENAS						[ ]
+		MENOR QUE <										[ ]
+		MENOR O IGUAL QUE <=							[ ]
+		MAYOR QUE >										[ ]
+		MAYOR O IGUAL QUE >=							[ ]
+		DISTINTO DE <>									[ ]
 
 	LOGICOS												[X]
 		DISYUNCIÓN or									[X]

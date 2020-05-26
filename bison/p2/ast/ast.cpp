@@ -1614,8 +1614,6 @@ void lp::ForStmt::evaluate()
 
 	step = this->_to->evaluateNumber();
 
-
-
 	int i = from;
 	while(i<to)
 	{
