@@ -111,6 +111,12 @@ int main(int argc, char *argv[])
  if (argc == 2) 
  {
      yyin = fopen(argv[1],"r");
+     if(yyin == NULL)
+     {
+        printf("Error de apertura del archivo %s\n", argv[1]);
+        fclose(yyin);
+        exit(-1);        
+     }
 
 	 interactiveMode = false;
  }
