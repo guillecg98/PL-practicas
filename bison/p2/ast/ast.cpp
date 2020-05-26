@@ -1171,7 +1171,7 @@ void lp::AssignmentStmt::evaluate()
 				{
 				  	// Get the identifier in the table of symbols as LogicalVariable
 
-					lp::AlfaNumericVariable * v = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 
 					// Assignment the value to the identifier in the table of symbols
 					v->setValue(value);
@@ -1299,7 +1299,7 @@ void lp::AssignmentStmt::evaluate()
 					// Insert the first variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value of the previous variable
 
-					lp::AlfaNumericVariable *firstVar = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
 
 					table.installSymbol(firstVar);
 				}
@@ -1447,7 +1447,7 @@ void lp::ReadStringStmt::evaluate()
 	if (var->getType() == CADENA)
 	{
 		/* Get the identifier in the table of symbols as NumericVariable */
-		lp::AlfaNumericVariable * n = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+		lp::alfanumericVariable * n = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 
 		/* Assignment the read value to the identifier */
 		n->setValue(value);
@@ -1460,7 +1460,7 @@ void lp::ReadStringStmt::evaluate()
 
 		// Insert $1 in the table of symbols as NumericVariable
 		// with the type CADENA and the read value
-		lp::AlfaNumericVariable *n = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,value);
+		lp::alfanumericVariable *n = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);
 
 		table.installSymbol(n);
 	}

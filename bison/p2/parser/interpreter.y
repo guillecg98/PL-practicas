@@ -280,7 +280,6 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
-<<<<<<< HEAD
 
 	| place SEMICOLON
 		{
@@ -292,7 +291,6 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 
 		}
 
-=======
 	| writestring SEMICOLON
 	  {
 		// Default action
@@ -303,7 +301,6 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
->>>>>>> 740a05f363abb83845ba1eca66ed32ede7ea9359
 	/*  NEW in example 17 */
 	| if
 	 {
@@ -329,10 +326,9 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 	}
     | for
 	{
-		
+
 	}
 ;
-
 
 block: LETFCURLYBRACKET stmtlist RIGHTCURLYBRACKET
 		{
@@ -506,7 +502,7 @@ exp:	NUMBER
 		  // Create a new division node
 		  $$ = new lp::DivisionNode($1, $3);
 	   }
-	   
+
 	| 	exp QUOTIENT exp
 		{
 		  // Create a new division node
