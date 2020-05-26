@@ -134,7 +134,8 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block repeat for clear place
+
+%type <st> stmt asgn write read if while block repeat for writestring readstring clear place
 
 %type <prog> program
 
@@ -191,7 +192,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %left PLUS MINUS
 
 /* MODIFIED in example 5 */
-%left MULTIPLICATION DIVISION MODULO
+%left MULTIPLICATION DIVISION MODULO QUOTIENT CONCAT
 
 %left LPAREN RPAREN
 
@@ -279,6 +280,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	  }
+<<<<<<< HEAD
 
 	| place SEMICOLON
 		{
@@ -290,6 +292,18 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 
 		}
 
+=======
+	| writestring SEMICOLON
+	  {
+		// Default action
+		// $$ = $1;
+	  }
+	| readstring SEMICOLON
+	  {
+		// Default action
+		// $$ = $1;
+	  }
+>>>>>>> 740a05f363abb83845ba1eca66ed32ede7ea9359
 	/*  NEW in example 17 */
 	| if
 	 {
@@ -431,7 +445,14 @@ place: PLACE exp exp
 write:  WRITE exp
 		{
 			// Create a new print node
-			 $$ = new lp::PrintStmt($2);
+			 $$ = new lp::WriteStmt($2);
+		}
+;
+
+writestring:  WRITE_STRING exp
+		{
+			// Create a new print node
+			 $$ = new lp::WriteStringStmt($2);
 		}
 ;
 
@@ -445,6 +466,13 @@ read:  READ LPAREN VARIABLE RPAREN
 	| READ LPAREN CONSTANT RPAREN
 		{
  			execerror("Semantic error in \"read statement\": it is not allowed to modify a constant ",$3);
+		}
+;
+
+readstring:  READ_STRING LPAREN VARIABLE RPAREN
+		{
+			// Create a new print node
+			 $$ = new lp::ReadStringStmt($3);
 		}
 ;
 
@@ -478,6 +506,12 @@ exp:	NUMBER
 		  // Create a new division node
 		  $$ = new lp::DivisionNode($1, $3);
 	   }
+	   
+	| 	exp QUOTIENT exp
+		{
+		  // Create a new division node
+		  $$ = new lp::QuotientNode($1, $3);
+	   }
 
 	| 	LPAREN exp RPAREN
        	{
@@ -502,6 +536,13 @@ exp:	NUMBER
 		  // Create a new modulo node
 
 		  $$ = new lp::ModuloNode($1, $3);
+       }
+
+    |	exp CONCAT exp
+		{
+		  // Create a new modulo node
+
+		  $$ = new lp::ConcatenationNode($1, $3);
        }
 
 	|	exp POWER exp

@@ -1171,7 +1171,7 @@ void lp::AssignmentStmt::evaluate()
 				{
 				  	// Get the identifier in the table of symbols as LogicalVariable
 
-					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+					lp::AlfaNumericVariable * v = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
 
 					// Assignment the value to the identifier in the table of symbols
 					v->setValue(value);
@@ -1299,7 +1299,7 @@ void lp::AssignmentStmt::evaluate()
 					// Insert the first variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value of the previous variable
 
-					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+					lp::AlfaNumericVariable *firstVar = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
 
 					table.installSymbol(firstVar);
 				}
@@ -1316,7 +1316,7 @@ void lp::AssignmentStmt::evaluate()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-void lp::PrintStmt::print()
+void lp::WriteStmt::print()
 {
   std::cout << "PrintStmt: "  << std::endl;
   std::cout << " print ";
@@ -1325,10 +1325,10 @@ void lp::PrintStmt::print()
 }
 
 
-void lp::PrintStmt::evaluate()
+void lp::WriteStmt::evaluate()
 {
 	std::cout << BIYELLOW;
-	std::cout << "Print: ";
+	std::cout << "write: ";
 	std::cout << RESET;
 
 	switch(this->_exp->getType())
@@ -1345,10 +1345,35 @@ void lp::PrintStmt::evaluate()
 			break;
 
 		default:
-			warning("Runtime error: incompatible type for ", "print");
+			warning("Runtime error: incompatible type for ", "write");
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::WriteStringStmt::print()
+{
+  std::cout << "WriteStmt: "  << std::endl;
+  std::cout << " print ";
+  this->_exp->print();
+  std::cout << std::endl;
+}
+
+
+void lp::WriteStringStmt::evaluate()
+{
+	std::cout << BIYELLOW;
+	std::cout << "Write: ";
+	std::cout << RESET;
+
+	if(this->_exp->getType()==CADENA){
+			this->_exp->evaluateCadena();
+			std::cout << std::endl;
+	}
+	else
+		warning("Runtime error: incompatible type for ", "writeString");
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1396,6 +1421,50 @@ void lp::ReadStmt::evaluate()
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ReadStringStmt::print()
+{
+  std::cout << "ReadStringStmt: "  << std::endl;
+  std::cout << " read (" << this->_id << ")";
+  std::cout << std::endl;
+}
+
+
+void lp::ReadStringStmt::evaluate()
+{
+	std::string value;
+	std::cout << BIYELLOW;
+	std::cout << "Insert a string value --> " ;
+	std::cout << RESET;
+	std::cin >> value;
+
+	/* Get the identifier in the table of symbols as Variable */
+	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
+
+	// Check if the type of the variable is CADENA
+	if (var->getType() == CADENA)
+	{
+		/* Get the identifier in the table of symbols as NumericVariable */
+		lp::AlfaNumericVariable * n = (lp::AlfaNumericVariable *) table.getSymbol(this->_id);
+
+		/* Assignment the read value to the identifier */
+		n->setValue(value);
+	}
+	// The type of variable is not CADENA
+	else
+	{
+		// Delete $1 from the table of symbols as Variable
+		table.eraseSymbol(this->_id);
+
+		// Insert $1 in the table of symbols as NumericVariable
+		// with the type CADENA and the read value
+		lp::AlfaNumericVariable *n = new lp::AlfaNumericVariable(this->_id,VARIABLE,CADENA,value);
+
+		table.installSymbol(n);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1528,8 +1597,7 @@ void lp::ForStmt::print()
 {
   std::cout << "ForStmt: "  << std::endl;
   // Condition
-  std::cout << "For variable: ";
-  this->_variable->print();
+  std::cout << "For variable: "<<this->_id;
   std::cout << std::endl;
   std::cout << "From: ";
   this->_from->print();
@@ -1562,18 +1630,16 @@ void lp::ForStmt::evaluate()
 	/* Assignment the read value to the identifier */
 	initialValue = n->getValue();
 
-	from = this->_from.evaluateNumber();
+	from = this->_from->evaluateNumber();
 
-	to = this->_to.evaluateNumber();
+	to = this->_to->evaluateNumber();
 
-	step = this->_to.evaluateNumber();
-
-
+	step = this->_to->evaluateNumber();
 
 	int i = from;
 	while(i<to)
 	{
-		_stmt.evaluate();
+		_stmt->evaluate();
 		i = i + step;
 		n->setValue(i);
 	}
@@ -1637,3 +1703,35 @@ void lp::AST::evaluate()
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ConcatenationNode::print()
+{
+  std::cout << "Concatenation: " << std::endl;
+  this->_left->print();
+  std::cout << " / ";
+  this->_right->print();
+}
+
+std::string lp::ConcatenationNode::evaluateCadena()
+{
+	std::string result;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == CADENA)
+	{
+		std::string left, right;
+
+		left = this->_left->evaluateNumber();
+		right = this->_right->evaluateNumber();
+
+		result = left + right;
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not numeric for", "Concatenation");
+	}
+
+  return result;
+}
