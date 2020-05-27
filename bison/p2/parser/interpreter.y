@@ -149,7 +149,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 // NEW in example 17: IF, ELSE, WHILE
-%token READ IF ELSE WHILE MODULO QUOTIENT WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE OR AND NOT
+%token READ IF ELSE WHILE WRITE READ_STRING WRITE_STRING THEN END_IF DO END_WHILE REPEAT UNTIL FOR FROM TO STEP END_FOR CLEAR PLACE
 
 // NEW in example 17
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -171,9 +171,10 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* MODIFIED in examples 11, 13 */
+%token <cadena> CADENA
+
 %token <identifier> VARIABLE UNDEFINED CONSTANT BUILTIN
 
-%token <cadena> CADENA
 
 /* Left associativity */
 
@@ -346,7 +347,7 @@ controlSymbol:  /* Epsilon rule*/
 
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
-	IF controlSymbol cond THEN stmt END_IF
+	IF controlSymbol cond THEN stmtlist END_IF
     {
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5);
@@ -356,7 +357,7 @@ if:	/* Simple conditional statement */
 	}
 
 	/* Compound conditional statement */
-	| IF controlSymbol cond THEN stmt ELSE stmt END_IF
+	| IF controlSymbol cond THEN stmtlist ELSE stmtlist     END_IF
 	 {
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5, $7);
@@ -367,7 +368,7 @@ if:	/* Simple conditional statement */
 ;
 
 	/*  NEW in example 17 */
-while:  WHILE controlSymbol cond DO stmt END_WHILE
+while:  WHILE controlSymbol cond DO stmtlist END_WHILE
 		{
 			// Create a new while statement node
 			$$ = new lp::WhileStmt($3, $5);
@@ -377,21 +378,27 @@ while:  WHILE controlSymbol cond DO stmt END_WHILE
     }
 ;
 
-repeat: REPEAT stmt UNTIL controlSymbol cond
+repeat: REPEAT stmtlist UNTIL controlSymbol cond
         {
             //Create a new until statement node
-            $$ = new lp::UntilStmt($5, $2);
+            $$ = new lp::UntilStmt($2, $5);
 
             // To control the interactive mode
 			control--;
 }
 ;
 
-for: FOR VARIABLE FROM exp TO exp STEP exp DO stmt END_FOR
+for: FOR VARIABLE FROM exp TO exp STEP exp DO stmtlist END_FOR
         {
             //Create a new fo statement node
             $$ = new lp::ForStmt($2, $4, $6, $8, $10);
-}
+        }
+        | FOR VARIABLE FROM exp TO exp DO stmtlist END_FOR
+        {
+            //Create a new fo statement node
+            $$ = new lp::ForStmt($2, $4, $6, $8);        
+        }
+    
 ;
 
 	/*  NEW in example 17 */
@@ -445,11 +452,15 @@ write:  WRITE exp
 		}
 ;
 
-writestring:  WRITE_STRING exp
+writestring:  WRITE_STRING LPAREN VARIABLE RPAREN
 		{
 			// Create a new print node
-			 $$ = new lp::WriteStringStmt($2);
+			 $$ = new lp::WriteStringStmt($3);
 		}
+		//| WRITE_STRING exp
+		//{
+		//	 $$ = new lp::WriteStringStmt($2);            
+		//}
 ;
 
 read:  READ LPAREN VARIABLE RPAREN
@@ -475,10 +486,29 @@ readstring:  READ_STRING LPAREN VARIABLE RPAREN
 
 exp:	NUMBER
 		{
-			// Create a new number node
+			// Create a new number node	
 			$$ = new lp::NumberNode($1);
 		}
+		
+	 | CADENA
+	 	{
+	 	std::cout << "nodo cadena nuevo -------ESTO DEBERIA APARECER Y NUNCA SALE-------------" <<std::endl;
+			 $$ = new lp::CadenasNode($1);
+		}
+		
+	 | VARIABLE
+		{
+		  // Create a new variable node
+		  $$ = new lp::VariableNode($1);
+		}
 
+	 | CONSTANT
+		{
+		  // Create a new constant node
+		  $$ = new lp::ConstantNode($1);
+
+		}
+		
 	| 	exp PLUS exp
 		{
 			// Create a new plus node
@@ -515,17 +545,6 @@ exp:	NUMBER
 			$$ = $2;
 		 }
 
-  	| 	PLUS exp %prec UNARY
-		{
-		  // Create a new unary plus node
-  		  $$ = new lp::UnaryPlusNode($2);
-		}
-
-	| 	MINUS exp %prec UNARY
-		{
-		  // Create a new unary minus node
-  		  $$ = new lp::UnaryMinusNode($2);
-		}
 
 	|	exp MODULO exp
 		{
@@ -545,24 +564,6 @@ exp:	NUMBER
      	{
 		  // Create a new power node
   		  $$ = new lp::PowerNode($1, $3);
-		}
-
-	 | VARIABLE
-		{
-		  // Create a new variable node
-		  $$ = new lp::VariableNode($1);
-		}
-
-	 | CADENA
-	 	{
-			 $$ = new lp::CadenasNode($1);
-		}
-
-	 | CONSTANT
-		{
-		  // Create a new constant node
-		  $$ = new lp::ConstantNode($1);
-
 		}
 
 	| BUILTIN LPAREN listOfExp RPAREN

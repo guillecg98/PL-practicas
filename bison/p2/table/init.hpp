@@ -42,8 +42,7 @@ static struct {
           std::string name ;
 	      int token;
 	      } keyword[] = {
-						"modulo", MODULO,
-						"quotient",QUOTIENT,
+
 						"read",READ,
 						"write",WRITE,
 						"readstring",READ_STRING,

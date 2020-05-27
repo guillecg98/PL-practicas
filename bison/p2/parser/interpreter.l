@@ -90,7 +90,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "%"		{ return MODULO;}
 "&"		{ return QUOTIENT;}									/*¿Símbolo de quotient?*/
 "**"	{ return POWER; }
-"||"     { return CONCAT; }
+"||"    { return CONCAT; }
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 "=="	{ return EQUAL; }			/* NEW in example 15 */
@@ -101,6 +101,13 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "<"		{ return LESS_THAN; }		/* NEW in example 15 */
 "{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
 "}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
+
+                     
+"'"([^'\\]|"\\\'")*"'" {
+                            yylval.cadena =  strdup(yytext);
+                            std::cout << "se devuelve una cadena: " << yylval.cadena << std::endl;
+                            return CADENA;
+                        }
 
 {integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 	{
 					  /* MODIFIED in example 4 */
@@ -113,7 +120,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 {IDENTIFIER}   		 {
 
-						// No se distinguen mayusculas y minusculas. Siempre se guarda en mayusculas
+						// No se distinguen mayusculas y minusculas. Siempre se guarda en minusculas
 						for (int i = 0; yytext[i] != '\0'; i++)
 						{
 							yytext[i] = tolower(yytext[i]);
@@ -137,11 +144,12 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 								 The identifier is inserted into the symbol table
 								 as undefined Variable with value 0.0
 								*/
+								
 								lp::NumericVariable *n = new lp::NumericVariable(identifier,VARIABLE,UNDEFINED,0.0);
 
 								/* A pointer to the new NumericVariable is inserted into the table of symbols */
 								table.installSymbol(n);
-
+                            
 								return VARIABLE;
 							}
 
@@ -165,18 +173,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 							}
                      }
 
-"'" {
-        BEGIN CADENA;
-    }
-<CADENA>"'"  {
-                        BEGIN 0;
-                        yytext[yyleng-1]='\0';
-						yylval.cadena = strdup(yytext);
-						return CADENA;
-                    }
-<CADENA>"\\\'"   {yymore();}
-<CADENA>.    {yymore();}
-<CADENA>\n    {yymore();}
 
 "@" {
         BEGIN LINE_COMMENT;
