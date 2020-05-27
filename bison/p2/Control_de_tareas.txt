@@ -141,7 +141,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 
 	ESCRITURA											[ ]
 		write											[X]
-		writestring										[ ]
+		writestring										[X]
 
 	SENTENCIAS DE CONTROL								[X]
 		CONDICIONAL SIMPLE								[X]

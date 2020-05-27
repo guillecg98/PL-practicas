@@ -143,6 +143,14 @@ class VariableNode : public ExpNode
 	*/
 	  bool evaluateBool();
 
+	/*!	
+		\brief   Evaluate the Variable as CADENA
+		\return  string
+		\sa		 print
+	*/
+	  std::string evaluateCadena();
+
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -654,6 +662,71 @@ class LogicalOperatorNode : public OperatorNode
 	\sa		 print()
 	*/
 	int getType();
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+class AlphaNumericOperatorNode : public OperatorNode
+{
+	public:
+
+		/*!
+		\brief Constructor of AlphaNumericOperatorNode uses OperatorNode's constructor as members initializer
+		\param L: pointer to ExpNode
+		\param R: pointer to ExpNode
+		\post  A new NumericOperatorNode is created with the parameters
+	*/
+		AlphaNumericOperatorNode(ExpNode *L, ExpNode *R): OperatorNode(L,R)
+		{
+
+		}
+
+		/*!
+		\brief   Get the type of the children expressions
+		\return  int
+		\sa		 print()
+		*/
+		int getType();
+};
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/*!
+  \class   ConcatenationNode
+  \brief   Definition of atributes and methods of UnaryPlusNode class
+  \note    ConcatenationNode Class publicly inherits from AlphaNumericOperatorNode class
+*/
+class ConcatenationNode : public AlphaNumericOperatorNode
+{
+
+ public:
+
+/*!
+	\brief Constructor of ConcatenationNode uses AlphaNumericOperatorNode's constructor as member initializer
+	\param expression: pointer to ExpNode
+	\post  A new ConcatenationNode is created with the parameter
+*/
+  ConcatenationNode(ExpNode *expressionL, ExpNode *expressionR): AlphaNumericOperatorNode(expressionL , expressionR)
+	{
+		// empty
+	}
+
+/*!
+	\brief   Print the ConcatenationNode
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!
+	\brief   Evaluate the ConcatenationNode
+	\return  bool
+	\sa		 print()
+*/
+  std::string evaluateCadena();
 };
 
 
@@ -1606,12 +1679,14 @@ class WriteStringStmt: public Statement
   WriteStringStmt(std::string id)
   	{
   		this->_id = id;
+  		this->_exp = NULL;
   	}
 
-//WriteStringStmt(ExpNode exp)
-  	//{
- 	//	this->_exp = exp;
-	//}
+ WriteStringStmt(ExpNode * exp)
+  {
+	this->_exp = exp;
+	this->_id = ""; 	
+  }
 
 /*!
 	\brief   Print the WriteStringStmt
