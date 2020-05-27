@@ -1648,7 +1648,9 @@ class WriteStmt: public Statement
 class WriteStringStmt: public Statement
 {
  private:
-  ExpNode *_exp; //!< Expresssion the print statement
+	std::string _id; //!< Name of the ReadStringStmt
+  	ExpNode *_exp; //!< Expresssion the print statement
+
 
  public:
 /*!
@@ -1656,10 +1658,16 @@ class WriteStringStmt: public Statement
 	\param expression: pointer to ExpNode
 	\post  A new WriteStringStmt is created with the parameter
 */
-  WriteStringStmt(ExpNode *expression)
-	{
-		this->_exp = expression;
-	}
+
+  WriteStringStmt(std::string id)
+  	{
+  		this->_id = id;
+  	}
+
+//WriteStringStmt(ExpNode exp)
+  	//{
+ 	//	this->_exp = exp;
+	//}
 
 /*!
 	\brief   Print the WriteStringStmt
@@ -1889,8 +1897,8 @@ class IfStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the if statement
-  Statement *_stmt1; //!< Statement of the consequent
-  Statement *_stmt2; //!< Statement of the alternative
+   std::list<Statement *> *_stmt1;  //!< List of statements of the consequent
+   std::list<Statement *> *_stmt2;  //!< List of statements of the alternative
 
   public:
 /*!
@@ -1899,7 +1907,7 @@ class IfStmt : public Statement
 	\param statement1: Statement of the consequent
 	\post  A new IfStmt is created with the parameters
 */
-  IfStmt(ExpNode *condition, Statement *statement1)
+  IfStmt(ExpNode *condition, std::list<Statement *> * statement1)
 	{
 		this->_cond = condition;
 		this->_stmt1 = statement1;
@@ -1914,7 +1922,7 @@ class IfStmt : public Statement
 	\param statement2: Statement of the alternative
 	\post  A new IfStmt is created with the parameters
 */
-  IfStmt(ExpNode *condition, Statement *statement1, Statement *statement2)
+  IfStmt(ExpNode *condition, std::list<Statement *> * statement1, std::list<Statement *> * statement2)
 	{
 		this->_cond = condition;
 		this->_stmt1 = statement1;
@@ -1955,7 +1963,7 @@ class WhileStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the while statement
-  Statement *_stmt; //!< Statement of the body of the while loop
+  std::list<Statement *> * _stmt; //!< Statement of the body of the while loop
 
   public:
 /*!
@@ -1964,7 +1972,7 @@ class WhileStmt : public Statement
 	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
-  WhileStmt(ExpNode *condition, Statement *statement)
+  WhileStmt(ExpNode *condition, std::list<Statement *> * statement)
 	{
 		this->_cond = condition;
 		this->_stmt = statement;
@@ -2000,7 +2008,7 @@ class UntilStmt : public Statement
 {
  private:
   ExpNode *_cond; //!< Condicion of the until statement
-  Statement *_stmt; //!< Statement of the body of the until loop
+  std::list<Statement *> * _stmt; //!< Statement of the body of the until loop
 
   public:
 /*!
@@ -2009,7 +2017,7 @@ class UntilStmt : public Statement
 	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
-  UntilStmt(ExpNode *condition, Statement *statement)
+  UntilStmt(std::list<Statement *> * statement, ExpNode *condition)
 	{
 		this->_cond = condition;
 		this->_stmt = statement;
@@ -2048,7 +2056,7 @@ class ForStmt : public Statement
   ExpNode *_from; //!< Condicion of the for statement
   ExpNode *_to; //!< Condicion of the for statement
   ExpNode * _step; //!< Condicion of the for statement
-  Statement *_stmt; //!< Statement of the body of the for loop
+  std::list<Statement *> * _stmt; //!< Statement of the body of the for loop
 
   public:
 /*!
@@ -2057,12 +2065,21 @@ class ForStmt : public Statement
 	\param statement: Statement of the body of the loop
 	\post  A new WhileStmt is created with the parameters
 */
-  ForStmt(std::string id, ExpNode * from,ExpNode * to,ExpNode * step, Statement *statement)
+  ForStmt(std::string id, ExpNode * from,ExpNode * to,ExpNode * step, std::list<Statement *> *statement)
 	{
 		this->_id = id;
 		this->_from = from;
 		this->_to = to;
 		this->_step = step;
+		this->_stmt = statement;
+	}
+
+  ForStmt(std::string id, ExpNode * from,ExpNode * to, std::list<Statement *> *statement)
+	{
+		this->_id = id;
+		this->_from = from;
+		this->_to = to;
+		this->_step = NULL;
 		this->_stmt = statement;
 	}
 

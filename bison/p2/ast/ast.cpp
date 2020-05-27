@@ -1184,14 +1184,15 @@ void lp::AssignmentStmt::evaluate()
 					// Insert the variable in the table of symbols as NumericVariable
 					// with the type BOOL and the value
 
-					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);					//seria variable o cadena como segundo parametro???
+					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);
 					table.installSymbol(v);
-
 				}
 			}break;
 
-			default:
+			default:{
+				std::cout << this->_exp->getType() << std::endl;
 				warning("Runtime error: incompatible type of expression for ", "Assigment");
+			}
 		}
 
 	}
@@ -1281,8 +1282,8 @@ void lp::AssignmentStmt::evaluate()
 				// Check the type of the first variable
 				if (firstVar->getType() == CADENA)
 				{
-				/* Get the identifier of the first variable in the table of symbols as LogicalVariable */
-				lp::alfanumericVariable * firstVar = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+					/* Get the identifier of the first variable in the table of symbols as LogicalVariable */
+					lp::alfanumericVariable * firstVar = (lp::alfanumericVariable *) table.getSymbol(this->_id);
 				  	// Get the identifier o f the in the table of symbols as NumericVariable
 //					lp::NumericVariable *n = (lp::NumericVariable *) table.getSymbol(this->_id);
 
@@ -1290,14 +1291,14 @@ void lp::AssignmentStmt::evaluate()
 					firstVar->setValue(secondVar->getValue());
 
 				}
-				// The type of variable is not BOOL
+				// The type of variable is not CADENA
 				else
 				{
 					// Delete the first variable from the table of symbols
 					table.eraseSymbol(this->_id);
 
 					// Insert the first variable in the table of symbols as NumericVariable
-					// with the type BOOL and the value of the previous variable
+					// with the type CADENA and the value of the previous variable
 
 					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
 
@@ -1307,7 +1308,7 @@ void lp::AssignmentStmt::evaluate()
 			break;
 
 			default:
-				warning("Runtime error: incompatible type of expression for ", "Assigment");
+				warning("Runtime error: incompatible type of expression for ", "Assigment multiple");
 		}
 	}
 }
@@ -1356,7 +1357,7 @@ void lp::WriteStringStmt::print()
 {
   std::cout << "WriteStmt: "  << std::endl;
   std::cout << " print ";
-  this->_exp->print();
+  std::cout << this->_id << std::endl;
   std::cout << std::endl;
 }
 
@@ -1367,10 +1368,14 @@ void lp::WriteStringStmt::evaluate()
 	std::cout << "Write: ";
 	std::cout << RESET;
 
-	if(this->_exp->getType()==CADENA){
-			this->_exp->evaluateCadena();
-			std::cout << std::endl;
+	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
+
+	if(var->getType() == CADENA){
+		lp::alfanumericVariable * n = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+		std::cout << n->getValue() << std::endl;
 	}
+	//if(this->_exp->getType() == CADENA)
+	//	std::cout << this->_exp->evaluateCadena() << std::endl;
 	else
 		warning("Runtime error: incompatible type for ", "writeString");
 }
@@ -1512,27 +1517,34 @@ void lp::IfStmt::print()
   // Condition
   this->_cond->print();
 
+  std::list<Statement *>::iterator stmtIter;
   // Consequent
-  this->_stmt1->print();
-
- // The alternative is printed if exists
+  for (stmtIter = this->_stmt1->begin(); stmtIter != this->_stmt2->end(); stmtIter++)
+  {
+     (*stmtIter)->print();
+  }
+  // The alternative is printed if exists
   if (this->_stmt2 != NULL)
-	  this->_stmt2->print();
+	  for (stmtIter = this->_stmt2->begin(); stmtIter != this->_stmt2->end(); stmtIter++)
+	     (*stmtIter)->print();
+  
 
   std::cout << std::endl;
 }
 
-
 void lp::IfStmt::evaluate()
 {
+
+  	std::list<Statement *>::iterator stmtIter;
+
    // If the condition is true,
 	if (this->_cond->evaluateBool() == true )
-     // the consequent is run
-	  this->_stmt1->evaluate();
-
+		for(stmtIter = this->_stmt1->begin(); stmtIter != this->_stmt1->end(); stmtIter++)
+			(*stmtIter)->evaluate();	
     // Otherwise, the alternative is run if exists
 	else if (this->_stmt2 != NULL)
-		  this->_stmt2->evaluate();
+		for(stmtIter = this->_stmt2->begin(); stmtIter != this->_stmt2->end(); stmtIter++)
+			(*stmtIter)->evaluate();
 }
 
 
@@ -1546,8 +1558,13 @@ void lp::WhileStmt::print()
   // Condition
   this->_cond->print();
 
-  // Body of the while loop
-  this->_stmt->print();
+
+  std::list<Statement *>::iterator stmtIter;
+  // Consequent
+  for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+  {
+     (*stmtIter)->print();
+  }
 
   std::cout << std::endl;
 }
@@ -1555,12 +1572,13 @@ void lp::WhileStmt::print()
 
 void lp::WhileStmt::evaluate()
 {
+  std::list<Statement *>::iterator stmtIter;
   // While the condition is true. the body is run
   while (this->_cond->evaluateBool() == true)
   {
-	  this->_stmt->evaluate();
+	for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+		(*stmtIter)->evaluate();
   }
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1573,8 +1591,12 @@ void lp::UntilStmt::print()
   // Condition
   this->_cond->print();
 
-  // Body of the while loop
-  this->_stmt->print();
+  std::list<Statement *>::iterator stmtIter;
+  // Consequent
+  for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+  {
+     (*stmtIter)->print();
+  }
 
   std::cout << std::endl;
 }
@@ -1582,11 +1604,12 @@ void lp::UntilStmt::print()
 
 void lp::UntilStmt::evaluate()
 {
-  // While the condition is true. the body is run
-  while (this->_cond->evaluateBool() == true)
-  {
-	  this->_stmt->evaluate();
-  }
+  std::list<Statement *>::iterator stmtIter;
+  // While the condition is false. the body is run
+  do{
+	for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+		(*stmtIter)->evaluate();
+  }while (this->_cond->evaluateBool() == false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1609,7 +1632,12 @@ void lp::ForStmt::print()
   this->_from->print();
   std::cout << std::endl;
   std::cout << "Do: ";
-  this->_stmt->print();
+  std::list<Statement *>::iterator stmtIter;
+  // Consequent
+  for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+  {
+     (*stmtIter)->print();
+  }
   std::cout << std::endl;
 }
 
@@ -1617,29 +1645,25 @@ void lp::ForStmt::print()
 void lp::ForStmt::evaluate()
 {
 
-  //double variable = this->_from->evaluateNumber();
-  //double stopCondition = this->_to->evaluateNumber();
-  //double step = this->_step->evaluateNumber();
-  // While the condition is true. the body is run
-
-	double initialValue, from, to, step;
+	double from, to, step;
+	from = this->_from->evaluateNumber();
+	to = this->_to->evaluateNumber();
+	if(this->_step == NULL)
+		step = 1;
+	else
+		step = this->_step->evaluateNumber();
 
 	/* Get the identifier in the table of symbols as NumericVariable */
 	lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
-
-	/* Assignment the read value to the identifier */
-	initialValue = n->getValue();
-
-	from = this->_from->evaluateNumber();
-
-	to = this->_to->evaluateNumber();
-
-	step = this->_to->evaluateNumber();
+	n->setValue(from);
 
 	int i = from;
-	while(i<to)
+	while(i<=to)
 	{
-		_stmt->evaluate();
+		std::list<Statement *>::iterator stmtIter;
+		for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+			(*stmtIter)->evaluate();
+
 		i = i + step;
 		n->setValue(i);
 	}
@@ -1674,10 +1698,6 @@ void lp::BlockStmt::evaluate()
   }
 }
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1710,7 +1730,7 @@ void lp::ConcatenationNode::print()
 {
   std::cout << "Concatenation: " << std::endl;
   this->_left->print();
-  std::cout << " / ";
+  std::cout << " || ";
   this->_right->print();
 }
 
@@ -1723,8 +1743,8 @@ std::string lp::ConcatenationNode::evaluateCadena()
 	{
 		std::string left, right;
 
-		left = this->_left->evaluateNumber();
-		right = this->_right->evaluateNumber();
+		left = this->_left->evaluateCadena();
+		right = this->_right->evaluateCadena();
 
 		result = left + right;
 	}

@@ -138,7 +138,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 
 	LECTURA												[ ]
 		read(identificador)								[X]
-		readstring(identificador)						[ ]
+		readstring(identificador)						[X]
 
 	ESCRITURA											[ ]
 		write											[X]
@@ -166,7 +166,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 				lista de sentencias
 			until condicional
 
-		BUCLE "for"									    [ ]
+		BUCLE "for"									    [x]
 			for identificador
 				from expr numerica 1
 				to expr numerica 2
