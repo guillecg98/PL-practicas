@@ -58,7 +58,6 @@ scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
-%x CADENA
 %x LINE_COMMENT
 %x COMMENT
 
@@ -105,7 +104,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 "'"([^'\\]|"\\\'")*"'" {
                             yylval.cadena =  strdup(yytext);
-                            std::cout << "se reconoce una cadena: " << yylval.cadena << std::endl;
                             return CADENA;
                         }
 

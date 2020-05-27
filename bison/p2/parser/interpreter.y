@@ -576,7 +576,6 @@ exp:	NUMBER
 
 	 | CADENA
 	 	{
-	 	std::cout << "nodo cadena nuevo -------ESTO DEBERIA APARECER Y NUNCA SALE-------------" <<std::endl;
 			 $$ = new lp::CadenasNode($1);
 		
 		}

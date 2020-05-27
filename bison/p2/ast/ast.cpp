@@ -1129,6 +1129,33 @@ void lp::AssignmentStmt::evaluate()
 				}
 			}
 			break;
+			case CADENA:
+			{
+				std::string value;
+
+				value = this->_exp->evaluateCadena();
+
+				if(firstVar->getType() == CADENA)
+				{
+				  	// Get the identifier in the table of symbols as LogicalVariable
+
+					lp::alfanumericVariable * v = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+
+					// Assignment the value to the identifier in the table of symbols
+					v->setValue(value);
+				}
+				else
+				{
+					// Delete the variable from the table of symbols
+					table.eraseSymbol(this->_id);
+
+					// Insert the variable in the table of symbols as NumericVariable
+					// with the type BOOL and the value
+
+					lp::alfanumericVariable * v = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,value);
+					table.installSymbol(v);
+				}
+			}break;
 
 			default:
 				warning("Runtime error: incompatible type of expression for ", "Assigment");
@@ -1213,7 +1240,37 @@ void lp::AssignmentStmt::evaluate()
 				}
 			}
 			break;
+			case CADENA:
+			{
+				/* Get the identifier of the previous asgn in the table of symbols as LogicalVariable */
+				lp::alfanumericVariable * secondVar = (lp::alfanumericVariable *) table.getSymbol(this->_asgn->_id);
+				// Check the type of the first variable
+				if (firstVar->getType() == CADENA)
+				{
+					/* Get the identifier of the first variable in the table of symbols as LogicalVariable */
+					lp::alfanumericVariable * firstVar = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+				  	// Get the identifier o f the in the table of symbols as NumericVariable
+//					lp::NumericVariable *n = (lp::NumericVariable *) table.getSymbol(this->_id);
 
+					// Assignment the value of the second variable to the first variable
+					firstVar->setValue(secondVar->getValue());
+
+				}
+				// The type of variable is not CADENA
+				else
+				{
+					// Delete the first variable from the table of symbols
+					table.eraseSymbol(this->_id);
+
+					// Insert the first variable in the table of symbols as NumericVariable
+					// with the type CADENA and the value of the previous variable
+
+					lp::alfanumericVariable *firstVar = new lp::alfanumericVariable(this->_id,VARIABLE,CADENA,secondVar->getValue());
+
+					table.installSymbol(firstVar);
+				}
+			}
+			break;
 			default:
 				warning("Runtime error: incompatible type of expression for ", "Assigment");
 		}

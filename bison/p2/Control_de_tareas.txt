@@ -133,7 +133,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
 	ASIGNACION											[]
 		IDENTIFICADOR := EXPR NUMÉRICA					[X]
-		IDENTIFICADOR := EXPR ALFANUMÉRICA				[]
+		IDENTIFICADOR := EXPR ALFANUMÉRICA				[X]
 
 	LECTURA												[X]
 		read(identificador)								[X]
