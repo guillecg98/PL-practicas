@@ -1440,7 +1440,7 @@ void lp::ReadStringStmt::evaluate()
 	std::cout << BIYELLOW;
 	std::cout << "Insert a string value --> " ;
 	std::cout << RESET;
-	std::cin >> value;
+	getline(std::cin, value);
 
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
