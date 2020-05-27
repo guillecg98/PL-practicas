@@ -117,6 +117,28 @@ bool lp::VariableNode::evaluateBool()
 	return result;
 }
 
+std::string lp::VariableNode::evaluateCadena() 
+{ 
+	std::string result = "";
+
+	if (this->getType() == CADENA)
+	{
+		// Get the identifier in the table of symbols as alfanumericVariable
+		lp::alfanumericVariable *var = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+
+		// Copy the value of the LogicalVariable
+		result = var->getValue();
+	}
+	else
+	{
+		warning("Runtime error in evaluateBool(): the variable is not boolean",
+				   this->_id);
+	}
+
+	// Return the value of the alfanumericVariable
+	return result;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -310,6 +332,23 @@ int lp::LogicalOperatorNode:: getType()
 
 	return	result;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+int lp::AlphaNumericOperatorNode::getType()
+{
+	int result = 0;
+
+	if( (this->_left->getType() == CADENA) and (this->_right->getType() == CADENA)){
+		result = CADENA;
+	}else{
+		warning("Runtime error: incompatible types for", "AlphaNumeric Operator");
+	}
+
+	return result;
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1331,16 +1370,26 @@ void lp::WriteStringStmt::evaluate()
 	std::cout << "Write: ";
 	std::cout << RESET;
 
-	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
+	if(this->_exp == NULL)
+	{
+		lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
 
-	if(var->getType() == CADENA){
-		lp::alfanumericVariable * n = (lp::alfanumericVariable *) table.getSymbol(this->_id);
-		std::cout << n->getValue() << std::endl;
-	}
-	//if(this->_exp->getType() == CADENA)
-	//	std::cout << this->_exp->evaluateCadena() << std::endl;
+		if(var->getType() == CADENA){
+			lp::alfanumericVariable * n = (lp::alfanumericVariable *) table.getSymbol(this->_id);
+			std::cout << n->getValue() << std::endl;
+		}		
+	}	
 	else
-		warning("Runtime error: incompatible type for ", "writeString");
+	{
+		switch(this->_exp->getType())
+		{
+			case CADENA:
+					std::cout << this->_exp->evaluateCadena() << std::endl;
+					break;
+			default:
+				warning("Runtime error: incompatible type for ", "writeString");
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1693,3 +1742,34 @@ void lp::AST::evaluate()
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ConcatenationNode::print()
+{
+  std::cout << "Concatenation: " << std::endl;
+  this->_left->print();
+  std::cout << " || ";
+  this->_right->print();
+}
+
+std::string lp::ConcatenationNode::evaluateCadena()
+{
+	std::string result;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == CADENA)
+	{
+		std::string left, right;
+
+		left = this->_left->evaluateCadena();
+		right = this->_right->evaluateCadena();
+		result = left + right;
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not string for", "Concatenation");
+	}
+
+  return result;
+}

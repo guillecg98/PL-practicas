@@ -480,11 +480,12 @@ read:  READ LPAREN VARIABLE RPAREN
 		}
 ;
 
-writestring: WRITE_STRING LPAREN VARIABLE RPAREN
+writestring: WRITE_STRING exp
 		{
 			// Create a new print node
-			 $$ = new lp::WriteStringStmt($3);
+			 $$ = new lp::WriteStringStmt($2);
 		}
+		
 ;
 
 readstring: READ_STRING LPAREN VARIABLE RPAREN 
@@ -555,6 +556,12 @@ exp:	NUMBER
 		  $$ = new lp::ModuloNode($1, $3);
        }
 
+    |	exp CONCAT exp
+		{
+		  // Create a new modulo node
+		  $$ = new lp::ConcatenationNode($1, $3);
+       }
+
 	|	exp POWER exp 
      	{ 
 		  // Create a new power node	
@@ -576,8 +583,7 @@ exp:	NUMBER
 
 	 | CADENA
 	 	{
-			 $$ = new lp::CadenasNode($1);
-		
+			 $$ = new lp::CadenasNode($1);		
 		}
 
 	| BUILTIN LPAREN listOfExp RPAREN
