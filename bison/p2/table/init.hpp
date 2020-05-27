@@ -1,7 +1,7 @@
-/*!
+/*!	
 	\file   init.hpp
 	\brief   Prototype of the function for the initialization of table of symbols
-	\author
+	\author  
 	\date    2017-12-5
 	\version 1.0
 */
@@ -34,7 +34,38 @@
 ///////////////////////////////////////
 
 
-// NEW in example 12
+/*!
+  \ brief Predefined numeric constants
+*/
+static struct {
+          std::string name ;
+	      double value;
+	      } numericConstant[] = { 
+	                    "PI",    3.14159265358979323846,
+	                    "E",     2.71828182845904523536,
+	                    "GAMMA", 0.57721566490153286060,
+	                    "DEG",  57.29577951308232087680,
+	                    "PHI",   1.61803398874989484820,
+	                    "",      0
+	                   };
+
+
+
+/*!
+  \ brief Predefined logical constants
+*/
+// NEW in example 15 
+static struct {
+          std::string name ;
+	      bool value;
+	      } logicalConstant[] = { 
+	                    "true", true,
+	                    "false", false,
+	                    "",      0
+	                   };
+
+
+// NEW in example 12 
 /*!
   \ brief Predefined keywords
 */
@@ -42,7 +73,8 @@ static struct {
           std::string name ;
 	      int token;
 	      } keyword[] = {
-
+						"modulo", MODULO,
+						"quotient",QUOTIENT,
 						"read",READ,
 						"write",WRITE,
 						"readstring",READ_STRING,
@@ -70,50 +102,9 @@ static struct {
 	                   };
 
 
-/*(?i:or)	{ return OR; }
-(?i:and)	{ return AND; }		esto tenemos que pensar si dejarlo aqui
-(?i:not)		{ return NOT; } o en el pie.l
-
-Por ahora se cargan en la tabla como keywords
-*/
-
-/*!
-  \ brief Predefined numeric constants
-*/
-static struct {
-          std::string name ;
-	      double value;
-	      } numericConstant[] = {
-	                    "pi",    3.14159265358979323846,
-	                    "e",     2.71828182845904523536,
-	                    "gamma", 0.57721566490153286060,
-	                    "deg",  57.29577951308232087680,
-	                    "phi",   1.61803398874989484820,
-	                    "",      0
-	                   };
-
-
-
-/*!
-  \ brief Predefined logical constants
-*/
-// NEW in example 15
-static struct {
-          std::string name ;
-	      bool value;
-	      } logicalConstant[] = {
-	                    "true", true,
-	                    "false", false,
-	                    "",      0
-	                   };
-
-
-
-
-
 // NEW in example 13
 
-static struct {    /* Predefined functions names */
+static struct {    /* Predefined functions names */ 
                 std::string name ;
 				lp::TypePointerDoubleFunction_1 function;
               } function_1 [] = {
@@ -125,12 +116,12 @@ static struct {    /* Predefined functions names */
 		    						"exp",     Exp,
 		    						"sqrt",    Sqrt,
 		    						"integer", integer,
-		    						"abs",     fabs,
+		    						"abs",     fabs,   
 		    						"",       0
 		              };
 
 // NEW in example 14
-static struct {
+static struct {   
                 std::string name ;
 				lp::TypePointerDoubleFunction_0 function;
               } function_0 [] = {
@@ -140,7 +131,7 @@ static struct {
 
 
 // NEW in example 14
-static struct {    /* Nombres predefinidos de funciones con 2 argumentos */
+static struct {    /* Nombres predefinidos de funciones con 2 argumentos */ 
                 std::string name ;
 				lp::TypePointerDoubleFunction_2 function;
               } function_2 [] = {
@@ -150,9 +141,9 @@ static struct {    /* Nombres predefinidos de funciones con 2 argumentos */
 
 
 
-/*!
+/*!		
 	\brief   Initialize the table of symbols
-	\return  void
+	\return  void 
 */
 
 void init(lp::Table &t);

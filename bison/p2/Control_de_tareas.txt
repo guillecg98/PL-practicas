@@ -14,50 +14,50 @@ NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
-PALABRAS RESERVADAS:		[x]							CHECK
+PALABRAS RESERVADAS:		[ ]							CHECK
 -----------------------------------------------------------------
-	modulo												[x]
-	quotient											[x]
+	modulo												[X]
+	quotient											[X]
 
-	or 													[x]
-	and													[x]
-	not													[x]
+	or 													[X]
+	and													[X]
+	not													[X]
 
-	read												[x]
-	readstring											[x]
+	read												[X]
+	readstring											[X]
 
-	write												[x]
-	writestring											[x]
+	write												[X]
+	writestring											[X]
 
-	SENTENCIA CONDICIONAL:								[x]
-		if												[x]
-		then											[x]
-		else											[x]
-		endif											[x]
+	SENTENCIA CONDICIONAL:								[X]
+		if												[X]
+		then											[X]
+		else											[X]
+		endif											[X]
 
-	SENTENCIA DE BUCLE MIENTRAS:						[x]
-		while											[x]
-		do												[x]
-		endwhile										[x]
+	SENTENCIA DE BUCLE MIENTRAS:						[X]
+		while											[X]
+		do												[X]
+		endwhile										[X]
 
-	SENTENCIA DE BUCLE REPETIR:							[x]
-		repeat											[x]
-		until											[x]
+	SENTENCIA DE BUCLE REPETIR:							[X]
+		repeat											[X]
+		until											[X]
 
-	SENTENCIA DE BUCLE PARA:							[x]
-		for												[x]
-		from											[x]
-		to												[x]
-		step											[x]
-		do												[x]
-		endfor											[x]
+	SENTENCIA DE BUCLE PARA:							[X]
+		for												[X]
+		from											[X]
+		to												[X]
+		step											[X]
+		do												[X]
+		endfor											[X]
 
-	MACROS:												[x]
-		clear											[x]
-		place											[x]
+	MACROS:												[X]
+		clear											[X]
+		place											[X]
 
-	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[x]
-	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[x]
+	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[X]
+	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[X]
 
 
 -----------------------------------------------------------------
@@ -69,7 +69,6 @@ IDENTIFICADORES:		[ ]								CHECK
 	NO CONTIENEN DOS SUBRAYADOS SEGUIDOS				[X]
 
 	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[X]
-
 
 -----------------------------------------------------------------
 NÚMERO:					[ ]								CHECK
@@ -105,15 +104,15 @@ OPERADORES:				[ ]								CHECK
 		MODULO modulo									[X]
 		POTENCIA **										[X]
 
-	ALFANUMERICOS										[ ]
-		CONCATENACION ||								[ ]
+	ALFANUMERICOS										[]
+		CONCATENACION ||								[]
 
-	RELACIONALES NÚMEROS Y CADENAS						[ ]
-		MENOR QUE <										[ ]
-		MENOR O IGUAL QUE <=							[ ]
-		MAYOR QUE >										[ ]
-		MAYOR O IGUAL QUE >=							[ ]
-		DISTINTO DE <>									[ ]
+	RELACIONALES NÚMEROS Y CADENAS						[]
+		MENOR QUE <										[]
+		MENOR O IGUAL QUE <=							[]
+		MAYOR QUE >										[]
+		MAYOR O IGUAL QUE >=							[]
+		DISTINTO DE <>									[]
 
 	LOGICOS												[X]
 		DISYUNCIÓN or									[X]
@@ -123,7 +122,7 @@ OPERADORES:				[ ]								CHECK
 -----------------------------------------------------------------
 OTROS:					[ ]								CHECK
 -----------------------------------------------------------------
-	COMENTARIOS											[ ]
+	COMENTARIOS											[X]
 		VARIAS LINEAS: DELIMITADORES #	.... #			[X]
 		UNA LÍNEA: DELIMITADOR @						[X]
 
@@ -132,11 +131,11 @@ OTROS:					[ ]								CHECK
 -----------------------------------------------------------------
 SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
-	ASIGNACION											[ ]
+	ASIGNACION											[]
 		IDENTIFICADOR := EXPR NUMÉRICA					[X]
-		IDENTIFICADOR := EXPR ALFANUMÉRICA				[ ]
+		IDENTIFICADOR := EXPR ALFANUMÉRICA				[]
 
-	LECTURA												[ ]
+	LECTURA												[X]
 		read(identificador)								[X]
 		readstring(identificador)						[X]
 
@@ -144,7 +143,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		write											[X]
 		writestring										[ ]
 
-	SENTENCIAS DE CONTROL								[ ]
+	SENTENCIAS DE CONTROL								[X]
 		CONDICIONAL SIMPLE								[X]
 			if condicional
 				then lista de sentencias
@@ -166,7 +165,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 				lista de sentencias
 			until condicional
 
-		BUCLE "for"									    [x]
+		BUCLE "for"									    [X]
 			for identificador
 				from expr numerica 1
 				to expr numerica 2
@@ -178,8 +177,8 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
 COMANDOS ESPECIALES:	[x]								CHECK
 -----------------------------------------------------------------
-	clear												[x]
-	place(expr numérica 1, expr numérica 2)				[x]
+	clear												[X]
+	place(expr numérica 1, expr numérica 2)				[]
 
 -----------------------------------------------------------------
 OBSERVACIONES:			[ ]								CHECK

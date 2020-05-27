@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
         fclose(yyin);
         exit(-1);        
      }
-
+     
 	 interactiveMode = false;
  }
 else

@@ -1,4 +1,4 @@
-/*!
+/*! 
   \file interpreter.l
   \brief Lexical or scanner file
 */
@@ -15,8 +15,8 @@
 #include "../includes/macros.hpp"
 
 /*********************/
-/*
-  NEW in example 16
+/* 
+  NEW in example 16 
   AST class
   IMPORTANT: must be written before interpreter.tab.h
 */
@@ -102,10 +102,10 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
 "}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
 
-                     
+
 "'"([^'\\]|"\\\'")*"'" {
                             yylval.cadena =  strdup(yytext);
-                            std::cout << "se devuelve una cadena: " << yylval.cadena << std::endl;
+                            std::cout << "se reconoce una cadena: " << yylval.cadena << std::endl;
                             return CADENA;
                         }
 
@@ -149,7 +149,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 								/* A pointer to the new NumericVariable is inserted into the table of symbols */
 								table.installSymbol(n);
-                            
 								return VARIABLE;
 							}
 
@@ -251,4 +250,3 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
    								BEGIN(INITIAL);
 							}
 %%
-
