@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block writestring readstring repeat for clear 
+%type <st> stmt asgn write read if while block writestring readstring repeat for clear  place
 
 %type <prog> program
 
@@ -345,6 +345,11 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
+	| place SEMICOLON
+	 {
+		// Default action
+		// $$ = $1;
+	 }
 	/*  NEW in example 17 */
 ;
 
@@ -459,6 +464,11 @@ clear:	CLEAR
 	}
 ;
 
+place: PLACE LPAREN exp COMMA exp RPAREN
+    {
+        $$ = new lp::PlaceStmt($3, $5);
+    }
+;
 
 write:  WRITE exp 
 		{

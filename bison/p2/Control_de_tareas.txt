@@ -104,8 +104,8 @@ OPERADORES:				[ ]								CHECK
 		MODULO modulo									[X]
 		POTENCIA **										[X]
 
-	ALFANUMERICOS										[x]
-		CONCATENACION ||								[x]
+	ALFANUMERICOS										[X]
+		CONCATENACION ||								[X]
 
 	RELACIONALES NÚMEROS Y CADENAS						[x]
 		MENOR QUE <										[x]
@@ -183,7 +183,7 @@ COMANDOS ESPECIALES:	[x]								CHECK
 -----------------------------------------------------------------
 OBSERVACIONES:			[ ]								CHECK
 -----------------------------------------------------------------
-	CAMBIO DE TIPO DINÁMICO								[ ]
+	CAMBIO DE TIPO DINÁMICO								[X]
 
 
 -----------------------------------------------------------------
