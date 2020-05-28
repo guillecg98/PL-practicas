@@ -411,10 +411,10 @@ while:  WHILE controlSymbol cond DO stmtlist END_WHILE
     }
 ;
 
-repeat: REPEAT stmtlist UNTIL controlSymbol cond
+repeat: REPEAT controlSymbol stmtlist UNTIL cond
         {
             //Create a new until statement node
-            $$ = new lp::UntilStmt($2, $5);
+            $$ = new lp::UntilStmt($3, $5);
 
             // To control the interactive mode
 			control--;
@@ -422,15 +422,17 @@ repeat: REPEAT stmtlist UNTIL controlSymbol cond
 ;
 
 
-for: FOR VARIABLE FROM exp TO exp STEP exp DO stmtlist END_FOR
+for: FOR controlSymbol VARIABLE FROM exp TO exp STEP exp DO stmtlist END_FOR
         {
             //Create a new fo statement node
-            $$ = new lp::ForStmt($2, $4, $6, $8, $10);
+            $$ = new lp::ForStmt($3, $5, $7, $9, $11);
+            control--;
         }
-        | FOR VARIABLE FROM exp TO exp DO stmtlist END_FOR
+        | FOR controlSymbol VARIABLE FROM exp TO exp DO stmtlist END_FOR
         {
             //Create a new fo statement node
-            $$ = new lp::ForStmt($2, $4, $6, $8);        
+            $$ = new lp::ForStmt($3, $5, $7, $9);        
+            control--;
         }
     
 ;
