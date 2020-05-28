@@ -104,15 +104,15 @@ OPERADORES:				[ ]								CHECK
 		MODULO modulo									[X]
 		POTENCIA **										[X]
 
-	ALFANUMERICOS										[]
-		CONCATENACION ||								[]
+	ALFANUMERICOS										[x]
+		CONCATENACION ||								[x]
 
-	RELACIONALES NÚMEROS Y CADENAS						[]
-		MENOR QUE <										[]
-		MENOR O IGUAL QUE <=							[]
-		MAYOR QUE >										[]
-		MAYOR O IGUAL QUE >=							[]
-		DISTINTO DE <>									[]
+	RELACIONALES NÚMEROS Y CADENAS						[x]
+		MENOR QUE <										[x]
+		MENOR O IGUAL QUE <=							[x]
+		MAYOR QUE >										[x]
+		MAYOR O IGUAL QUE >=							[x]
+		DISTINTO DE <>									[x]
 
 	LOGICOS												[X]
 		DISYUNCIÓN or									[X]

@@ -106,7 +106,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 {cadenas}	{
 				std::string str(yytext);
 				str = str.substr(1, str.size()-2);
-				std::cerr<<"Substr = "<<str<<"\n";
         		yylval.cadena =  strdup(str.c_str());
                 return CADENA;
 	        }
