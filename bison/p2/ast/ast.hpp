@@ -1615,6 +1615,100 @@ class AssignmentStmt : public Statement
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+/*!	
+  \class   AssignmentAdditionStmt
+  \brief   Definition of atributes and methods of AssignmentAdditionStmt class
+  \note    AssignmentAdditionStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+
+class AssignmentAdditionStmt : public Statement 
+{
+ private:
+  std::string _id;    //!< Name of the variable of the assignment statement
+  ExpNode *_exp; 	 //!< Expresssion the assignment statement
+
+ public:
+
+/*!		
+	\brief Constructor of AssignmentAdditionStmt 
+	\param id: string, variable of the AssignmentAdditionStmt
+	\param expression: pointer to ExpNode
+	\post  A new AssignmentAdditionStmt is created with the parameters
+*/
+  AssignmentAdditionStmt(std::string id, ExpNode *expression): _id(id), _exp(expression)
+	{
+		this->_id = id;
+		this->_exp = expression; 
+	}
+
+
+/*!
+	\brief   Print the AssignmentAdditionStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the AssignmentAdditionStmt
+	\return  void
+	\sa		 print
+*/
+    void evaluate();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+/*!	
+  \class   AssignmentSubstractionStmt
+  \brief   Definition of atributes and methods of AssignmentSubstractionStmt class
+  \note    AssignmentSubstractionStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+
+class AssignmentSubstractionStmt : public Statement 
+{
+ private:
+  std::string _id;    //!< Name of the variable of the assignment statement
+  ExpNode *_exp; 	 //!< Expresssion the assignment statement
+
+ public:
+
+/*!		
+	\brief Constructor of AssignmentSubstractionStmt 
+	\param id: string, variable of the AssignmentSubstractionStmt
+	\param expression: pointer to ExpNode
+	\post  A new AssignmentSubstractionStmt is created with the parameters
+*/
+  AssignmentSubstractionStmt(std::string id, ExpNode *expression): _id(id), _exp(expression)
+	{
+		this->_id = id;
+		this->_exp = expression; 
+	}
+
+
+/*!
+	\brief   Print the AssignmentSubstractionStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the AssignmentSubstractionStmt
+	\return  void
+	\sa		 print
+*/
+    void evaluate();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /*!	
   \class   UnaryPlusStmt

@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block writestring readstring repeat for clear place unary
+%type <st> stmt asgn write read if while block writestring readstring repeat for clear place unaryOps arithAssignOps
 
 %type <prog> program
 
@@ -350,10 +350,15 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
-    | unary SEMICOLON
+    | unaryOps SEMICOLON
     {
 		// Default action
 		// $$ = $1;    
+    }
+    | arithAssignOps SEMICOLON
+    {
+		// Default action
+		// $$ = $1;       
     }
 	/*  NEW in example 17 */
 ;
@@ -430,28 +435,33 @@ for: FOR VARIABLE FROM exp TO exp STEP exp DO stmtlist END_FOR
     
 ;
 
-unary: PLUS PLUS VARIABLE
+unaryOps: PLUS PLUS VARIABLE
         {
-            std::cout << "aumentar valor de" << std::endl;
             $$ = new lp::UnaryPlusStmt($3);
         }
     | VARIABLE PLUS PLUS
         {
-            std::cout << "aumentar valor de " << std::endl;
             $$ = new lp::UnaryPlusStmt($1);
         }
     | MINUS MINUS VARIABLE
         {
-            std::cout << "reducir valor de " << std::endl;
             $$ = new lp::UnaryMinusStmt($3);
         }
     | VARIABLE MINUS MINUS
         {
-            std::cout << "reducir valor de " << std::endl;
             $$ = new lp::UnaryMinusStmt($1);
         }
 ;
 
+arithAssignOps: VARIABLE PLUS ASSIGNMENT exp
+        {
+            $$ = new lp::AssignmentAdditionStmt($1, $4);
+        }
+        | VARIABLE MINUS ASSIGNMENT exp
+        {
+            $$ = new lp::AssignmentSubstractionStmt($1, $4);        
+        }
+;
 
 	/*  NEW in example 17 */
 cond: 	LPAREN exp RPAREN
