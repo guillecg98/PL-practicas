@@ -308,6 +308,8 @@ int lp::RelationalOperatorNode::getType()
 		result = BOOL;
 	else if ( (this->_left->getType() == BOOL) and (this->_right->getType() == BOOL))
 		result = BOOL;
+	else if ((this->_left->getType() == CADENA) and (this->_right->getType() == CADENA))
+		result = BOOL;
 	else
 		warning("Runtime error: incompatible types for", "Relational Operator");
 
@@ -773,19 +775,28 @@ bool lp::GreaterThanNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		if(this->_left->getType() == NUMBER && this->_right->getType() == NUMBER){
-			double leftNumber, rightNumber;
-            leftNumber = this->_left->evaluateNumber();
-           	rightNumber = this->_right->evaluateNumber();
-	        result = (leftNumber > rightNumber);
-	    }else{ warning("Runtime error: incompatible types of parameters for ", "operator Greater than"); }
+		switch(this->_left->getType()){
+			case NUMBER:
+			{
+				double leftNumber, rightNumber;
+				leftNumber = this->_left->evaluateNumber();
+				rightNumber = this->_right->evaluateNumber();
 
-		if(this->_left->getType() == CADENA && this->_right->getType() == CADENA){
-			std::string leftStr = this->_left->evaluateCadena();
-			std::string rightStr = this->_right->evaluateCadena();
-
-			result = (leftStr > rightStr);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator Greater than"); }
+				result = ( leftNumber > rightNumber);
+			}
+			break;
+			case CADENA:
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr > rightStr);
+			}
+			break;
+			default:
+				warning("Runtime error: incompatible types of parameters for ",
+								"Greater than operator");
+		}
 	}
 	else
 	{
@@ -813,24 +824,31 @@ bool lp::GreaterOrEqualNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		if(this->_left->getType() == NUMBER && this->_right->getType() == NUMBER){
-			double leftNumber, rightNumber;
-			leftNumber = this->_left->evaluateNumber();
-			rightNumber = this->_right->evaluateNumber();
+		switch(this->_left->getType()){
+			case NUMBER:
+			{
+				double leftNumber, rightNumber;
+				leftNumber = this->_left->evaluateNumber();
+				rightNumber = this->_right->evaluateNumber();
 
-			result = (leftNumber >= rightNumber);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator GreaterOrEqual than"); }
-
-		if(this->_left->getType() == CADENA && this->_right->getType() == CADENA){
-			std::string leftStr = this->_left->evaluateCadena();
-			std::string rightStr = this->_right->evaluateCadena();
-
-			result = (leftStr >= rightStr);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator GreaterOrEqual than"); }
-	}
-	else
+				result = ( leftNumber >= rightNumber);
+			}
+			break;
+			case CADENA:
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr >= rightStr);
+			}
+			break;
+			default:
+				warning("Runtime error: incompatible types of parameters for ",
+								"Greater or Equal than operator");
+		}
+	}else
 	{
-		warning("Runtime error: incompatible types of parameters for ", "operator Greater or equal than");
+		warning("Runtime error: incompatible types of parameters for ", "operator Greater or Equal than");
 	}
 
 	return result;
@@ -855,20 +873,28 @@ bool lp::LessThanNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		if(this->_left->getType() == NUMBER && this->_right->getType() == NUMBER){
-			double leftNumber, rightNumber;
-			leftNumber = this->_left->evaluateNumber();
-			rightNumber = this->_right->evaluateNumber();
+		switch(this->_left->getType()){
+			case NUMBER:
+			{
+				double leftNumber, rightNumber;
+				leftNumber = this->_left->evaluateNumber();
+				rightNumber = this->_right->evaluateNumber();
 
-			result = (leftNumber < rightNumber);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator Less than"); }
-
-		if(this->_left->getType() == CADENA && this->_right->getType() == CADENA){
-			std::string leftStr = this->_left->evaluateCadena();
-			std::string rightStr = this->_right->evaluateCadena();
-
-			result = (leftStr < rightStr);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator Less than"); }
+				result = ( leftNumber < rightNumber);
+			}
+			break;
+			case CADENA:
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr < rightStr);
+			}
+			break;
+			default:
+				warning("Runtime error: incompatible types of parameters for ",
+								"Less than operator");
+		}
 	}
 	else
 	{
@@ -896,20 +922,28 @@ bool lp::LessOrEqualNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		if(this->_left->getType() == NUMBER && this->_right->getType() == NUMBER){
-			double leftNumber, rightNumber;
-			leftNumber = this->_left->evaluateNumber();
-			rightNumber = this->_right->evaluateNumber();
+		switch(this->_left->getType()){
+			case NUMBER:
+			{
+				double leftNumber, rightNumber;
+				leftNumber = this->_left->evaluateNumber();
+				rightNumber = this->_right->evaluateNumber();
 
-			result = (leftNumber <= rightNumber);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator LessOrEqual than"); }
-
-		if(this->_left->getType() == CADENA && this->_right->getType() == CADENA){
-			std::string leftStr = this->_left->evaluateCadena();
-			std::string rightStr = this->_right->evaluateCadena();
-
-			result = (leftStr <= rightStr);
-		}else{ warning("Runtime error: incompatible types of parameters for ", "operator LessOrEqual than"); }
+				result = ( leftNumber <= rightNumber);
+			}
+			break;
+			case CADENA:
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr <= rightStr);
+			}
+			break;
+			default:
+				warning("Runtime error: incompatible types of parameters for ",
+								"Less or Equal than operator");
+		}
 	}
 	else
 	{
@@ -940,23 +974,32 @@ bool lp::EqualNode::evaluateBool()
 	{
 		switch(this->_left->getType()){
 			case NUMBER:
+			{
 				double leftNumber, rightNumber;
 				leftNumber = this->_left->evaluateNumber();
 				rightNumber = this->_right->evaluateNumber();
 
 				// ERROR_BOUND to control the precision of real numbers
 				result = ( std::abs(leftNumber - rightNumber) < ERROR_BOUND );
+			}
 			break;
 			case CADENA:
-				result = (this->_left->evaluateCadena() == this->_right->evaluateCadena());
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr == rightStr);
+			}
 			break;
 			case BOOL:
+			{
 				bool leftBoolean, rightBoolean;
 				leftBoolean = this->_left->evaluateBool();
 				rightBoolean = this->_right->evaluateBool();
 
 				//
 				result = (leftBoolean == rightBoolean);
+			}
 			break;
 		  	default:
 				warning("Runtime error: incompatible types of parameters for ",
@@ -992,23 +1035,32 @@ bool lp::NotEqualNode::evaluateBool()
 	{
 		switch(this->_left->getType()){
 			case NUMBER:
+			{
 				double leftNumber, rightNumber;
 				leftNumber = this->_left->evaluateNumber();
 				rightNumber = this->_right->evaluateNumber();
 
 				// ERROR_BOUND to control the precision of real numbers
 				result = ( std::abs(leftNumber - rightNumber) >= ERROR_BOUND );
+			}
 			break;
 			case CADENA:
-				result = (this->_left->evaluateCadena() != this->_right->evaluateCadena());
+			{
+				std::string leftStr,rightStr;
+				leftStr = this->_left->evaluateCadena();
+				rightStr = this->_right->evaluateCadena();
+				result = (leftStr != rightStr);
+			}
 			break;
 			case BOOL:
+			{
 				bool leftBoolean, rightBoolean;
 				leftBoolean = this->_left->evaluateBool();
 				rightBoolean = this->_right->evaluateBool();
 
 				//
 				result = (leftBoolean != rightBoolean);
+			}
 			break;
 		  default:
 				warning("Runtime error: incompatible types of parameters for ",
