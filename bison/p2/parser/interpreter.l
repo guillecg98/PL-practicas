@@ -1,4 +1,4 @@
-/*! 
+/*!
   \file interpreter.l
   \brief Lexical or scanner file
 */
@@ -15,8 +15,8 @@
 #include "../includes/macros.hpp"
 
 /*********************/
-/* 
-  NEW in example 16 
+/*
+  NEW in example 16
   AST class
   IMPORTANT: must be written before interpreter.tab.h
 */
@@ -55,6 +55,7 @@ LETTER [a-zA-Z]
 integerNUMBER 					[0-9]+
 realNUMBER						[0-9]+\.[0-9]+
 scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
+cadenas		"'"([^'\\]|"\\\'")*"'"
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
@@ -92,8 +93,8 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "||"    { return CONCAT; }
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
-"=="	{ return EQUAL; }			/* NEW in example 15 */
-"!="	{ return NOT_EQUAL; }		/* NEW in example 15 */
+"="	{ return EQUAL; }			/* NEW in example 15 */
+"<>"	{ return NOT_EQUAL; }		/* NEW in example 15 */
 ">="	{ return GREATER_OR_EQUAL; }/* NEW in example 15 */
 "<="	{ return LESS_OR_EQUAL; }	/* NEW in example 15 */
 ">"		{ return GREATER_THAN; }	/* NEW in example 15 */
@@ -102,10 +103,13 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
 
 
-"'"([^'\\]|"\\\'")*"'" {
-                            yylval.cadena =  strdup(yytext);
-                            return CADENA;
-                        }
+{cadenas}	{
+				std::string str(yytext);
+				str = str.substr(1, str.size()-2);
+				std::cerr<<"Substr = "<<str<<"\n";
+        		yylval.cadena =  strdup(str.c_str());
+                return CADENA;
+	        }
 
 {integerNUMBER}|{realNUMBER}|{scientificNotationNUMBER} 	{
 					  /* MODIFIED in example 4 */
@@ -142,7 +146,7 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 								 The identifier is inserted into the symbol table
 								 as undefined Variable with value 0.0
 								*/
-								
+
 								lp::NumericVariable *n = new lp::NumericVariable(identifier,VARIABLE,UNDEFINED,0.0);
 
 								/* A pointer to the new NumericVariable is inserted into the table of symbols */
