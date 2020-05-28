@@ -1109,7 +1109,49 @@ bool lp::AndNode::evaluateBool()
 	return result;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 
+void lp::UnaryPlusStmt::print()
+{
+  std::cout << "UnaryPlusStmt: " << std::endl;
+  std::cout << this->_id << std::endl;
+}
+
+void lp::UnaryPlusStmt::evaluate()
+{
+	lp::Variable *firstVar = (lp::Variable *) table.getSymbol(this->_id);
+	if (firstVar->getType() == NUMBER)
+	{
+	  	// Get the identifier in the table of symbols as NumericVariable
+		lp::NumericVariable *v = (lp::NumericVariable *) table.getSymbol(this->_id);
+
+		// Assignment the value to the identifier in the table of symbols
+		v->setValue(v->getValue()+1);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::UnaryMinusStmt::print()
+{
+  std::cout << "UnaryMinusStmt: " << std::endl;
+  std::cout << this->_id << std::endl;																	//////////////////////////////////////
+}
+
+void lp::UnaryMinusStmt::evaluate()
+{
+	lp::Variable *firstVar = (lp::Variable *) table.getSymbol(this->_id);
+	if (firstVar->getType() == NUMBER)
+	{
+	  	// Get the identifier in the table of symbols as NumericVariable
+		lp::NumericVariable *v = (lp::NumericVariable *) table.getSymbol(this->_id);
+
+		// Assignment the value to the identifier in the table of symbols
+		v->setValue(v->getValue()-1);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////

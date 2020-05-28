@@ -306,6 +306,7 @@ class CadenasNode : public ExpNode
 		std::string evaluateCadena();
 };
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1604,6 +1605,98 @@ class AssignmentStmt : public Statement
 
 /*!	
 	\brief   Evaluate the AssignmentStmt
+	\return  void
+	\sa		 print
+*/
+    void evaluate();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*!	
+  \class   UnaryPlusStmt
+  \brief   Definition of atributes and methods of UnaryPlusStmt class
+  \note    UnaryPlusStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+
+class UnaryPlusStmt : public Statement 
+{
+ private:
+  std::string _id; 	 //!< Expresssion the assignment statement
+
+ public:
+
+/*!		
+	\brief Constructor of UnaryPlusStmt 
+	\param id: string, variable of the UnaryPlusStmt
+	\param expression: pointer to ExpNode
+	\post  A new UnaryPlusStmt is created with the parameters
+*/
+
+  UnaryPlusStmt(std::string id)
+	{
+		this->_id = id; 
+	}
+
+/*!
+	\brief   Print the UnaryPlusStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the UnaryPlusStmt
+	\return  void
+	\sa		 print
+*/
+    void evaluate();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*!	
+  \class   UnaryMinusStmt
+  \brief   Definition of atributes and methods of UnaryMinusStmt class
+  \note    UnaryMinusStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+
+class UnaryMinusStmt : public Statement 
+{
+ private:
+  std::string _id; 	 //!< Expresssion the assignment statement
+
+ public:
+
+/*!		
+	\brief Constructor of UnaryMinusStmt 
+	\param id: string, variable of the UnaryMinusStmt
+	\param expression: pointer to ExpNode
+	\post  A new UnaryMinusStmt is created with the parameters
+*/
+
+  UnaryMinusStmt(std::string id)
+	{
+		this->_id = id; 
+	}
+
+/*!
+	\brief   Print the UnaryMinusStmt
+	\return  void
+	\sa		 evaluate()
+*/
+  void print();
+
+/*!	
+	\brief   Evaluate the UnaryMinusStmt
 	\return  void
 	\sa		 print
 */

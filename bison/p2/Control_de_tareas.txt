@@ -178,7 +178,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 COMANDOS ESPECIALES:	[x]								CHECK
 -----------------------------------------------------------------
 	clear												[X]
-	place(expr numérica 1, expr numérica 2)				[]
+	place(expr numérica 1, expr numérica 2)				[X]
 
 -----------------------------------------------------------------
 OBSERVACIONES:			[ ]								CHECK
@@ -217,7 +217,7 @@ MODOS DE EJECUCIÓN:		[ ]								CHECK
 -----------------------------------------------------------------
 OPCIONALES:				[ ]								CHECK
 -----------------------------------------------------------------
-	OPERADORES UNARIOS (++, --, etc)					[ ]
+	OPERADORES UNARIOS (++, --, etc)					[X]
 	OPERADIRES ARITMETICOS Y ASIGNACION (+:=,-:=)		[ ]
 
 	SENTENCIA "swicth"									[ ]

@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn write read if while block writestring readstring repeat for clear  place
+%type <st> stmt asgn write read if while block writestring readstring repeat for clear place unary
 
 %type <prog> program
 
@@ -350,6 +350,11 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
+    | unary SEMICOLON
+    {
+		// Default action
+		// $$ = $1;    
+    }
 	/*  NEW in example 17 */
 ;
 
@@ -423,6 +428,28 @@ for: FOR VARIABLE FROM exp TO exp STEP exp DO stmtlist END_FOR
             $$ = new lp::ForStmt($2, $4, $6, $8);        
         }
     
+;
+
+unary: PLUS PLUS VARIABLE
+        {
+            std::cout << "aumentar valor de" << std::endl;
+            $$ = new lp::UnaryPlusStmt($3);
+        }
+    | VARIABLE PLUS PLUS
+        {
+            std::cout << "aumentar valor de " << std::endl;
+            $$ = new lp::UnaryPlusStmt($1);
+        }
+    | MINUS MINUS VARIABLE
+        {
+            std::cout << "reducir valor de " << std::endl;
+            $$ = new lp::UnaryMinusStmt($3);
+        }
+    | VARIABLE MINUS MINUS
+        {
+            std::cout << "reducir valor de " << std::endl;
+            $$ = new lp::UnaryMinusStmt($1);
+        }
 ;
 
 
