@@ -190,9 +190,9 @@ OBSERVACIONES:			[ ]								CHECK
 CONTROL DE ERRORES:		[ ]								CHECK
 -----------------------------------------------------------------
 	LÉXICOS
-		IDENTIFICADOR MAL ESCRITO 						[ ]
-		SIMBOLO NO PERMITIDO							[ ]
-		OTROS											[ ]
+		IDENTIFICADOR MAL ESCRITO 						[x]
+		SIMBOLO NO PERMITIDO							[x]
+		OTROS											[x]
 
 	SINTÁCTICOS											[ ]
 		SENTENCIA DE CONTROL MAL ESCRITA				[ ]
