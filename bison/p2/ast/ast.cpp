@@ -1857,6 +1857,7 @@ void lp::PlaceStmt::print()
 
 void lp::PlaceStmt::evaluate()
 {
+	std::cout << CLEAR_SCREEN;
 	PLACE((int)this->_posX, (int)this->_posY);
 }
 

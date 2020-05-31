@@ -192,7 +192,12 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 <COMMENT>.	{yymore();}
 <COMMENT>\n	{yymore();}
 
-
+"?" {printf("\n ERROR: %s simbolo no permitido\n",yytext);}
+"¿" {printf("\n ERROR: %s simbolo no permitido\n",yytext);}
+"!=" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner <>\n",yytext);}
+"&&" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner .y.\n",yytext);}
+"=" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner :=\n",yytext);}
+":" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner ;\n",yytext);}
 
 ^! { /* The interpreter finishes when the symbol # is written at the beginning of the line */
 	// std::cout << CLEAR_SCREEN;
