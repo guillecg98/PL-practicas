@@ -1,5 +1,5 @@
 /*!
-	\file    alfanumericVariable.cpp
+	\file    alfaNumericVariable.cpp
 	\brief   Code of some functions of alfanumericVariable class
 	\author
 	\date    2017-10-19
