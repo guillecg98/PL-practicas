@@ -1,20 +1,20 @@
-a = b = PI;
+a := b := PI;
 
-print a;
-print b;
-print PI;
+write (a);
+write (b);
+write (PI);
 
-dato = 2;
-print dato;
+dato := 2;
+write (dato);
 
-dato = true;
-print dato;
-
-
-dato = 9;
-print dato;
+dato := true;
+write (dato);
 
 
-print 3> PI;
+dato := 9;
+write (dato);
+
+
+write (3 > PI);
 
 
