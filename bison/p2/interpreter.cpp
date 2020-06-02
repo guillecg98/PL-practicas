@@ -110,6 +110,24 @@ int main(int argc, char *argv[])
  */
  if (argc == 2) 
  {
+     //Check that file is txt extension
+     std::string fileName (argv[1]);
+     if (fileName.length() < 4)
+     {
+        printf("Error, archivo inapropiado\n");
+        exit(-1);
+     }
+     else
+     {
+         std::string extension = fileName.substr(fileName.length()-4, 4);
+         if (extension != ".txt")
+         {
+          printf("Error, archivo inapropiado\n");
+          exit(-1);          
+         }
+     }
+
+     //Opens txt file
      yyin = fopen(argv[1],"r");
      if(yyin == NULL)
      {

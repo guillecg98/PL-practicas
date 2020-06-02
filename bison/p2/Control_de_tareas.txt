@@ -202,11 +202,11 @@ CONTROL DE ERRORES:		[ ]								CHECK
 	SEMÁNTICOS											[ ]
 		ARGUMENTOS U OPERANDOS INCOMPATIBLES			[ ]
 
-	DE EJECUCIÓN										[ ]
-		SENTENCIA "PARA" CON BUCLE INFINITO				[ ]
-		FICHERO INEXISTENTE								[ ]
-		FICHERO CON EXTENSIÓN INCORRECTA				[ ]
-		OTROS											[ ]
+	DE EJECUCIÓN										[X]
+		SENTENCIA "PARA" CON BUCLE INFINITO				[X]
+		FICHERO INEXISTENTE								[X]
+		FICHERO CON EXTENSIÓN INCORRECTA				[X]
+		OTROS											[X]
 
 -----------------------------------------------------------------
 MODOS DE EJECUCIÓN:		[ ]								CHECK
