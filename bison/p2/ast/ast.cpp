@@ -131,7 +131,7 @@ std::string lp::VariableNode::evaluateCadena()
 	}
 	else
 	{
-		warning("Runtime error in evaluateBool(): the variable is not boolean",
+		warning("Runtime error in evaluateCadena(): the variable is not CADENA",
 				   this->_id);
 	}
 
@@ -1666,12 +1666,15 @@ void lp::UntilStmt::evaluate()
 {
   std::list<Statement *>::iterator stmtIter;
   // While the condition is false. the body is run
+  int infinite = 0;
   do{
 	for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
 		(*stmtIter)->evaluate();
-	std::cout << "sale de un evalute" << std::endl;
-  }while (this->_cond->evaluateBool() == false);
-  std::cout << "sale el todo" << std::endl;
+	infinite++;
+  }while (this->_cond->evaluateBool() == false and infinite < 10000000);
+
+  if (infinite >= 10000000)
+		warning("Runtime error: infinite for loop condition ", "untilStmt");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1719,8 +1722,9 @@ void lp::ForStmt::evaluate()
 	lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
 	n->setValue(from);
 
+	int infinite = 0;
 	int i = from;
-	while(i<=to)
+	while(i<=to and infinite < 10000000)
 	{
 		std::list<Statement *>::iterator stmtIter;
 		for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
@@ -1728,7 +1732,11 @@ void lp::ForStmt::evaluate()
 
 		i = i + step;
 		n->setValue(i);
+		infinite++;
 	}
+
+	if (infinite >= 10000000)
+		warning("Runtime error: infinite for loop condition ", "forStmt");
 }
 
 
