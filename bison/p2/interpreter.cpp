@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
      std::string fileName (argv[1]);
      if (fileName.length() < 4)
      {
-        printf("Error, archivo inapropiado\n");
+        printf("Error, archivo inapropiado (Se esperan archivos.txt)\n");
         exit(-1);
      }
      else
