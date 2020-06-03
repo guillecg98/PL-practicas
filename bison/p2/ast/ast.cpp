@@ -1725,6 +1725,7 @@ void lp::ForStmt::evaluate()
 	lp::NumericVariable *n = new lp::NumericVariable(this->_id,	VARIABLE, NUMBER, from);
 	table.installSymbol(n);
 
+
 	int infinite = 0;
 	int i = from;
 	while(i<=to and infinite < 10000000)
@@ -1806,7 +1807,11 @@ void lp::ReadStringStmt::evaluate()
 	std::cout << BIYELLOW;
 	std::cout << "Insert a string value --> " ;
 	std::cout << RESET;
+<<<<<<< HEAD
 	std::cin>>value;
+=======
+	std::cin >> value;
+>>>>>>> 2802d7e4c189bc29689e0dd48ce43c75d0c4969e
 
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
@@ -1868,6 +1873,7 @@ void lp::PlaceStmt::print()
 
 void lp::PlaceStmt::evaluate()
 {
+
 	PLACE((int)this->_posX, (int)this->_posY);
 }
 
