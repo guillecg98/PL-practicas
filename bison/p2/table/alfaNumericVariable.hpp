@@ -1,5 +1,5 @@
 /*!
-	\file    alfanumericVariable.hpp
+	\file    alfaNumericVariable.hpp
 	\brief   Declaration of alfanumericVariable class
 	\author
 	\date    2017-12-1

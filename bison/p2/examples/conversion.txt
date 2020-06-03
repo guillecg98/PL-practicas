@@ -9,7 +9,6 @@
   Departamento:  Informática y Análisis Numérico
   Centro:        Escuela Politécnica Superior de Córdoba
   Universidad de Córdoba
-
   Curso académico: 2019 - 2020
 
   Fichero de ejemplo de conversión de tipo

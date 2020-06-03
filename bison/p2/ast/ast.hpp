@@ -271,12 +271,12 @@ class NumberNode : public ExpNode
 class CadenasNode : public ExpNode
 {
 	private:
-		std::string _cadena;
+		std::string _cadena; //!< \brief string of the NumberNode
 
 	public:
 		/*!
 		\brief Constructor of CadenasNode
-		\param value: string
+		\param cadena: string
 		\post  A new CadenasNode is created with the value of the parameter
 		\note  Inline function
 		*/
@@ -564,7 +564,7 @@ class NumericOperatorNode : public OperatorNode
 //////////////////////////////////////////////////////////////////////////////
 
 /*!
-  \class   QuotiendNode
+  \class   QuotientNode
   \brief   Definition of atributes and methods of Quotient class
   \note    Quotient Class publicly inherits from NumericOperatorNode class
 */
@@ -668,6 +668,13 @@ class LogicalOperatorNode : public OperatorNode
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+/*!	
+  \class   AlphaNumericOperatorNode
+  \brief   Definition of atributes and methods of AlphaNumericOperatorNode class
+  \note    AlphaNumericOperatorNode Class publicly inherits from OperatorNode class
+  \warning Abstract class, because it does not redefine the print method of ExpNode
+*/
+
 class AlphaNumericOperatorNode : public OperatorNode
 {
 	public:
@@ -697,7 +704,7 @@ class AlphaNumericOperatorNode : public OperatorNode
 
 /*!
   \class   ConcatenationNode
-  \brief   Definition of atributes and methods of UnaryPlusNode class
+  \brief   Definition of atributes and methods of ConcatenationNode class
   \note    ConcatenationNode Class publicly inherits from AlphaNumericOperatorNode class
 */
 class ConcatenationNode : public AlphaNumericOperatorNode
@@ -707,7 +714,8 @@ class ConcatenationNode : public AlphaNumericOperatorNode
 
 /*!
 	\brief Constructor of ConcatenationNode uses AlphaNumericOperatorNode's constructor as member initializer
-	\param expression: pointer to ExpNode
+	\param expressionL: pointer to left ExpNode
+	\param expressionR: pointer to right ExpNode	
 	\post  A new ConcatenationNode is created with the parameter
 */
   ConcatenationNode(ExpNode *expressionL, ExpNode *expressionR): AlphaNumericOperatorNode(expressionL , expressionR)
@@ -1727,7 +1735,6 @@ class UnaryPlusStmt : public Statement
 /*!		
 	\brief Constructor of UnaryPlusStmt 
 	\param id: string, variable of the UnaryPlusStmt
-	\param expression: pointer to ExpNode
 	\post  A new UnaryPlusStmt is created with the parameters
 */
 
@@ -1773,7 +1780,6 @@ class UnaryMinusStmt : public Statement
 /*!		
 	\brief Constructor of UnaryMinusStmt 
 	\param id: string, variable of the UnaryMinusStmt
-	\param expression: pointer to ExpNode
 	\post  A new UnaryMinusStmt is created with the parameters
 */
 
@@ -1859,7 +1865,7 @@ class WriteStringStmt: public Statement
  public:
 /*!
 	\brief Constructor of WriteStringStmt
-	\param expression: pointer to ExpNode
+	\param id: Name of variable to write
 	\post  A new WriteStringStmt is created with the parameter
 */
 
@@ -1868,6 +1874,12 @@ class WriteStringStmt: public Statement
   		this->_id = id;
   		this->_exp = NULL;
   	}
+
+/*!
+	\brief Constructor of WriteStringStmt
+	\param exp: pointer to ExpNode
+	\post  A new WriteStringStmt is created with the parameter
+*/
 
  WriteStringStmt(ExpNode * exp)
   {
@@ -2056,13 +2068,14 @@ class PlaceStmt : public Statement
 {
 	private:
 
-	double _posX,_posY;//!< Name of the ReadStmt
+	double _posX;//!< Placement position X
+	double _posY;//!< Placement position Y
 
 	public:
 	/*!
 		\brief Constructor of PlaceStmt
-		\param _posX: double, name of the variable x of the PlaceStmt
-		\param _posY: double, name of the variable y of the PlaceStmt
+		\param posX: double, name of the variable x of the PlaceStmt
+		\param posY: double, name of the variable y of the PlaceStmt
 		\post  A new PlaceStmt is created with the parameter
 	*/
 	PlaceStmt(ExpNode *posX, ExpNode *posY){
@@ -2091,8 +2104,8 @@ class PlaceStmt : public Statement
 
 /*!
   \class   UntilStmt
-  \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class
+  \brief   Definition of atributes and methods of ForStmt class
+  \note    ForStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
 class UntilStmt : public Statement
@@ -2103,10 +2116,10 @@ class UntilStmt : public Statement
 
   public:
 /*!
-	\brief Constructor of  WhileStmt
+	\brief Constructor of  ForStmt
 	\param condition: ExpNode of the condition
 	\param statement: Statement of the body of the loop
-	\post  A new WhileStmt is created with the parameters
+	\post  A new ForStmt is created with the parameters
 */
   UntilStmt(std::list<Statement *> * statement, ExpNode *condition)
 	{
@@ -2135,26 +2148,29 @@ class UntilStmt : public Statement
 // NEW in example 17
 
 /*!
-  \class   UntilStmt
-  \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class
+  \class   ForStmt
+  \brief   Definition of atributes and methods of ForStmt class
+  \note    ForStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
 class ForStmt : public Statement
 {
  private:
   std::string _id;    //!< Name of the variable of the assignment statement
-  ExpNode *_from; //!< Condicion of the for statement
-  ExpNode *_to; //!< Condicion of the for statement
-  ExpNode * _step; //!< Condicion of the for statement
+  ExpNode *_from; //!< Starting value of variable 
+  ExpNode *_to; //!< Finishing value of variable
+  ExpNode * _step; //!< Increasing value of variable
   std::list<Statement *> * _stmt; //!< Statement of the body of the for loop
 
   public:
 /*!
-	\brief Constructor of  WhileStmt
-	\param condition: ExpNode of the condition
-	\param statement: Statement of the body of the loop
-	\post  A new WhileStmt is created with the parameters
+	\brief Constructor of  ForStmt
+	\param id: variable name
+	\param from: ExpNode pointer to expressions starting value
+	\param to: ExpNode pointer to expressions finishing value
+	\param step: ExpNode pointer to expressions increasing value
+	\param statement: list Statement of the body of the for loop
+	\post  A new ForStmt is created with the parameters
 */
   ForStmt(std::string id, ExpNode * from,ExpNode * to,ExpNode * step, std::list<Statement *> *statement)
 	{
@@ -2164,6 +2180,15 @@ class ForStmt : public Statement
 		this->_step = step;
 		this->_stmt = statement;
 	}
+
+/*!
+	\brief Constructor of  ForStmt
+	\param id: variable name
+	\param from: ExpNode pointer to expressions starting value
+	\param to: ExpNode pointer to expressions finishing value
+	\param statement: list Statement of the body of the for loop
+	\post  A new ForStmt is created with the parameters
+*/
 
   ForStmt(std::string id, ExpNode * from,ExpNode * to, std::list<Statement *> *statement)
 	{
@@ -2196,9 +2221,9 @@ class ForStmt : public Statement
 // NEW in example 17
 
 /*!
-  \class   UntilStmt
-  \brief   Definition of atributes and methods of WhileStmt class
-  \note    WhileStmt Class publicly inherits from Statement class
+  \class   IfStmt
+  \brief   Definition of atributes and methods of IfStmt class
+  \note    IfStmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
 class IfStmt : public Statement
