@@ -39,7 +39,6 @@
 #include "../parser/interpreter.tab.h"
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1719,8 +1718,12 @@ void lp::ForStmt::evaluate()
 		step = this->_step->evaluateNumber();
 
 	/* Get the identifier in the table of symbols as NumericVariable */
-	lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
-	n->setValue(from);
+	table.eraseSymbol(this->_id);
+	//lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
+	//n->setValue(from);
+
+	lp::NumericVariable *n = new lp::NumericVariable(this->_id,	VARIABLE, NUMBER, from);
+	table.installSymbol(n);
 
 	int infinite = 0;
 	int i = from;
@@ -1803,7 +1806,7 @@ void lp::ReadStringStmt::evaluate()
 	std::cout << BIYELLOW;
 	std::cout << "Insert a string value --> " ;
 	std::cout << RESET;
-	getline(std::cin, value);
+	std::cin>>value;
 
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);

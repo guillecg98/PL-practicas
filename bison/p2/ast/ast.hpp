@@ -2104,8 +2104,8 @@ class PlaceStmt : public Statement
 
 /*!
   \class   UntilStmt
-  \brief   Definition of atributes and methods of ForStmt class
-  \note    ForStmt Class publicly inherits from Statement class
+  \brief   Definition of atributes and methods of untilstmt class
+  \note    untilstmt Class publicly inherits from Statement class
 		   and adds its own print and evaluate functions
 */
 class UntilStmt : public Statement
@@ -2116,10 +2116,10 @@ class UntilStmt : public Statement
 
   public:
 /*!
-	\brief Constructor of  ForStmt
+	\brief Constructor of  untilstmt
 	\param condition: ExpNode of the condition
 	\param statement: Statement of the body of the loop
-	\post  A new ForStmt is created with the parameters
+	\post  A new untilstmt is created with the parameters
 */
   UntilStmt(std::list<Statement *> * statement, ExpNode *condition)
 	{
