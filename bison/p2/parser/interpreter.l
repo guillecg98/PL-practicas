@@ -55,7 +55,7 @@ LETTER [a-zA-Z]
 integerNUMBER 					[0-9]+
 realNUMBER						[0-9]+\.[0-9]+
 scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
-cadenas		"'"([^'\\]|"\\\'")*"'"
+cadenas		"'"([^']|"\\\'")*"'"
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
@@ -196,19 +196,8 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 "¿" {printf("\n ERROR: %s simbolo no permitido\n",yytext);}
 "!=" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner <>\n",yytext);}
 "&&" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner .y.\n",yytext);}
-"=" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner :=\n",yytext);}
+"==" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner = en la condicion\n",yytext);}
 ":" {printf("\n ERROR: %s simbolo no permitido \n Quizás quisite poner ;\n",yytext);}
-
-^! { /* The interpreter finishes when the symbol # is written at the beginning of the line */
-	// std::cout << CLEAR_SCREEN;
-	//  PLACE(24,10);
-  	  std::cout <<  BIYELLOW;
-   	  std::cout <<  ">>>>>>> End of program <<<<<<<";
- 	  std::cout << std::endl;
-   	  std::cout << RESET;
-	 // PLACE(25,1);
-  	  return 0;
-	}
 
 <<EOF>> { /* The interpreter finishes when finds the end of file character */
 		/*  PLACE(24,10);
