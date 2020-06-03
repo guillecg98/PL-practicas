@@ -1719,6 +1719,7 @@ void lp::ForStmt::evaluate()
 		step = this->_step->evaluateNumber();
 
 	/* Get the identifier in the table of symbols as NumericVariable */
+	
 	lp::NumericVariable * n = (lp::NumericVariable *) table.getSymbol(this->_id);
 	n->setValue(from);
 
@@ -1803,8 +1804,7 @@ void lp::ReadStringStmt::evaluate()
 	std::cout << BIYELLOW;
 	std::cout << "Insert a string value --> " ;
 	std::cout << RESET;
-	std::cin.ignore();
-	std::getline(std::cin, value);
+	std::cin >> value;
 
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
