@@ -61,7 +61,6 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 %x LINE_COMMENT
 %x COMMENT
-%x ESTADO_CADENA
 
 /* NEW in example 3 */
 /* STATE  */
@@ -115,6 +114,9 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 						i++;
 					}else if(str[i] == 92 && str[i+1] == 't'){
 						def.push_back(9);
+						i++;
+					}else if(str[i] == 92 && str[i+1] == 39){
+						def.push_back(39);
 						i++;
 					}else{
 						def.push_back(str[i]);
