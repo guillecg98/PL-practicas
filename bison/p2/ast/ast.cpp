@@ -1725,10 +1725,13 @@ void lp::ForStmt::evaluate()
 	lp::NumericVariable *n = new lp::NumericVariable(this->_id,	VARIABLE, NUMBER, from);
 	table.installSymbol(n);
 
+	if (step > 0 and from > to)
+		warning("Runtime error: infinite for loop condition ", "forStmt");
+	if (step < 0 and from < to)
+		warning("Runtime error: infinite for loop condition ", "forStmt");		
 
-	int infinite = 0;
 	int i = from;
-	while(i<=to and infinite < 10000000)
+	while(i<=to)
 	{
 		std::list<Statement *>::iterator stmtIter;
 		for(stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
@@ -1736,11 +1739,7 @@ void lp::ForStmt::evaluate()
 
 		i = i + step;
 		n->setValue(i);
-		infinite++;
 	}
-
-	if (infinite >= 10000000)
-		warning("Runtime error: infinite for loop condition ", "forStmt");
 }
 
 

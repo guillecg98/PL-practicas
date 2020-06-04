@@ -4,13 +4,12 @@
 */
 
 /*!
- \mainpage Flex and Bison: example 17
- \author   
- \date     2018 - 4 - 26
+ \mainpage PIE 
+ \author   Guillermo Cosano Galiot & Leonardo Cosano Palma
+ \date     2020 - 4 - 18
  \version  1.0
  \note Novelties
 	+ AST: intermidiate code
-	+ New statements: if, while, block
 */
 
 
@@ -112,17 +111,17 @@ int main(int argc, char *argv[])
  {
      //Check that file is txt extension
      std::string fileName (argv[1]);
-     if (fileName.length() < 4)
+     if (fileName.length() < 3)
      {
-        printf("Error, archivo inapropiado (Se esperan archivos.txt)\n");
+        printf("Error, archivo inapropiado (Se esperan archivos.p)\n");
         exit(-1);
      }
      else
      {
-         std::string extension = fileName.substr(fileName.length()-4, 4);
-         if (extension != ".txt")
+         std::string extension = fileName.substr(fileName.length()-2, 2);
+         if (extension != ".p")
          {
-          printf("Error, archivo inapropiado\n");
+          printf("Error, archivo inapropiado (Se esperan archivos.p)\n");
           exit(-1);          
          }
      }
