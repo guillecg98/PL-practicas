@@ -55,12 +55,13 @@ LETTER [a-zA-Z]
 integerNUMBER 					[0-9]+
 realNUMBER						[0-9]+\.[0-9]+
 scientificNotationNUMBER	 	[0-9]+e[+-]?[0-9]+
-cadenas		"'"([^']|"\\\'")*"'"
+cadenas '([^']|"\\\'")*'
 
 IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 %x LINE_COMMENT
 %x COMMENT
+%x ESTADO_CADENA
 
 /* NEW in example 3 */
 /* STATE  */
@@ -105,8 +106,22 @@ IDENTIFIER  {LETTER}({LETTER}|{DIGIT}*(_)?{LETTER}|{DIGIT})*
 
 {cadenas}	{
 				std::string str(yytext);
+				std::string def;
 				str = str.substr(1, str.size()-2);
-        		yylval.cadena =  strdup(str.c_str());
+
+				for(unsigned i = 0; i < str.size(); i++){
+					if(str[i] == 92 && str[i+1] == 'n'){
+						def.push_back(10);
+						i++;
+					}else if(str[i] == 92 && str[i+1] == 't'){
+						def.push_back(9);
+						i++;
+					}else{
+						def.push_back(str[i]);
+					}
+				}
+
+        		yylval.cadena =  strdup(def.c_str());
                 return CADENA;
 	        }
 
