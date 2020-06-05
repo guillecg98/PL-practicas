@@ -1802,11 +1802,19 @@ void lp::ReadStringStmt::print()
 
 void lp::ReadStringStmt::evaluate()
 {
-	std::string value;
+	std::string value, read, temp;
+	char aux;
 	std::cout << BIYELLOW;
 	std::cout << "Insert a string value --> " ;
 	std::cout << RESET;
-	std::cin>>value;
+	aux = getchar();
+	temp += aux;
+	std::getline(std::cin, read);
+
+	if ( aux != '\n')
+		value = temp + read;
+	else
+		value = read;		
 
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *) table.getSymbol(this->_id);
