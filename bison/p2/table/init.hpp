@@ -19,7 +19,7 @@
 ///////////////////////////////////////
 
 //  interpreter.tab.h contains the number values of the tokens produced by the parser
-#include "../parser/interpreter.tab.h"
+#include "../parser/pie.tab.h"
 
 ///////////////////////////////////////
 // NEW in example 13

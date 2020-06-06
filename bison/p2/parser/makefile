@@ -1,6 +1,6 @@
 # MAKEFILE for parser
 
-NAME=interpreter
+NAME=pie
 
 # Compiler
 CPP = g++
