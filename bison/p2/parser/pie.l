@@ -24,7 +24,7 @@
 /*********************/
 
 /*  interpreter.tab.h contains the numeric values of the tokens produced by the parser */
-#include "interpreter.tab.h"
+#include "pie.tab.h"
 
 /********************/
 /* NEW in example 3 */

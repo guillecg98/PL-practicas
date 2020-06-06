@@ -1,4 +1,4 @@
-NAME=interpreter
+NAME=pie
 
 # Compiler
 CPP = g++
@@ -26,7 +26,7 @@ OBJECTS-AST = ast/*.o  # New in example 16
 # MODIFIED in example 7: ./table/table.hpp
 # MODIFIED in example 10: ./table/init.hpp
 # MODIFIED in example 16: ./ast/ast.hpp
-INCLUDES = ./parser/interpreter.tab.h ./error/error.hpp \
+INCLUDES = ./parser/pie.tab.h ./error/error.hpp \
 			./table/table.hpp \
 			./table/init.hpp \
 			./ast/ast.hpp
